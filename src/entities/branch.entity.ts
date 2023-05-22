@@ -5,40 +5,9 @@ import { UserRole } from '../enums/userRole.enum';
 import * as bcrypt from 'bcrypt';
 import { UserType } from '../enums/userType.enum';
 
-export type UserDocument = User & Document;
+export type BranchDocument = Branch & Document;
 
-export class Address {
-    @Prop()
-    @ApiProperty()
-    branchID: string
-    @Prop()
-    @ApiProperty()
-    country: string
-    @Prop()
-    @ApiProperty()
-    governate: string
-    @Prop()
-    @ApiProperty()
-    regionCity: string
-    @Prop()
-    @ApiProperty()
-    street: string
-    @Prop()
-    @ApiProperty()
-    buildingNumber: string
-    @Prop()
-    @ApiProperty()
-    postalCode: string
-    @Prop()
-    @ApiProperty()
-    floor: string
-    @Prop()
-    @ApiProperty()
-    landmark: string
-    @Prop()
-    @ApiProperty()
-    additionalInformation: string
-}
+
 @Schema({
     autoIndex: true,
     timestamps: {
@@ -46,7 +15,7 @@ export class Address {
         updatedAt: 'updatedAt',
     },
 })
-export class User extends OBaseEntity {
+export class Branch extends OBaseEntity {
 
     @ApiProperty()
     @Prop({})
@@ -62,11 +31,7 @@ export class User extends OBaseEntity {
 
     @ApiProperty()
     @Prop({})
-    tax_number: number;
-    
-    @ApiProperty()
-    @Prop({})
-    activityCode: number;
+    tax_number: number
 
     @ApiProperty()
     @Prop({})
@@ -84,12 +49,12 @@ export class User extends OBaseEntity {
     @Prop({})
     client_secret: string
     
-    @ApiProperty()
-    @Prop({})
-    address: Address
+    // @ApiProperty()
+    // @Prop({})
+    // address: Address
   
     @ApiProperty()
-    @Prop({default:UserType.Busniss})
+    @Prop({default:UserType.Person})
     type: string
 
 
@@ -102,10 +67,10 @@ export class User extends OBaseEntity {
     };
 }
 
-export const UserSchema = SchemaFactory.createForClass(User);
+export const BranchSchema = SchemaFactory.createForClass(Branch);
 
 // hash password pre save user
-UserSchema.pre('save', async function (next) {
+BranchSchema.pre('save', async function (next) {
     let user = this;
     if (user.isModified('password')) {
         const salt = await bcrypt.genSalt(10);
@@ -115,7 +80,7 @@ UserSchema.pre('save', async function (next) {
     next();
 });
 
-// UserSchema.pre('updateOne', async function (next) {
+// BranchSchema.pre('updateOne', async function (next) {
 //     let user = this;
 //     if (user?._update.password) {
 //         const salt = await bcrypt.genSalt(10);
@@ -125,4 +90,4 @@ UserSchema.pre('save', async function (next) {
 //     next();
 // });
 
-UserSchema.loadClass(User);
+BranchSchema.loadClass(Branch);

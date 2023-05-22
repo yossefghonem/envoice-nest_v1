@@ -1,15 +1,22 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from '../../dtos/create-user.dto';
 import { UpdateUserDto } from '../../dtos/update-user.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { User } from '../../entities/user.entity';
 
 @Injectable()
 export class UserService {
+
+  constructor(@InjectModel("User") private readonly userRepo:Model<User>){}
+
   create(createUserDto: CreateUserDto) {
     return 'This action adds a new user';
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async findAll() {
+    let users=await this.userRepo.find();
+    return users
   }
 
   findOne(id: number) {

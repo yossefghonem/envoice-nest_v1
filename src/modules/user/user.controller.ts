@@ -3,7 +3,7 @@ import { UserService } from './user.service';
 import { CreateUserDto } from '../../dtos/create-user.dto';
 import { UpdateUserDto } from '../../dtos/update-user.dto';
 
-@Controller('user')
+@Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
@@ -12,8 +12,9 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
-  @Get()
+  @Get("all")
   findAll() {
+    console.log("gey all users");
     return this.userService.findAll();
   }
 
