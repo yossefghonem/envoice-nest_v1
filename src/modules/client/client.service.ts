@@ -12,7 +12,10 @@ export class ClientService {
         return clients;
     }
 
-    
+    getOne(id: string){
+        const client = this.clientRepo.findOne({_id : id});
+        return client;
+    }
 
     // functions
 }
