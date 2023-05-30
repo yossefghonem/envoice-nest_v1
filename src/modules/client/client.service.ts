@@ -8,9 +8,11 @@ export class ClientService {
     constructor(@InjectModel(Client.name) private readonly clientRepo: Model<ClientDocument>) { }
 
     getAll() {
-        const clients = this.clientRepo.find({})
+    const clients = this.clientRepo.find({});
         return clients;
     }
+
+    
 
     // functions
 }

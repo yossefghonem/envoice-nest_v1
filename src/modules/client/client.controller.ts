@@ -6,7 +6,7 @@ export class ClientController {
   constructor(private readonly clientService: ClientService) {}
 
   @Get()
-  getAll(){
+  getAll() {
     return this.clientService.getAll();
   }
 }
