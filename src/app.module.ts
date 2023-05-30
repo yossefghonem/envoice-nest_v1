@@ -4,11 +4,14 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './modules/user/user.module';
 import { ClientModule } from './modules/client/client.module';
-
+import { ConfigModule } from '@nestjs/config';
 const allModules= [UserModule, ClientModule];
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://127.0.0.1:27017/envoices'),
+    ConfigModule.forRoot({
+      isGlobal: true
+    }),
+    MongooseModule.forRoot(process.env.mongodb),
     ...allModules,
     
   ],

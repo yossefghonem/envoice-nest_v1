@@ -1,18 +1,28 @@
 ## node app
 FROM node:18
+
 LABEL authors="abobakr"
 
 WORKDIR /nest-apps
 
-COPY package.json .
+COPY tsconfig.json ./
+COPY package*.json ./
 
 RUN npm install
 
-COPY . .
+COPY src/  src/
+COPY .env ./
 
-CMD [ "npm","start" ]
+RUN npm run build
+
+# RUN mkdir -p /data/db
+
+# CMD ["mongod"]
 
 EXPOSE 5000
+#
+CMD [ "npm","start" ]
+#
 
 
 # # Client App
