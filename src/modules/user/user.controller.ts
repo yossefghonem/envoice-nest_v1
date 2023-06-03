@@ -14,6 +14,7 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
+
   @Get("all")
   findAll() {
     console.log("gey all users");

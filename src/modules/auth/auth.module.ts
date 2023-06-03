@@ -14,9 +14,10 @@ import { JwtStrategy } from '../../guards/jwt.strategy';
     JwtModule.register({
       secret: process.env.TOKEN_SECRET,
       signOptions: { algorithm: 'HS256', expiresIn: '1d' },
-      
+
     }),
     // import modules
+    UserModule
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],

@@ -8,9 +8,9 @@ import { UnauthorizedException } from '@nestjs/common/exceptions';
 import { UserRole } from '../enums/userRole.enum';
 
 export interface JwtUser {
-  _id: string;
-  username: string;
-  role: UserRole
+  id: string;
+  taxNumber: string;
+  // role: UserRole
 }
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -27,9 +27,9 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
     let tokenPayload: JwtUser
     tokenPayload = {
-      _id: payload._id,
-      username: payload.username,
-      role: payload.role
+      id: payload.id,
+      taxNumber: payload.username,
+      // role: payload.role
     }
 
     return tokenPayload;

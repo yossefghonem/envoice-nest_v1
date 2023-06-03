@@ -1,15 +1,17 @@
-import { Prop } from '@nestjs/mongoose';
-import { ApiProperty } from '@nestjs/swagger';
-import { Model } from 'mongoose';
+import { ApiProperty } from "@nestjs/swagger";
+import { CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-export class OBaseEntity extends Model<any> {
-  _id?: any;
 
-  @Prop({})
-  // @ApiProperty({})
-  createdAt?: number;
-  // @ApiProperty()
-  @Prop({})
-  // @ApiProperty({})
-  updatedAt?: number;
+export abstract class OBaseEntity {
+  @PrimaryGeneratedColumn('increment', { type: 'bigint' })
+  @ApiProperty()
+  id?: number;
+
+  @CreateDateColumn({ type: 'timestamp' })
+  @ApiProperty({ readOnly: true, required: false })
+  createdAt?: Date;
+  
+  @UpdateDateColumn({ type: 'timestamp' })
+  @ApiProperty({ readOnly: true, required: false })
+  updatedAt?: Date;
 }
