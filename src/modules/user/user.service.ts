@@ -5,28 +5,27 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../../entities/user.entity';
 import { Repository } from 'typeorm';
 import { LoginDto } from '../../dtos/userDto';
+import { RoleService } from '../role/role.service';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User) private readonly repo: Repository<User>,
+    private readonly roleService: RoleService
   ) {
 
   }
-
-
-
   async onModuleInit() {
-    const adminsCount = await this.repo.count({ where: { superAdmin: true }, loadEagerRelations: false })
+    const adminsCount = await this.repo.count({ where: { taxNumber: "20150012" }, loadEagerRelations: false })
+    const role = await this.roleService.getDefault()
     if (adminsCount === 0) {
       const newAdmin: User = {
         name: 'المدير العام',
         email: 'admin@dev.com',
         password: '123456789',
         taxNumber: "20150012",
-        superAdmin: true,
-        mobile: "01111111111",
-        role: "admin"
+        phone: "01111111111",
+        role: role
       }
       this.repo.save(newAdmin)
     }
@@ -60,8 +59,11 @@ export class UserService {
     return users
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: number) {
+    let user = await this.repo.findOneBy({ id: id })
+
+    return { ...user, roleName: user.role.name }
+
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

@@ -9,4 +9,18 @@ export class CreateUserDto {
 
     @ApiProperty()
     password: string;
+
+    @ApiProperty()
+    taxNumber: string;
+
+    @ApiProperty()
+    phone: string;
+
+    @ApiProperty()
+    client_id: string;
+
+    @ApiProperty()
+    client_secret: string;
+
+
 }

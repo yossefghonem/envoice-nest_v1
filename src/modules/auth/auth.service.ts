@@ -24,7 +24,7 @@ export class AuthService {
         {
           id: user.id,
           taxNumber: user.taxNumber,
-          // email: user.email,
+          // roleName: user.role.name,
           // mobile: user.mobile,
           // userType: user.userType,
           // defaultLang: user.defaultLang,
@@ -36,7 +36,7 @@ export class AuthService {
       ),
     };
   }
-  
+
   async Login(body: LoginDto) {
     let userStored: User;
 

@@ -39,13 +39,7 @@ export class Address {
     @ApiProperty()
     additionalInformation: string
 }
-@Schema({
-    autoIndex: true,
-    timestamps: {
-        createdAt: 'createdAt',
-        updatedAt: 'updatedAt',
-    },
-})
+
 export class Client extends OBaseEntity {
 
     @ApiProperty()
@@ -79,13 +73,13 @@ export class Client extends OBaseEntity {
     @ApiProperty()
     @Prop({})
     client_secret: string
-    
+
     @ApiProperty()
     @Prop({})
     address: Address
-  
+
     @ApiProperty()
-    @Prop({default:UserType.Person})
+    @Prop({ default: UserType.Person })
     type: string
 
 

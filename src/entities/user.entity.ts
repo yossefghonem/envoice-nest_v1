@@ -3,9 +3,11 @@ import { Exclude } from 'class-transformer';
 import {
     Column,
     Entity,
+    ManyToOne,
 } from 'typeorm';
 import { OverrideUtils } from '../shared/override-utility';
 import { OBaseEntity } from './OBaseEntity';
+import { Role } from './role.entity';
 
 
 @Entity()
@@ -14,19 +16,22 @@ export class User extends OBaseEntity {
     name?: string;
 
     @Column({})
-    role?: string;
-
-    @Column({ nullable: true })
-    mobile?: string;
-
-    @Column({})
     email?: string;
 
     @Column({ unique: true })
     taxNumber?: string;
 
-    @Column({ default: false })
-    superAdmin?: boolean;
+    @Column({})
+    phone: string;
+
+    @Column({ nullable: true })
+    client_id?: string;
+
+    @Column({ nullable: true })
+    client_secret?: string;
+
+    @Column({ nullable: true })
+    client_secret2?: string;
 
     @Column({
         nullable: false,
@@ -46,11 +51,8 @@ export class User extends OBaseEntity {
     password?: string;
 
 
-    // @ApiPropertyOptional({ type: () => Role })
-    // @ManyToOne(() => Role, { eager: true })
-    // role?: Role;
-
-    // @ManyToOne(() => Pos, (pos) => pos.users)
-    // pos: Pos;
+    @ApiPropertyOptional({ type: () => Role })
+    @ManyToOne(() => Role, r => r.users, { eager: true })
+    role: Role;
 
 }

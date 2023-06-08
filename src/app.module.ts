@@ -9,7 +9,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { AuthModule } from './modules/auth/auth.module';
-const AllModules = [UserModule, AuthModule];
+import { RoleModule } from './modules/role/role.module';
+import { PermissionModule } from './modules/permission/permission.module';
+import { BranchModule } from './modules/branch/branch.module';
+const AllModules = [UserModule, AuthModule, RoleModule, PermissionModule];
 @Module({
   imports: [
     ...AllModules,
@@ -30,6 +33,8 @@ const AllModules = [UserModule, AuthModule];
       //   trustServerCertificate: true,
       // },
     }),
+    BranchModule,
+
     // ServeStaticModule.forRoot({
     //   rootPath: join(__dirname, '..', 'static'),
     // }),
