@@ -1,3 +1,4 @@
+import { Address } from './../../entities/address.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Branch } from '../../entities/branch.entity';
@@ -11,8 +12,15 @@ export class BranchService {
         @InjectRepository(Branch) private readonly repo: Repository<Branch>
     ) { }
 
-    create(brnch: CreateBranchDto) {
-        return this.repo.save(brnch)
+    async create(branch: CreateBranchDto) {
+        const address: Address = branch.address
+        const newbranch: Branch = {
+            name_ar: branch.name_ar,
+            name_en: branch.name_en,
+            code: branch.code,
+            address: address,
+        }
+        return await this.repo.save(newbranch);
     }
 
     async findAll() {
@@ -21,17 +29,14 @@ export class BranchService {
     }
 
     async findOne(id: number) {
-        let user = await this.repo.findOneBy({ id: id })
-
-        return { ...user }
-
+        return await this.repo.findOneBy({ id: id })
     }
 
-    update(id: number, updateUserDto: UpdateBranchDto) {
-        return `This action updates a #${id} user`;
+    async update(id: number, branch: UpdateBranchDto) {
+        return await this.repo.update(id, branch)
     }
 
-    remove(id: number) {
-        return `This action removes a #${id} user`;
+    async remove(id: number) {
+        return await this.repo.delete(id)
     }
 }

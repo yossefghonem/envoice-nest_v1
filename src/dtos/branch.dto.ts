@@ -4,31 +4,31 @@ import { ApiProperty, PartialType } from "@nestjs/swagger";
 export class AddressDto {
 
     @ApiProperty({})
-    country: string
+    country?: string
 
     @ApiProperty({})
-    governate: string
+    governate?: string
 
     @ApiProperty({})
-    regionCity: string
+    regionCity?: string
 
     @ApiProperty({})
-    street: string
+    street?: string
 
     @ApiProperty({})
-    buildingNumber: string
+    buildingNumber?: string
 
     @ApiProperty({})
-    postalCode: string
+    postalCode?: string
 
     @ApiProperty({})
-    floor: string
+    floor?: string
 
     @ApiProperty({})
-    landmark: string
+    landmark?: string
 
     @ApiProperty({})
-    additionalInformation: string
+    additionalInformation?: string
 
 }
 export class CreateBranchDto {
@@ -41,8 +41,8 @@ export class CreateBranchDto {
     @ApiProperty()
     code: string;
 
-    @ApiProperty()
-    adress: AddressDto;
+    @ApiProperty({ type: AddressDto })
+    address: AddressDto;
 }
 
 

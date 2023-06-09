@@ -18,13 +18,13 @@ export class CreateUserDto {
     phone: string;
 
     @ApiProperty()
-    client_id: string;
+    clientId: string;
 
     @ApiProperty()
-    client_secret: string;
+    clientSecret: string;
 
     @ApiProperty()
-    client_secret2: string;
+    clientSecret2: string;
 
     @ApiProperty()
     branchId: string;

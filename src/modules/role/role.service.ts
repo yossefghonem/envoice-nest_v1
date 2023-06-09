@@ -4,6 +4,7 @@ import { User } from '../../entities/user.entity';
 import { Repository } from 'typeorm';
 import { LoginDto } from '../../dtos/user.dto';
 import { Role } from '../../entities/role.entity';
+import { CreateRoleDto, UpdateRoleDto } from '../../dtos/role.dto';
 
 @Injectable()
 export class RoleService {
@@ -23,8 +24,8 @@ export class RoleService {
     }
 
 
-    create(createUserDto: any) {
-        return 'This action adds a new user';
+    async create(role: CreateRoleDto) {
+        return await this.repo.save(role)
     }
 
     async findAll() {
@@ -36,14 +37,14 @@ export class RoleService {
         return this.repo.findOne({ where: { name: 'superAdmin' } })
     }
     findOne(id: number) {
-        return `This action returns a #${id} user`;
+        return this.repo.findOneBy({ id: id })
     }
 
-    update(id: number, updateUserDto: any) {
-        return `This action updates a #${id} user`;
+    async update(id: number, role: UpdateRoleDto) {
+        return await this.repo.update(id, role);
     }
 
     remove(id: number) {
-        return `This action removes a #${id} user`;
+        return this.repo.delete(id);
     }
 }

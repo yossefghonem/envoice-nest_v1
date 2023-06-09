@@ -1,13 +1,15 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { StaticService } from './static.service';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('static')
+@ApiTags("static")
 export class StaticController {
   constructor(private readonly staticService: StaticService) { }
 
-  @Post()
-  create(@Body() createStaticDto: any) {
-    return this.staticService.create(createStaticDto);
+  @Post('seedActivity')
+  create() {
+    return this.staticService.seedActivites();
   }
 
   @Get()

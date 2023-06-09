@@ -13,7 +13,7 @@ import { RoleModule } from './modules/role/role.module';
 import { PermissionModule } from './modules/permission/permission.module';
 import { BranchModule } from './modules/branch/branch.module';
 import { StaticModule } from './modules/static/static.module';
-const AllModules = [UserModule, AuthModule, RoleModule, PermissionModule];
+const AllModules = [RoleModule, UserModule, AuthModule, PermissionModule];
 @Module({
   imports: [
     ...AllModules,

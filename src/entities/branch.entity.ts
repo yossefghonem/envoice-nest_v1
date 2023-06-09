@@ -2,6 +2,7 @@ import { ApiPropertyOptional } from '@nestjs/swagger';
 import {
     Column,
     Entity,
+    JoinColumn,
     ManyToOne,
     OneToMany,
     OneToOne,
@@ -20,12 +21,15 @@ export class Branch extends OBaseEntity {
     @Column({})
     name_ar?: string;
 
-    @ApiPropertyOptional({ type: () => Address })
-    @ManyToOne(() => Address, ad => ad.branch)
-    address?: Address[];
+    @Column({ nullable: true })
+    code?: string;
+
+    @OneToOne(() => Address, { cascade: true, eager: true })
+    @JoinColumn()
+    address?: Address;
 
     @ApiPropertyOptional({ type: () => User })
-    @ManyToOne(() => User, u => u.branch)
+    @OneToMany(() => User, u => u.branch)
     users?: User[];
 
     @ApiPropertyOptional({ type: () => Client })

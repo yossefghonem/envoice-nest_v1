@@ -1,6 +1,7 @@
 import {
     Column,
     Entity,
+    ManyToOne,
     OneToMany,
 } from 'typeorm';
 import { OBaseEntity } from './OBaseEntity';
@@ -12,34 +13,34 @@ import { Branch } from './branch.entity';
 export class Address extends OBaseEntity {
 
     @Column({})
-    country: string
+    country?: string
 
     @Column({})
-    governate: string
+    governate?: string
 
     @Column({})
-    regionCity: string
+    regionCity?: string
 
     @Column({})
-    street: string
+    street?: string
 
     @Column({})
-    buildingNumber: string
+    buildingNumber?: string
 
     @Column({})
-    postalCode: string
+    postalCode?: string
 
     @Column({})
-    floor: string
+    floor?: string
 
     @Column({})
-    landmark: string
+    landmark?: string
 
     @Column({})
-    additionalInformation: string
+    additionalInformation?: string
 
-    @ApiPropertyOptional({ type: () => Branch })
-    @OneToMany(() => Branch, b => b.address)
-    branch?: Branch[];
+    // @ApiPropertyOptional({ type: () => Branch })
+    // @ManyToOne(() => Branch, b => b.address, { cascade: true })
+    // branch?: Branch;
 
 }

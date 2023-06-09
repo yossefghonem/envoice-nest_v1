@@ -23,7 +23,7 @@ export class UserService {
         password: '123456789',
         taxNumber: "20150012",
         phone: "01111111111",
-        role: role
+        role: role,
       }
       this.repo.save(newAdmin)
     }
@@ -55,10 +55,10 @@ export class UserService {
       password: user.password,
       taxNumber: user.taxNumber,
       phone: user.phone,
-      client_id: user.client_id,
-      client_secret: user.client_secret,
-      client_secret2: user.client_secret2,
-      // branch: { id: +user.branchId },
+      clientId: user.clientId,
+      clientSecret: user.clientSecret,
+      clientSecret2: user.clientSecret2,
+      branch: { id: +user.branchId },
       // activity: user.activity,
       role: { id: +user.role }
     }

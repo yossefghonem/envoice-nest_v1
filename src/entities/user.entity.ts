@@ -28,13 +28,13 @@ export class User extends OBaseEntity {
     phone: string;
 
     @Column({ nullable: true })
-    client_id?: string;
+    clientId?: string;
 
     @Column({ nullable: true })
-    client_secret?: string;
+    clientSecret?: string;
 
     @Column({ nullable: true })
-    client_secret2?: string;
+    clientSecret2?: string;
 
     @Column({
         nullable: false,
@@ -56,14 +56,10 @@ export class User extends OBaseEntity {
 
     @ApiPropertyOptional({ type: () => Role })
     @ManyToOne(() => Role, r => r.users, { eager: true })
-    role: Role;
+    role?: Role;
 
     @ApiPropertyOptional({ type: () => Branch })
     @ManyToOne(() => Branch, r => r.users, { eager: true })
     branch?: Branch;
-
-    // @ApiPropertyOptional({ type: () => Client })
-    // @OneToMany(() => Client, c => c.user,{eager: true})
-    // clients?: Client[];
 
 }

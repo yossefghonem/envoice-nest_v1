@@ -13,7 +13,6 @@ export class BranchController {
     return this.branchService.create(branch);
   }
 
-
   @Get("all")
   findAll() {
     return this.branchService.findAll();
