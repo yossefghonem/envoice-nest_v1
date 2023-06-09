@@ -11,8 +11,8 @@ export class BranchService {
         @InjectRepository(Branch) private readonly repo: Repository<Branch>
     ) { }
 
-    create(createUserDto: CreateBranchDto) {
-        return 'This action adds a new user';
+    create(brnch: CreateBranchDto) {
+        return this.repo.save(brnch)
     }
 
     async findAll() {

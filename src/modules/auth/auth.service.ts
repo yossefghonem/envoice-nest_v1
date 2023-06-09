@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { JwtUser } from '../../guards/jwt.strategy';
-import { CreateUserDto, LoginDto } from '../../dtos/userDto';
+import { CreateUserDto, LoginDto } from '../../dtos/user.dto';
 import { UserService } from '../user/user.service';
 import { User } from '../../entities/user.entity';
 

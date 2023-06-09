@@ -1,8 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from '../../dtos/create-user.dto';
-import { UpdateUserDto } from '../../dtos/update-user.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { CreateUserDto, UpdateUserDto } from '../../dtos/user.dto';
 
 @Controller('users')
 @ApiTags("User")
@@ -11,6 +10,7 @@ export class UserController {
 
   @Post()
   create(@Body() user: CreateUserDto) {
+
     return this.userService.create(user);
   }
 

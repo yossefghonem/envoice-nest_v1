@@ -1,0 +1,48 @@
+import { PartialType } from "@nestjs/mapped-types";
+import { ApiProperty } from "@nestjs/swagger";
+
+export class CreateUserDto {
+    @ApiProperty()
+    name: string;
+
+    @ApiProperty()
+    email: string;
+
+    @ApiProperty()
+    password: string;
+
+    @ApiProperty()
+    taxNumber: string;
+
+    @ApiProperty()
+    phone: string;
+
+    @ApiProperty()
+    client_id: string;
+
+    @ApiProperty()
+    client_secret: string;
+
+    @ApiProperty()
+    client_secret2: string;
+
+    @ApiProperty()
+    branchId: string;
+
+    @ApiProperty()
+    activity: string;
+
+    @ApiProperty()
+    role: string;
+
+}
+
+export class LoginDto {
+    @ApiProperty()
+    taxNumber: string;
+
+    @ApiProperty()
+    password: string;
+}
+
+export class UpdateUserDto extends PartialType(CreateUserDto) { }

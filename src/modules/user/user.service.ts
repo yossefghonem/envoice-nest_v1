@@ -1,10 +1,8 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { CreateUserDto } from '../../dtos/create-user.dto';
-import { UpdateUserDto } from '../../dtos/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../../entities/user.entity';
 import { Repository } from 'typeorm';
-import { LoginDto } from '../../dtos/userDto';
+import { CreateUserDto, LoginDto, UpdateUserDto } from '../../dtos/user.dto';
 import { RoleService } from '../role/role.service';
 
 @Injectable()
@@ -50,8 +48,21 @@ export class UserService {
 
   }
 
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  create(user: CreateUserDto) {
+    const newUser: User = {
+      name: user.name,
+      email: user.email,
+      password: user.password,
+      taxNumber: user.taxNumber,
+      phone: user.phone,
+      client_id: user.client_id,
+      client_secret: user.client_secret,
+      client_secret2: user.client_secret2,
+      // branch: { id: +user.branchId },
+      // activity: user.activity,
+      role: { id: +user.role }
+    }
+    return this.repo.save(newUser)
   }
 
   async findAll() {
@@ -62,12 +73,12 @@ export class UserService {
   async findOne(id: number) {
     let user = await this.repo.findOneBy({ id: id })
 
-    return { ...user, roleName: user.role.name }
+    return { ...user, role: user.role.name }
 
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+    // return this.repo.update(id, updateUserDto);
   }
 
   remove(id: number) {
