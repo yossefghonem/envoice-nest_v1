@@ -1,118 +1,64 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Exclude } from 'class-transformer';
+import {
+    Column,
+    Entity,
+    ManyToOne,
+} from 'typeorm';
+import { OverrideUtils } from '../shared/override-utility';
 import { OBaseEntity } from './OBaseEntity';
-import { ApiProperty } from '@nestjs/swagger';
-import { UserRole } from '../enums/userRole.enum';
-import * as bcrypt from 'bcrypt';
-import { UserType } from '../enums/userType.enum';
+import { Role } from './role.entity';
+import { Branch } from './branch.entity';
+import { User } from './user.entity';
 
-export type ClientDocument = Client & Document;
 
-export class Address {
-    @Prop()
-    @ApiProperty()
-    branchID: string
-    @Prop()
-    @ApiProperty()
-    country: string
-    @Prop()
-    @ApiProperty()
-    governate: string
-    @Prop()
-    @ApiProperty()
-    regionCity: string
-    @Prop()
-    @ApiProperty()
-    street: string
-    @Prop()
-    @ApiProperty()
-    buildingNumber: string
-    @Prop()
-    @ApiProperty()
-    postalCode: string
-    @Prop()
-    @ApiProperty()
-    floor: string
-    @Prop()
-    @ApiProperty()
-    landmark: string
-    @Prop()
-    @ApiProperty()
-    additionalInformation: string
-}
-
+@Entity()
 export class Client extends OBaseEntity {
+    @Column({})
+    name?: string;
 
+    @Column({})
+    email?: string;
+
+    @Column({ unique: true })
+    taxNumber?: string;
+
+    @Column({})
+    phone: string;
+
+    @Column({ nullable: true })
+    client_id?: string;
+
+    @Column({ nullable: true })
+    client_secret?: string;
+
+    @Column({ nullable: true })
+    client_secret2?: string;
+
+    @Column({
+        nullable: false,
+        transformer: {
+            to: (value) => {
+                if (value === null) return;
+                return OverrideUtils.encryptPassword(value);
+            },
+            from: (value) => {
+                if (value === null) return;
+                return OverrideUtils.dycreptPassword(value);
+            },
+        },
+    })
+    @Exclude({ toPlainOnly: true })
     @ApiProperty()
-    @Prop({})
-    name: string;
-
-    @ApiProperty()
-    @Prop({})
-    email: string;
-
-    @ApiProperty()
-    @Prop({})
-    password: string;
-
-    @ApiProperty()
-    @Prop({})
-    tax_number: number
-
-    @ApiProperty()
-    @Prop({})
-    phone: string
-
-    @ApiProperty()
-    @Prop({})
-    clientId: string
-
-    @ApiProperty()
-    @Prop({})
-    clientSecret: string
-
-    @ApiProperty()
-    @Prop({})
-    client_secret: string
-
-    @ApiProperty()
-    @Prop({})
-    address: Address
-
-    @ApiProperty()
-    @Prop({ default: UserType.Person })
-    type: string
+    password?: string;
 
 
-    @ApiProperty()
-    @Prop({ enum: [UserRole.USER, UserRole.ADMIN, UserRole.SUBUSER], default: UserRole.USER })
-    role: string;
+    // @ApiPropertyOptional({ type: () => User })
+    // @ManyToOne(() => User, u => u.clients, { eager: true })
+    // user: User;
 
-    async checkPassword(candidatePassword: string) {
-        return bcrypt.compare(candidatePassword, this.password);
-    };
+    @ApiPropertyOptional({ type: () => Branch })
+    @ManyToOne(() => Branch, b => b.clients, { eager: true })
+    branch: Branch;
+
 }
-
-export const ClientSchema = SchemaFactory.createForClass(Client);
-
-// hash password pre save user
-ClientSchema.pre('save', async function (next) {
-    let user = this;
-    if (user.isModified('password')) {
-        const salt = await bcrypt.genSalt(10);
-        let hashedPassword = await bcrypt.hash(user.password, salt);
-        user.password = hashedPassword
-    }
-    next();
-});
-
-// ClientSchema.pre('updateOne', async function (next) {
-//     let user = this;
-//     if (user?._update.password) {
-//         const salt = await bcrypt.genSalt(10);
-//         let hashedPassword = await bcrypt.hash(user._update.password, salt);
-//         user._update.password = hashedPassword
-//     }
-//     next();
-// });
-
-ClientSchema.loadClass(Client);

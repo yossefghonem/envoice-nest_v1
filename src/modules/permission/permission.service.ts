@@ -1,11 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { CreateUserDto } from '../../dtos/create-user.dto';
-import { UpdateUserDto } from '../../dtos/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from '../../entities/user.entity';
 import { Repository } from 'typeorm';
-import { LoginDto } from '../../dtos/userDto';
-import { Role } from '../../entities/role.entity';
 import { Permission } from '../../entities/permission.entity';
 
 @Injectable()
@@ -26,7 +21,7 @@ export class PermissionService {
     // }
 
 
-    create(createUserDto: CreateUserDto) {
+    create(createUserDto: any) {
         return 'This action adds a new user';
     }
 
@@ -39,7 +34,7 @@ export class PermissionService {
         return `This action returns a #${id} user`;
     }
 
-    update(id: number, updateUserDto: UpdateUserDto) {
+    update(id: number, updateUserDto: any) {
         return `This action updates a #${id} user`;
     }
 

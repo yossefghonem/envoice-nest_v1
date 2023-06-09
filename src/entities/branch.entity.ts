@@ -8,6 +8,8 @@ import {
 } from 'typeorm';
 import { OBaseEntity } from './OBaseEntity';
 import { Address } from './address.entity';
+import { User } from './user.entity';
+import { Client } from './client.entity';
 
 
 @Entity()
@@ -20,7 +22,13 @@ export class Branch extends OBaseEntity {
 
     @ApiPropertyOptional({ type: () => Address })
     @ManyToOne(() => Address, ad => ad.branch)
-    address: Address[];
+    address?: Address[];
 
+    @ApiPropertyOptional({ type: () => User })
+    @ManyToOne(() => User, u => u.branch)
+    users?: User[];
 
+    @ApiPropertyOptional({ type: () => Client })
+    @ManyToOne(() => Client, u => u.branch)
+    clients?: Client[];
 }
