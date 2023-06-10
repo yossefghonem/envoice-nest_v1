@@ -5,7 +5,7 @@ import { CreateBranchDto, UpdateBranchDto } from '../../dtos/branch.dto';
 import { Role } from '../../entities/role.entity';
 import { CreateRoleDto, UpdateRoleDto } from '../../dtos/role.dto';
 
-@Controller('role')
+@Controller('roles')
 @ApiTags("Roles")
 export class RoleController {
   constructor(private readonly roleService: RoleService) { }
@@ -36,3 +36,4 @@ export class RoleController {
     return this.roleService.remove(+id);
   }
 }
+

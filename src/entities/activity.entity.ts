@@ -1,6 +1,7 @@
 import { OBaseEntity } from './OBaseEntity';
-import { ApiProperty } from '@nestjs/swagger';
-import { Column, Entity } from 'typeorm';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Column, Entity, OneToMany } from 'typeorm';
+import { User } from './user.entity';
 
 
 
@@ -10,13 +11,17 @@ export class Activities extends OBaseEntity {
 
     @ApiProperty()
     @Column({})
-    code: string;
+    code?: string;
 
     @ApiProperty()
     @Column({})
-    desc_en: string;
+    desc_en?: string;
 
     @ApiProperty()
     @Column({})
-    desc_ar: string;
+    desc_ar?: string;
+
+    @ApiPropertyOptional({ type: () => User })
+    @OneToMany(() => User, u => u.activity)
+    users?: User[];
 }

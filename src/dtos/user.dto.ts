@@ -21,7 +21,7 @@ export class CreateUserDto {
     clientId: string;
 
     @ApiProperty()
-    clientSecret: string;
+    clientSecret1: string;
 
     @ApiProperty()
     clientSecret2: string;

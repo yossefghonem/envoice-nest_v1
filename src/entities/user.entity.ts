@@ -11,6 +11,7 @@ import { OBaseEntity } from './OBaseEntity';
 import { Role } from './role.entity';
 import { Branch } from './branch.entity';
 import { Client } from './client.entity';
+import { Activities } from './activity.entity';
 
 
 @Entity()
@@ -56,7 +57,11 @@ export class User extends OBaseEntity {
 
     @ApiPropertyOptional({ type: () => Role })
     @ManyToOne(() => Role, r => r.users, { eager: true })
-    role?: Role;
+    role: Role;
+
+    @ApiPropertyOptional({ type: () => Activities })
+    @ManyToOne(() => Activities, r => r.users, { eager: true })
+    activity: Activities;
 
     @ApiPropertyOptional({ type: () => Branch })
     @ManyToOne(() => Branch, r => r.users, { eager: true })
