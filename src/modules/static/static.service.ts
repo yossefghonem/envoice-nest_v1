@@ -10,7 +10,9 @@ export class StaticService {
     private readonly activityRepo: Repository<Activities>
   ) { }
 
-  seedActivites() {
+  async seedActivites() {
+    if ((await this.activityRepo.count()) > 0)
+      return "activities already stored";
     return this.activityRepo.save(activities.map((act) => {
       return {
         code: act.code,

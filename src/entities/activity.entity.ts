@@ -21,7 +21,7 @@ export class Activities extends OBaseEntity {
     @Column({})
     desc_ar?: string;
 
-    @ApiPropertyOptional({ type: () => User })
-    @OneToMany(() => User, u => u.activity)
-    users?: User[];
+    // @ApiPropertyOptional({ type: () => User })
+    // @OneToMany(() => User, u => u.activity)
+    // users: User[];
 }
