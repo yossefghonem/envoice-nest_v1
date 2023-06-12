@@ -61,7 +61,7 @@ export class User extends OBaseEntity {
 
     // @ApiPropertyOptional({ type: () => Activities })
     @ManyToOne(() => Activities, r => r.id, { eager: true })
-    activity: Activities;
+    activity?: Activities;
 
     @ApiPropertyOptional({ type: () => Branch })
     @ManyToOne(() => Branch, r => r.users, { eager: true })

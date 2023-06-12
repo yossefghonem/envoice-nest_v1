@@ -13,12 +13,12 @@ export class UserService {
     @InjectRepository(Activities) private readonly activityRepo: Repository<Activities>,
     private readonly roleService: RoleService
   ) {
-
   }
+
   async onModuleInit() {
     const adminsCount = await this.repo.count({ where: { taxNumber: "20150012" }, loadEagerRelations: false })
     const role = await this.roleService.getDefault()
-    const activity = await this.activityRepo.findOneBy({ code: "0111" })
+    // const activity = await this.activityRepo.findOneBy({ code: "0111" })
     if (adminsCount === 0) {
       const newAdmin: User = {
         name: 'المدير العام',
@@ -27,14 +27,14 @@ export class UserService {
         taxNumber: "20150012",
         phone: "01111111111",
         role: role,
-        activity: activity
+        // activity: activity
       }
+
       this.repo.save(newAdmin)
     }
   }
 
   async findUser(body: LoginDto): Promise<User | PromiseLike<User>> {
-
     let existsUser = await this.repo.findOne({
       where: [{ taxNumber: body.taxNumber }]
     });
@@ -42,6 +42,7 @@ export class UserService {
     if (!existsUser) {
       throw new UnauthorizedException('User Not Found')
     }
+
     if (existsUser.password !== body.password)
       throw new UnauthorizedException('check your credintials');
 
@@ -49,7 +50,6 @@ export class UserService {
     delete existsUser.password
     existsUser["status"] = true
     return existsUser;
-
   }
 
   create(user: CreateUserDto) {
@@ -68,6 +68,7 @@ export class UserService {
       activity: { id: +user.activity },
       role: { id: +user.role }
     }
+
     return this.repo.save(newUser)
   }
 
@@ -80,7 +81,6 @@ export class UserService {
     let user = await this.repo.findOneBy({ id: id })
 
     return { ...user, role: user.role.name }
-
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
