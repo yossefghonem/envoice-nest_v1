@@ -20,8 +20,8 @@ export class StaticService {
     }))
   }
 
-  findAll() {
-    return `This action returns all static`;
+  async findAll() {
+    return await this.activityRepo.find()
   }
 
   findOne(id: number) {

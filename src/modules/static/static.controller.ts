@@ -12,7 +12,7 @@ export class StaticController {
     return this.staticService.seedActivites();
   }
 
-  @Get()
+  @Get("activities")
   findAll() {
     return this.staticService.findAll();
   }
