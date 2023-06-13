@@ -12,6 +12,7 @@ import { Role } from './role.entity';
 import { Branch } from './branch.entity';
 import { Client } from './client.entity';
 import { Activities } from './activity.entity';
+import { Company } from './company.entity';
 
 
 @Entity()
@@ -29,7 +30,7 @@ export class User extends OBaseEntity {
     phone: string;
 
     @Column({ nullable: true })
-    clientId?: string;
+    client_id?: string;
 
     @Column({ nullable: true })
     clientSecret?: string;
@@ -59,12 +60,12 @@ export class User extends OBaseEntity {
     @ManyToOne(() => Role, r => r.users, { eager: true })
     role: Role;
 
-    // @ApiPropertyOptional({ type: () => Activities })
-    @ManyToOne(() => Activities, r => r.id, { eager: true })
-    activity?: Activities;
+    // @ApiPropertyOptional({ type: () => Branch })
+    // @ManyToOne(() => Branch, r => r.users, { eager: true })
+    // branch?: Branch;
 
-    @ApiPropertyOptional({ type: () => Branch })
-    @ManyToOne(() => Branch, r => r.users, { eager: true })
-    branch?: Branch;
+    // @ApiPropertyOptional({ type: () => Company })
+    @OneToMany(() => Company, r => r.user)
+    company?: Company;
 
 }

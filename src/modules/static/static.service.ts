@@ -5,6 +5,7 @@ import { Activities } from '../../entities/activity.entity';
 import * as activities from './../../basic-json/activities.json'
 @Injectable()
 export class StaticService {
+
   constructor(
     @InjectRepository(Activities)
     private readonly activityRepo: Repository<Activities>
@@ -24,6 +25,10 @@ export class StaticService {
 
   async findAll() {
     return await this.activityRepo.find()
+  }
+
+  getDefaultActivity() {
+    return this.activityRepo.findOneBy({ code: "0111" })
   }
 
   findOne(id: number) {

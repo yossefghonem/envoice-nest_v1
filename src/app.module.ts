@@ -13,6 +13,10 @@ import { RoleModule } from './modules/role/role.module';
 import { PermissionModule } from './modules/permission/permission.module';
 import { BranchModule } from './modules/branch/branch.module';
 import { StaticModule } from './modules/static/static.module';
+import { CompanyModule } from './modules/company/company.module';
+import { FatoraModule } from './modules/fatora/fatora.module';
+import { GroupModule } from './modules/group/group.module';
+import { ItemModule } from './modules/item/item.module';
 const AllModules = [RoleModule, UserModule, AuthModule, PermissionModule];
 @Module({
   imports: [
@@ -36,6 +40,10 @@ const AllModules = [RoleModule, UserModule, AuthModule, PermissionModule];
     }),
     BranchModule,
     StaticModule,
+    CompanyModule,
+    FatoraModule,
+    GroupModule,
+    ItemModule,
 
     // ServeStaticModule.forRoot({
     //   rootPath: join(__dirname, '..', 'static'),

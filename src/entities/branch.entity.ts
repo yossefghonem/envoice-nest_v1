@@ -11,6 +11,7 @@ import { OBaseEntity } from './OBaseEntity';
 import { Address } from './address.entity';
 import { User } from './user.entity';
 import { Client } from './client.entity';
+import { Company } from './company.entity';
 
 
 @Entity()
@@ -28,11 +29,15 @@ export class Branch extends OBaseEntity {
     @JoinColumn()
     address?: Address;
 
-    @ApiPropertyOptional({ type: () => User })
-    @OneToMany(() => User, u => u.branch)
-    users?: User[];
+    // @ApiPropertyOptional({ type: () => User })
+    // @OneToMany(() => User, u => u.branch)
+    // users?: User[];
 
     @ApiPropertyOptional({ type: () => Client })
     @ManyToOne(() => Client, u => u.branch)
     clients?: Client[];
+
+    @ApiPropertyOptional({ type: () => Company })
+    @ManyToOne(() => Company, u => u.branch)
+    company?: Company[];
 }

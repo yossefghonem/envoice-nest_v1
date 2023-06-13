@@ -5,20 +5,22 @@ import { Repository } from 'typeorm';
 import { CreateUserDto, LoginDto, UpdateUserDto } from '../../dtos/user.dto';
 import { RoleService } from '../role/role.service';
 import { Activities } from '../../entities/activity.entity';
+import { StaticService } from '../static/static.service';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User) private readonly repo: Repository<User>,
     @InjectRepository(Activities) private readonly activityRepo: Repository<Activities>,
-    private readonly roleService: RoleService
+    private readonly roleService: RoleService,
+    private readonly staticService: StaticService
   ) {
   }
 
   async onModuleInit() {
     const adminsCount = await this.repo.count({ where: { taxNumber: "20150012" }, loadEagerRelations: false })
     const role = await this.roleService.getDefault()
-    // const activity = await this.activityRepo.findOneBy({ code: "0111" })
+    // const activity = await this.staticService.getDefaultActivity()
     if (adminsCount === 0) {
       const newAdmin: User = {
         name: 'المدير العام',
@@ -61,12 +63,12 @@ export class UserService {
       password: user.password,
       taxNumber: user.taxNumber,
       phone: user.phone,
-      clientId: user.clientId,
+      client_id: user.clientId,
       clientSecret: user.clientSecret1,
       clientSecret2: user.clientSecret2,
-      branch: { id: +user.branchId },
-      activity: { id: +user.activity },
-      role: { id: +user.role }
+      company: { id: +user.companyId },
+      // activity: { id: +user.activity },
+      role: { id: +user.roleId }
     }
 
     return this.repo.save(newUser)

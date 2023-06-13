@@ -27,13 +27,10 @@ export class CreateUserDto {
     clientSecret2: string;
 
     @ApiProperty()
-    branchId: string;
+    companyId: string;
 
     @ApiProperty()
-    activity: string;
-
-    @ApiProperty()
-    role: string;
+    roleId: string;
 
 }
 

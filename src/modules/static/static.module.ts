@@ -7,6 +7,7 @@ import { Activities } from '../../entities/activity.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([Activities])],
   controllers: [StaticController],
-  providers: [StaticService]
+  providers: [StaticService],
+  exports: [StaticService]
 })
 export class StaticModule { }

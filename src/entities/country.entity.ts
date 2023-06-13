@@ -1,29 +1,21 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { OBaseEntity } from './OBaseEntity';
 import { ApiProperty } from '@nestjs/swagger';
+import { Column, Entity } from 'typeorm';
 
-export type CountryDocument = Country & Document;
 
 
-@Schema({
-    autoIndex: true,
-    timestamps: {
-        createdAt: 'createdAt',
-        updatedAt: 'updatedAt',
-    },
-})
+@Entity()
 export class Country extends OBaseEntity {
 
     @ApiProperty()
-    @Prop({})
+    @Column({})
     code: string;
 
     @ApiProperty()
-    @Prop({})
+    @Column({})
     desc_en: string;
 
     @ApiProperty()
-    @Prop({})
+    @Column({})
     desc_er: string;
 }
-export const CountrySchema = SchemaFactory.createForClass(Country);
