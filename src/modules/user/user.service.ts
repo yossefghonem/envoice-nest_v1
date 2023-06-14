@@ -86,10 +86,10 @@ export class UserService {
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
-    // return this.repo.update(id, updateUserDto);
+    return this.repo.update(id, updateUserDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} user`;
+    return this.repo.delete(id);
   }
 }

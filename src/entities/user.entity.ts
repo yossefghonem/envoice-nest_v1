@@ -65,7 +65,7 @@ export class User extends OBaseEntity {
     // branch?: Branch;
 
     // @ApiPropertyOptional({ type: () => Company })
-    @OneToMany(() => Company, r => r.user)
+    @ManyToOne(() => Company, r => r.user)
     company?: Company;
 
 }

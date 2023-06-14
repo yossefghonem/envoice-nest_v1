@@ -1,12 +1,15 @@
 import { Controller, Post, Get, Param, Patch, Body, Delete } from '@nestjs/common';
 import { CompanyService } from './company.service';
+import { CreateCompanyDto, UpdateCompanyDto } from '../../dtos/company.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('companys')
+@ApiTags("Cpmany")
 export class CompanyController {
   constructor(private readonly companyService: CompanyService) { }
 
-  @Post('')
-  create(@Body() c: any) {
+  @Post()
+  create(@Body() c: CreateCompanyDto) {
     return this.companyService.create(c);
   }
 
@@ -21,8 +24,8 @@ export class CompanyController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateStaticDto: any) {
-    return this.companyService.update(+id, updateStaticDto);
+  update(@Param('id') id: string, @Body() update: UpdateCompanyDto) {
+    return this.companyService.update(+id, update);
   }
 
   @Delete(':id')

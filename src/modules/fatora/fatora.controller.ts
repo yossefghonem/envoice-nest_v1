@@ -2,10 +2,12 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { FatoraService } from './fatora.service';
 import { CreateFatoraDto } from './dto/create-fatora.dto';
 import { UpdateFatoraDto } from './dto/update-fatora.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('fatora')
+@ApiTags('fatora')
 export class FatoraController {
-  constructor(private readonly fatoraService: FatoraService) {}
+  constructor(private readonly fatoraService: FatoraService) { }
 
   @Post()
   create(@Body() createFatoraDto: CreateFatoraDto) {
