@@ -17,6 +17,7 @@ import { CompanyModule } from './modules/company/company.module';
 import { FatoraModule } from './modules/fatora/fatora.module';
 import { GroupModule } from './modules/group/group.module';
 import { ItemModule } from './modules/item/item.module';
+import { LicenseModule } from './modules/license/license.module';
 const AllModules = [RoleModule, UserModule, AuthModule, PermissionModule];
 @Module({
   imports: [
@@ -44,6 +45,7 @@ const AllModules = [RoleModule, UserModule, AuthModule, PermissionModule];
     FatoraModule,
     GroupModule,
     ItemModule,
+    LicenseModule,
 
     // ServeStaticModule.forRoot({
     //   rootPath: join(__dirname, '..', 'static'),

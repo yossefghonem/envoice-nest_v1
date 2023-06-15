@@ -13,6 +13,7 @@ import { Branch } from './branch.entity';
 import { Client } from './client.entity';
 import { Activities } from './activity.entity';
 import { Company } from './company.entity';
+import { License } from './license.entity';
 
 
 @Entity()
@@ -60,12 +61,12 @@ export class User extends OBaseEntity {
     @ManyToOne(() => Role, r => r.users, { eager: true })
     role: Role;
 
-    // @ApiPropertyOptional({ type: () => Branch })
-    // @ManyToOne(() => Branch, r => r.users, { eager: true })
-    // branch?: Branch;
+    @ApiPropertyOptional({ type: () => License })
+    @OneToMany(() => License, r => r.user, { eager: true })
+    license?: License;
 
     // @ApiPropertyOptional({ type: () => Company })
-    @ManyToOne(() => Company, r => r.user)
+    @ManyToOne(() => Company, r => r.user, { eager: true })
     company?: Company;
 
 }

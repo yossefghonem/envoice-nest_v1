@@ -21,7 +21,7 @@ export class Company extends OBaseEntity {
     certificate?: string;
 
     @ApiPropertyOptional({ type: () => User })
-    @OneToMany(() => User, r => r.company, { eager: true })
+    @OneToMany(() => User, r => r.company,)
     user?: User[];
 
     @ApiPropertyOptional({ type: () => Branch })

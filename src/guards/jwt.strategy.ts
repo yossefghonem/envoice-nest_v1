@@ -6,6 +6,7 @@ import { UserService } from '../modules/user/user.service';
 
 import { UnauthorizedException } from '@nestjs/common/exceptions';
 import { UserRole } from '../enums/userRole.enum';
+import { LicenseService } from '../modules/license/license.service';
 
 export interface JwtUser {
   id: string;
@@ -14,17 +15,21 @@ export interface JwtUser {
 }
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor() {
+  constructor(private readonly licenseService: LicenseService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: true,
       secretOrKey: process.env.TOKEN_SECRET,
-      algorithm: "HS256"
+      algorithm: "HS256",
     });
   }
 
   async validate(payload: any) {
-
+    const user = await this.licenseService.isValidLicense(payload.id);
+    console.log("5555555555555", user)
+    if (!user) {
+      throw new UnauthorizedException("User is not authorized");
+    }
     let tokenPayload: JwtUser
     tokenPayload = {
       id: payload.id,
