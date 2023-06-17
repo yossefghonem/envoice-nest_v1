@@ -16,7 +16,7 @@ export class UserController {
   }
 
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get("all")
   findAll() {
     console.log("get all users");

@@ -16,7 +16,8 @@ export class CompanyService {
             certificate: body.certificate,
             activity: { id: +body.activity },
         }
-        return this.repo.save(newComp)
+        let company = await this.repo.save(newComp)
+        return this.repo.findOneBy({ id: company.id })
     }
 
     async findAll() {
