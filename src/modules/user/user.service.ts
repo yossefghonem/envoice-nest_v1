@@ -54,7 +54,7 @@ export class UserService {
     return existsUser;
   }
 
-  create(user: CreateUserDto) {
+  async create(user: CreateUserDto) {
     console.log({ user });
 
     const newUser: User = {
@@ -71,7 +71,9 @@ export class UserService {
       role: { id: +user.roleId }
     }
 
-    return this.repo.save(newUser)
+    let userDb = await this.repo.save(newUser)
+    return this.repo.findOneBy({ id: userDb.id });
+
   }
 
   async findAll() {

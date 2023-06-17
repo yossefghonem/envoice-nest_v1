@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateFatoraDto } from './dto/create-fatora.dto';
-import { UpdateFatoraDto } from './dto/update-fatora.dto';
+import { CreateFatoraDto, UpdateFatoraDto } from '../../dtos/fatora.dto';
 
 @Injectable()
 export class FatoraService {

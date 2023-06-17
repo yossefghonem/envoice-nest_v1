@@ -1,8 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { FatoraService } from './fatora.service';
-import { CreateFatoraDto } from './dto/create-fatora.dto';
-import { UpdateFatoraDto } from './dto/update-fatora.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { CreateFatoraDto, UpdateFatoraDto } from '../../dtos/fatora.dto';
 
 @Controller('fatora')
 @ApiTags('fatora')
