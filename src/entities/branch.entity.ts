@@ -25,6 +25,9 @@ export class Branch extends OBaseEntity {
     @Column({ nullable: true })
     code?: string;
 
+    @Column({ default: 0 })
+    invoiceSerial?: number;
+
     @OneToOne(() => Address, { cascade: true, eager: true })
     @JoinColumn()
     address?: Address;

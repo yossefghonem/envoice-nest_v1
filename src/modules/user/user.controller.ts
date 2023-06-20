@@ -14,10 +14,6 @@ export class UserController {
     return this.userService.create(user);
   }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 752f2b7 (hiiiiii)
   // @UseGuards(JwtAuthGuard)
   @Get("all")
   findAll() {
