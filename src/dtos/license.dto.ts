@@ -9,7 +9,7 @@ export class CreateLicenseDto {
     endDate: Date;
 
     @ApiProperty({})
-    userId: string;
+    companyId: string;
 }
 
 export class UpdateLicenseDto extends PartialType(CreateLicenseDto) { }

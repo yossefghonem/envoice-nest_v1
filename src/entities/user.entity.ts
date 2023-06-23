@@ -61,10 +61,6 @@ export class User extends OBaseEntity {
     @ManyToOne(() => Role, r => r.users, { eager: true })
     role: Role;
 
-    @ApiPropertyOptional({ type: () => License })
-    @OneToMany(() => License, r => r.user, { eager: true })
-    license?: License;
-
     // @ApiPropertyOptional({ type: () => Company })
     @ManyToOne(() => Company, r => r.user, { eager: true })
     company?: Company;

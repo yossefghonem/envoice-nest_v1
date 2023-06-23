@@ -14,7 +14,7 @@ export class LicenseController {
     return this.licenseService.create(createLicenseDto);
   }
 
-  @Get()
+  @Get("all")
   findAll() {
     return this.licenseService.findAll();
   }

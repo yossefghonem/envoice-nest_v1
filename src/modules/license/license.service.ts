@@ -10,22 +10,23 @@ export class LicenseService {
   }
 
   async isValidLicense(userId: number): Promise<boolean> {
-    const license = await this.repo.findOne({
-      where:
-      {
-        user: { id: userId },
-        endDate: MoreThanOrEqual(new Date())
-      }
-    })
-    return !!license
+    // license=>company=>user
+    const lic = await this.repo.createQueryBuilder("license")
+      .leftJoinAndSelect("license.company", "company")
+      .leftJoinAndSelect("license.user", "user")
+      .where("user.id:=userId", { userId })
+      .andWhere("license.endDate:>d", { d: new Date() })
+      .getOne()
+    return !!lic
   }
 
-  create(body: CreateLicenseDto) {
-    return this.repo.save({
+  async create(body: CreateLicenseDto) {
+    let licDb = await this.repo.save({
       startDate: body.startDate,
       endDate: body.endDate,
-      user: { id: +body.userId }
+      company: { id: +body.companyId }
     })
+    return this.repo.findOneBy({ id: licDb.id });
   }
 
   findAll() {
