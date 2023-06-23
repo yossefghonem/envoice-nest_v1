@@ -13,9 +13,9 @@ export class LicenseService {
     // license=>company=>user
     const lic = await this.repo.createQueryBuilder("license")
       .leftJoinAndSelect("license.company", "company")
-      .leftJoinAndSelect("license.user", "user")
-      .where("user.id:=userId", { userId })
-      .andWhere("license.endDate:>d", { d: new Date() })
+      .leftJoinAndSelect("company.user", "user")
+      .where("user.id = :userId", { userId })
+      .andWhere("license.endDate > :d", { d: new Date() })
       .getOne()
     return !!lic
   }

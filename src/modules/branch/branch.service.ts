@@ -4,28 +4,40 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Branch } from '../../entities/branch.entity';
 import { Repository } from 'typeorm';
 import { CreateBranchDto, UpdateBranchDto } from '../../dtos/branch.dto';
+import { JwtUser } from '../../guards/jwt.strategy';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class BranchService {
 
     constructor(
         @InjectRepository(Branch) private readonly repo: Repository<Branch>
+        , private userService: UserService
     ) { }
 
-    async create(branch: CreateBranchDto) {
+    async create(branch: CreateBranchDto, user: JwtUser) {
+        const userDb = await this.userService.findOne(+user.id)
+        console.log(userDb);
+
+        // return userDb;
         const address: Address = branch.address
         const newbranch: Branch = {
             name_ar: branch.name_ar,
             name_en: branch.name_en,
             code: branch.code,
             address: address,
+            company: userDb.company
         }
         return await this.repo.save(newbranch);
     }
 
-    async findAll() {
-        let users = await this.repo.find();
-        return users
+    async findAll(user: JwtUser) {
+        let branches = await this.repo.createQueryBuilder("b")
+            .leftJoinAndSelect('b.company', 'company')
+            .leftJoinAndSelect('company.user', 'user')
+            .where('user.id = :id', { 'id': user.id })
+            .getMany()
+        return branches
     }
 
     async findOne(id: number) {

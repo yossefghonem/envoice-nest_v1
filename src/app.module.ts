@@ -33,8 +33,8 @@ const AllModules = [RoleModule, UserModule, AuthModule, PermissionModule];
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true,
       autoLoadEntities: true,
-      // logging: true,
-      // logger: 'advanced-console',
+      logging: true,
+      logger: 'advanced-console',
       // extra: {
       //   trustServerCertificate: true,
       // },

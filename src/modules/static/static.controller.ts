@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { StaticService } from './static.service';
 import { ApiTags } from '@nestjs/swagger';
 
@@ -15,6 +15,16 @@ export class StaticController {
   @Get("activities")
   findAll() {
     return this.staticService.findAll();
+  }
+
+  @Post('seedGpc')
+  createGpc() {
+    return this.staticService.seedGpcCode();
+  }
+
+  @Get("gpc")
+  findAllGpc(@Query() search: string) {
+    return this.staticService.findAllGpc(search);
   }
 
   @Get(':id')

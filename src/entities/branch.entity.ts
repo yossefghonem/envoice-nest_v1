@@ -42,5 +42,5 @@ export class Branch extends OBaseEntity {
 
     @ApiPropertyOptional({ type: () => Company })
     @ManyToOne(() => Company, u => u.branch)
-    company?: Company[];
+    company: Company;
 }

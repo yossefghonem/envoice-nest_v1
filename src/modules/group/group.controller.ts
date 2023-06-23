@@ -1,8 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { GroupService } from './group.service';
-import { CreateGroupDto } from './dto/create-group.dto';
-import { UpdateGroupDto } from './dto/update-group.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { CreateGroupDto, UpdateGroupDto } from '../../dtos/group.dto';
 
 @Controller('group')
 @ApiTags('group')
@@ -14,7 +13,7 @@ export class GroupController {
     return this.groupService.create(createGroupDto);
   }
 
-  @Get()
+  @Get("all")
   findAll() {
     return this.groupService.findAll();
   }

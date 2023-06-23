@@ -3,9 +3,10 @@ import { StaticService } from './static.service';
 import { StaticController } from './static.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Activities } from '../../entities/activity.entity';
+import { GpcCode } from '../../entities/gpcCode.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Activities])],
+  imports: [TypeOrmModule.forFeature([Activities, GpcCode])],
   controllers: [StaticController],
   providers: [StaticService],
   exports: [StaticService]
