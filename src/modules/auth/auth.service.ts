@@ -24,7 +24,7 @@ export class AuthService {
         {
           id: user.id,
           taxNumber: user.taxNumber,
-          // roleName: user.role.name,
+          role: user.role.name,
           // mobile: user.mobile,
           // userType: user.userType,
           // defaultLang: user.defaultLang,

@@ -1,3 +1,5 @@
+import { UserRole } from './../../enums/userRole.enum';
+import { JwtUser } from './../../guards/jwt.strategy';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Company } from '../../entities/company.entity';
@@ -20,9 +22,16 @@ export class CompanyService {
         return this.repo.findOneBy({ id: company.id })
     }
 
-    async findAll() {
-        let companies = await this.repo.find();
-        return companies
+    async findAll(user: JwtUser) {
+
+        if (user.role === UserRole.SUPERADMIN)
+            return await this.repo.find();
+        return await this.repo.createQueryBuilder("c")
+            .leftJoin("c.user", "user")
+            .leftJoinAndSelect("c.activity", "activities")
+            .where("user.id = :id", { id: user.id })
+            .getMany()
+
     }
 
     findOne(id: number) {

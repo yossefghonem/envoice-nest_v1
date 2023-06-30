@@ -37,19 +37,20 @@ export class OverrideUtils {
   // }
 
   static encryptPassword(password: string) {
-
+    console.log(password);
     var decrypted = CryptoJS.AES.decrypt(password, process.env.JWT_SECRET);
     var value = decrypted.toString(CryptoJS.enc.Utf8);
 
     if (value) {
-
+      console.log({ value });
       // Dont do nothing because myString is already an encrypted value
       return password;
     } else {
       // Here encrypt your string again
-      return CryptoJS.AES.encrypt(password, process.env.JWT_SECRET).toString();
+      const enc = CryptoJS.AES.encrypt(password, process.env.JWT_SECRET).toString();
+      console.log({ enc });
+      return enc;
     }
-
 
   }
   static dycreptPassword(password: string) {

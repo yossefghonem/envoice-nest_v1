@@ -11,7 +11,7 @@ import { LicenseService } from '../modules/license/license.service';
 export interface JwtUser {
   id: string;
   taxNumber: string;
-  // role: UserRole
+  role: UserRole
 }
 
 @Injectable()
@@ -38,8 +38,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     let tokenPayload: JwtUser
     tokenPayload = {
       id: payload.id,
-      taxNumber: payload.username,
-      // role: payload.role
+      taxNumber: payload.taxNumber,
+      role: payload.role
     }
 
     return tokenPayload;

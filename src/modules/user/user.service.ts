@@ -44,6 +44,8 @@ export class UserService {
     if (!existsUser) {
       throw new UnauthorizedException('User Not Found')
     }
+    console.log("11", existsUser);
+    console.log("22", body.password);
 
     if (existsUser.password !== body.password)
       throw new UnauthorizedException('check your credintials');
@@ -66,7 +68,7 @@ export class UserService {
       client_id: user.clientId,
       clientSecret: user.clientSecret1,
       clientSecret2: user.clientSecret2,
-      company: { id: +user.companyId },
+      company: user.company,
       // activity: { id: +user.activity },
       role: { id: +user.roleId }
     }
@@ -87,7 +89,14 @@ export class UserService {
     return { ...user, role: user.role.name }
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    console.log({ id, updateUserDto });
+    // let user: User = await this.repo.findOneBy({ id: id })
+    // console.log({ user });
+    // user.company = { id: 3 }
+
+    // let newU = await this.repo.save(user)
+    // return newU
     return this.repo.update(id, updateUserDto);
   }
 

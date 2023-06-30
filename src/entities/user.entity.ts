@@ -39,14 +39,17 @@ export class User extends OBaseEntity {
     @Column({ nullable: true })
     clientSecret2?: string;
 
+
     @Column({
         nullable: false,
         transformer: {
             to: (value) => {
                 if (value === null) return;
+                console.log({ tt: value });
                 return OverrideUtils.encryptPassword(value);
             },
             from: (value) => {
+                console.log({ ff: value });
                 if (value === null) return;
                 return OverrideUtils.dycreptPassword(value);
             },
@@ -56,13 +59,11 @@ export class User extends OBaseEntity {
     @ApiProperty()
     password?: string;
 
-
     @ApiPropertyOptional({ type: () => Role })
     @ManyToOne(() => Role, r => r.users, { eager: true })
     role: Role;
 
     // @ApiPropertyOptional({ type: () => Company })
-    @ManyToOne(() => Company, r => r.user, { eager: true })
+    @ManyToOne(() => Company, r => r.user, { eager: true, cascade: true })
     company?: Company;
-
 }

@@ -1,3 +1,4 @@
+import { JwtUser } from './../../guards/jwt.strategy';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../../entities/user.entity';
@@ -5,6 +6,7 @@ import { Repository } from 'typeorm';
 import { LoginDto } from '../../dtos/user.dto';
 import { Role } from '../../entities/role.entity';
 import { CreateRoleDto, UpdateRoleDto } from '../../dtos/role.dto';
+import { UserRole } from '../../enums/userRole.enum';
 
 @Injectable()
 export class RoleService {
@@ -28,9 +30,10 @@ export class RoleService {
         return await this.repo.save(role)
     }
 
-    async findAll() {
-        let roles = await this.repo.find();
-        return roles
+    async findAll(user: JwtUser) {
+        if (user.role === UserRole.SUPERADMIN)
+            return await this.repo.find();
+        return await this.repo.findBy({ name: UserRole.USER })
     }
 
     getDefault() {

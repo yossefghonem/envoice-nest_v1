@@ -1,4 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { JwtAuthGuard } from './../../guards/jwt.guard';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards, Req } from '@nestjs/common';
 import { RoleService } from './role.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateBranchDto, UpdateBranchDto } from '../../dtos/branch.dto';
@@ -17,8 +18,12 @@ export class RoleController {
   }
 
   @Get("all")
-  findAll() {
-    return this.roleService.findAll();
+  @UseGuards(JwtAuthGuard)
+  async findAll(@Req() req: any) {
+    let role = await this.roleService.findAll(req.user);
+    console.log({ role });
+    return role;
+
   }
 
   @Get(':id')
