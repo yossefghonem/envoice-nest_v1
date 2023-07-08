@@ -23,18 +23,18 @@ export class ItemService {
   }
 
   findAll() {
-    return `This action returns all item`;
+    return this.repo.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} item`;
+    return this.repo.findOneBy({ id });
   }
 
-  update(id: number, updateItemDto: UpdateItemDto) {
-    return `This action updates a #${id} item`;
+  async update(id: number, updateItemDto: UpdateItemDto) {
+    return await this.repo.update(id, updateItemDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} item`;
+  async remove(id: number) {
+    return await this.repo.delete(id);
   }
 }

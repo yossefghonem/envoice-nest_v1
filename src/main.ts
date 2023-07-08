@@ -9,7 +9,6 @@ async function bootstrap() {
   app.enableCors();
   app.use(morgan('dev'));
 
-
   const PORT = process.env.PORT || 5000;
   const config = new DocumentBuilder()
     .setTitle('Envoices')
@@ -23,7 +22,6 @@ async function bootstrap() {
     Logger.log(`Mongo DB connected on ${process.env.db_host}`, 'DataBase')
     Logger.log(`http://localhost:${PORT}/api`, "swagger")
   });
-
-
 }
+
 bootstrap();

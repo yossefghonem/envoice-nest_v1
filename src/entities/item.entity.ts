@@ -12,6 +12,7 @@ export class Item extends OBaseEntity {
     code?: string;
 
     @Column({
+        nullable: true,
         type: 'simple-enum',
         enum: ItemTypes,
     })

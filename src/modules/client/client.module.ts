@@ -2,11 +2,12 @@ import { Module } from '@nestjs/common';
 import { ClientService } from './client.service';
 import { ClientController } from './client.controller';
 import { MongooseModule } from '@nestjs/mongoose';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Client } from '../../entities/client.entity';
 
 @Module({
   imports: [
-    // sql module// mongo
-
+    TypeOrmModule.forFeature([Client])
   ],
   controllers: [ClientController],
   providers: [ClientService]

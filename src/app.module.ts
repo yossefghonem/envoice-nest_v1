@@ -55,6 +55,3 @@ const AllModules = [RoleModule, UserModule, AuthModule, PermissionModule];
   providers: [AppService],
 })
 export class AppModule { }
-
-
-
