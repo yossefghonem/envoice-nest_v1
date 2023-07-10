@@ -8,9 +8,9 @@ import { OBaseEntity } from './OBaseEntity';
 import { User } from './user.entity';
 import { Permission } from './permission.entity';
 
-
 @Entity()
 export class Role extends OBaseEntity {
+    [x: string]: any;
     @Column({})
     name?: string;
 

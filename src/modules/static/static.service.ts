@@ -3,19 +3,21 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Like, Repository } from 'typeorm';
 import { Activities } from '../../entities/activity.entity';
 import * as activities from './../../basic-json/activities.json'
+import * as units from './../../basic-json/units.json'
 import * as fs from 'fs';
 import * as pash from 'path';
 // import * as gpcs from './../../basic-json/gpcCodes.json'
 import { GpcCode } from '../../entities/gpcCode.entity';
+import { Units } from '../../entities/units.entity';
 @Injectable()
 export class StaticService {
-
-
   constructor(
     @InjectRepository(Activities)
     private readonly activityRepo: Repository<Activities>,
     @InjectRepository(GpcCode)
-    private readonly gpcRepo: Repository<GpcCode>
+    private readonly gpcRepo: Repository<GpcCode>,
+    @InjectRepository(Units)
+    private readonly unitRepo: Repository<Units>
   ) { }
 
   async seedActivites() {
@@ -34,7 +36,6 @@ export class StaticService {
     return await this.activityRepo.find()
   }
 
-
   // ==================Gpc===============================================
   findAllGpc(search: any) {
     console.log(search);
@@ -42,9 +43,10 @@ export class StaticService {
     if (search.name) {
       qb.where("q.name LIKE :name", { name: `%${search.name}%` })
     }
-    return qb.take(100).getMany()
 
+    return qb.take(100).getMany()
   }
+
   async seedGpcCode() {
     if ((await this.gpcRepo.count()) > 0)
       return "Gpc already stored";
@@ -61,9 +63,10 @@ export class StaticService {
       let res = await this.gpcRepo.save(batch);
       currentBatch += batchSize;
     }
-    return currentBatch
 
+    return currentBatch
   }
+
   getDefaultActivity() {
     return this.activityRepo.findOneBy({ code: "0111" })
   }
@@ -78,5 +81,25 @@ export class StaticService {
 
   remove(id: number) {
     return `This action removes a #${id} static`;
+  }
+
+  //==========================units================================================
+  async seedUnits() {
+    if ((await this.unitRepo.count()) > 0)
+      return "units already stored";
+    return this.unitRepo.save(units.map((act) => {
+      return {
+        code: act.code,
+        desc_en: act.desc_en,
+        desc_ar: act.desc_ar,
+      } as Units
+    }))
+  }
+
+  async findAllUnits() {
+    console.log('====================================');
+    console.log("ssss");
+    console.log('====================================');
+    return await this.unitRepo.find()
   }
 }

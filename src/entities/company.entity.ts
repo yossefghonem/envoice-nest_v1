@@ -13,7 +13,6 @@ import { Activities } from './activity.entity';
 import { User } from './user.entity';
 import { License } from './license.entity';
 
-
 @Entity()
 export class Company extends OBaseEntity {
     @Column({})
@@ -22,8 +21,11 @@ export class Company extends OBaseEntity {
     @Column({ default: "Egytrust ci" })
     certificate?: string;
 
+    @Column({ unique: true })
+    taxNumber?: string;
+
     @ApiPropertyOptional({ type: () => User })
-    @OneToMany(() => User, r => r.company,)
+    @OneToMany(() => User, r => r.company)
     user?: User[];
 
     @ApiPropertyOptional({ type: () => Branch })
@@ -37,5 +39,4 @@ export class Company extends OBaseEntity {
     @ApiPropertyOptional({ type: () => License })
     @OneToOne(() => License, r => r.company)
     license?: License;
-
 }

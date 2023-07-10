@@ -10,28 +10,27 @@ import { CreateCompanyDto, UpdateCompanyDto } from '../../dtos/company.dto';
 export class CompanyService {
     constructor(@InjectRepository(Company) private readonly repo: Repository<Company>) { }
 
-
     async create(body: CreateCompanyDto) {
-
         const newComp: Company = {
             name: body.name,
+            taxNumber: body.taxNumber,
             certificate: body.certificate,
-            activity: { id: +body.activity },
+            activity: { id: +body.activityCode },
         }
+
         let company = await this.repo.save(newComp)
         return this.repo.findOneBy({ id: company.id })
     }
 
     async findAll(user: JwtUser) {
-
-        if (user.role === UserRole.SUPERADMIN)
-            return await this.repo.find();
-        return await this.repo.createQueryBuilder("c")
-            .leftJoin("c.user", "user")
-            .leftJoinAndSelect("c.activity", "activities")
-            .where("user.id = :id", { id: user.id })
-            .getMany()
-
+        return await this.repo.find()
+        // if (user.role === UserRole.SUPERADMIN)
+        //     return await this.repo.find();
+        // return await this.repo.createQueryBuilder("c")
+        //     .leftJoin("c.user", "user")
+        //     .leftJoinAndSelect("c.activity", "activities")
+        //     .where("user.id = :id", { id: user.id })
+        //     .getMany()
     }
 
     findOne(id: number) {

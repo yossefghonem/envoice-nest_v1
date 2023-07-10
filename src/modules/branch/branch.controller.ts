@@ -9,7 +9,6 @@ import { JwtAuthGuard } from '../../guards/jwt.guard';
 export class BranchController {
   constructor(private readonly branchService: BranchService) { }
 
-
   @Post()
   @UseGuards(JwtAuthGuard)
   create(@Body() branch: CreateBranchDto, @Req() req: any) {

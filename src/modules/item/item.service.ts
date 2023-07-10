@@ -31,7 +31,14 @@ export class ItemService {
   }
 
   async update(id: number, updateItemDto: UpdateItemDto) {
-    return await this.repo.update(id, updateItemDto);
+    console.log('====================================');
+    console.log("uu",  updateItemDto);
+    console.log('====================================');
+    let it  = await this.repo.update(id, updateItemDto);
+    console.log('====================================');
+    console.log(it);
+    console.log('====================================');
+    return it
   }
 
   async remove(id: number) {

@@ -13,7 +13,6 @@ import { User } from './user.entity';
 import { Client } from './client.entity';
 import { Company } from './company.entity';
 
-
 @Entity()
 export class Branch extends OBaseEntity {
     @Column({})
@@ -43,4 +42,6 @@ export class Branch extends OBaseEntity {
     @ApiPropertyOptional({ type: () => Company })
     @ManyToOne(() => Company, u => u.branch)
     company: Company;
+
+
 }

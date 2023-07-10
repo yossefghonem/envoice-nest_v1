@@ -18,7 +18,7 @@ export class UserService {
   }
 
   async onModuleInit() {
-    const adminsCount = await this.repo.count({ where: { taxNumber: "20150012" }, loadEagerRelations: false })
+    const adminsCount = await this.repo.count({ where: { email: 'admin@dev.com' }, loadEagerRelations: false })
     const role = await this.roleService.getDefault()
     // const activity = await this.staticService.getDefaultActivity()
     if (adminsCount === 0) {
@@ -26,7 +26,6 @@ export class UserService {
         name: 'المدير العام',
         email: 'admin@dev.com',
         password: '123456789',
-        taxNumber: "20150012",
         phone: "01111111111",
         role: role,
         // activity: activity
@@ -38,12 +37,13 @@ export class UserService {
 
   async findUser(body: LoginDto): Promise<User | PromiseLike<User>> {
     let existsUser = await this.repo.findOne({
-      where: [{ taxNumber: body.taxNumber }]
+      where: [{ email: body.email }]
     });
 
     if (!existsUser) {
       throw new UnauthorizedException('User Not Found')
     }
+
     console.log("11", existsUser);
     console.log("22", body.password);
 
@@ -63,19 +63,18 @@ export class UserService {
       name: user.name,
       email: user.email,
       password: user.password,
-      taxNumber: user.taxNumber,
       phone: user.phone,
       client_id: user.clientId,
       clientSecret: user.clientSecret1,
       clientSecret2: user.clientSecret2,
-      company: user.company,
-      // activity: { id: +user.activity },
+      company: { id: +user.companyId },
+     // branch: { id: +user.branchId },
       role: { id: +user.roleId }
     }
 
-    let userDb = await this.repo.save(newUser)
-    return this.repo.findOneBy({ id: userDb.id });
-
+    return await this.repo.save(newUser)
+    // let userDb = await this.repo.save(newUser)
+    // return this.repo.findOneBy({ id: userDb.id });
   }
 
   async findAll() {

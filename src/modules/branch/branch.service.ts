@@ -9,7 +9,6 @@ import { UserService } from '../user/user.service';
 
 @Injectable()
 export class BranchService {
-
     constructor(
         @InjectRepository(Branch) private readonly repo: Repository<Branch>
         , private userService: UserService
@@ -28,6 +27,7 @@ export class BranchService {
             address: address,
             company: userDb.company
         }
+
         return await this.repo.save(newbranch);
     }
 
@@ -35,7 +35,7 @@ export class BranchService {
         let branches = await this.repo.createQueryBuilder("b")
             .leftJoinAndSelect('b.company', 'company')
             .leftJoinAndSelect('company.user', 'user')
-            .where('user.id = :id', { 'id': user.id })
+            // .where('user.id = :id', { 'id': user.id })
             .getMany()
         return branches
     }

@@ -13,9 +13,6 @@ export class CreateUserDto {
     password: string;
 
     @ApiProperty()
-    taxNumber: string;
-
-    @ApiProperty()
     phone: string;
 
     @ApiProperty()
@@ -28,16 +25,15 @@ export class CreateUserDto {
     clientSecret2: string;
 
     @ApiProperty()
-    company: Company;
+    companyId: string;
 
     @ApiProperty()
     roleId: string;
-
 }
 
 export class LoginDto {
     @ApiProperty()
-    taxNumber: string;
+    email: string;
 
     @ApiProperty()
     password: string;

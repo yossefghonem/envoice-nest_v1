@@ -15,7 +15,6 @@ import { Activities } from './activity.entity';
 import { Company } from './company.entity';
 import { License } from './license.entity';
 
-
 @Entity()
 export class User extends OBaseEntity {
     @Column({})
@@ -23,9 +22,6 @@ export class User extends OBaseEntity {
 
     @Column({})
     email?: string;
-
-    @Column({ unique: true })
-    taxNumber?: string;
 
     @Column({})
     phone: string;
@@ -38,7 +34,6 @@ export class User extends OBaseEntity {
 
     @Column({ nullable: true })
     clientSecret2?: string;
-
 
     @Column({
         nullable: false,
@@ -63,7 +58,11 @@ export class User extends OBaseEntity {
     @ManyToOne(() => Role, r => r.users, { eager: true })
     role: Role;
 
-    // @ApiPropertyOptional({ type: () => Company })
-    @ManyToOne(() => Company, r => r.user, { eager: true, cascade: true })
+    @ApiPropertyOptional({ type: () => Company })
+    @ManyToOne(() => Company, r => r.user, { eager: true })
     company?: Company;
+
+    // @ApiPropertyOptional({ type: () => Branch })
+    // @ManyToOne(() => Branch, r => r.users, { eager: true, cascade: true })
+    // branch?: Branch;
 }

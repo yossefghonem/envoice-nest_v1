@@ -5,9 +5,13 @@ export class CreateCompanyDto {
     name?: string;
 
     @ApiProperty({})
+    taxNumber?: string;
+
+    @ApiProperty({})
     certificate?: string;
 
     @ApiProperty({})
-    activity: string;
+    activityCode?: string;
 }
+
 export class UpdateCompanyDto extends PartialType(CreateCompanyDto) { }

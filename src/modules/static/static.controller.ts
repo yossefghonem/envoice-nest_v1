@@ -27,18 +27,14 @@ export class StaticController {
     return this.staticService.findAllGpc(search);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.staticService.findOne(+id);
+  @Get("/units")
+  findAllUnits() {
+    return this.staticService.findAllUnits();
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateStaticDto: any) {
-    return this.staticService.update(+id, updateStaticDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.staticService.remove(+id);
+  // ============================units================================================
+  @Post('seedUnit')
+  createUnits() {
+    return this.staticService.seedUnits();
   }
 }

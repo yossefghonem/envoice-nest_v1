@@ -9,13 +9,11 @@ import { CreateUserDto, LoginDto } from '../../dtos/user.dto';
 import { UserService } from '../user/user.service';
 import { User } from '../../entities/user.entity';
 
-
 @Injectable()
 export class AuthService {
   constructor(
     private jwtService: JwtService,
     public userService: UserService,
-
   ) { }
   sign(user: User) {
     return {
@@ -23,7 +21,7 @@ export class AuthService {
       token: this.jwtService.sign(
         {
           id: user.id,
-          taxNumber: user.taxNumber,
+          email: user.email,
           role: user.role.name,
           // mobile: user.mobile,
           // userType: user.userType,
@@ -50,8 +48,8 @@ export class AuthService {
 
     return this.sign(userStored);
   }
+
   CreateUser(user: CreateUserDto) {
     throw new Error('Method not implemented.');
   }
-
 }
