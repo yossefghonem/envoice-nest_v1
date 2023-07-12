@@ -10,6 +10,24 @@ import { CreateCompanyDto, UpdateCompanyDto } from '../../dtos/company.dto';
 export class CompanyService {
     constructor(@InjectRepository(Company) private readonly repo: Repository<Company>) { }
 
+
+    async onModuleInit() {
+        const company = await this.repo.count({ where: { taxNumber: "20150012" }, loadEagerRelations: false })
+        console.log("", company);
+
+        if (company === 0) {
+            const newC: Company = {
+                name: 'Default Company',
+                taxNumber: '20150012',
+                certificate: "EgyTrust"
+            }
+            await this.repo.save(newC)
+        }
+    }
+    async getDefaultCompany(): Promise<Company> {
+        const company = await this.repo.findOneBy({ taxNumber: '20150012' })
+        return company
+    }
     async create(body: CreateCompanyDto) {
         const newComp: Company = {
             name: body.name,

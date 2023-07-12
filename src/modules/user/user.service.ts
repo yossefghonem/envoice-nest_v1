@@ -6,21 +6,22 @@ import { CreateUserDto, LoginDto, UpdateUserDto } from '../../dtos/user.dto';
 import { RoleService } from '../role/role.service';
 import { Activities } from '../../entities/activity.entity';
 import { StaticService } from '../static/static.service';
+import { CompanyService } from '../company/company.service';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User) private readonly repo: Repository<User>,
-    @InjectRepository(Activities) private readonly activityRepo: Repository<Activities>,
     private readonly roleService: RoleService,
-    private readonly staticService: StaticService
+    private readonly compService: CompanyService,
   ) {
   }
 
   async onModuleInit() {
     const adminsCount = await this.repo.count({ where: { email: 'admin@dev.com' }, loadEagerRelations: false })
     const role = await this.roleService.getDefault()
-    // const activity = await this.staticService.getDefaultActivity()
+    const company = await this.compService.getDefaultCompany()
+
     if (adminsCount === 0) {
       const newAdmin: User = {
         name: 'المدير العام',
@@ -28,7 +29,7 @@ export class UserService {
         password: '123456789',
         phone: "01111111111",
         role: role,
-        // activity: activity
+        company: company,
       }
 
       this.repo.save(newAdmin)
@@ -68,7 +69,7 @@ export class UserService {
       clientSecret: user.clientSecret1,
       clientSecret2: user.clientSecret2,
       company: { id: +user.companyId },
-     // branch: { id: +user.branchId },
+      // branch: { id: +user.branchId },
       role: { id: +user.roleId }
     }
 

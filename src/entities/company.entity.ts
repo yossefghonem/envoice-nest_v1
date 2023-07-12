@@ -25,18 +25,18 @@ export class Company extends OBaseEntity {
     taxNumber?: string;
 
     @ApiPropertyOptional({ type: () => User })
-    @OneToMany(() => User, r => r.company)
-    user?: User[];
+    @OneToMany(() => User, r => r.company, { cascade: true })
+    users?: User[];
 
     @ApiPropertyOptional({ type: () => Branch })
-    @OneToMany(() => Branch, r => r.company, { eager: true })
+    @OneToMany(() => Branch, r => r.company, { eager: true, cascade: true })
     branch?: Branch[];
 
     // @ApiPropertyOptional({ type: () => Activities })
-    @ManyToOne(() => Activities, r => r.id, { eager: true })
+    @ManyToOne(() => Activities, r => r.id, { eager: true, cascade: true })
     activity?: Activities;
 
     @ApiPropertyOptional({ type: () => License })
-    @OneToOne(() => License, r => r.company)
+    @OneToOne(() => License, r => r.company, { cascade: true })
     license?: License;
 }
