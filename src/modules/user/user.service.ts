@@ -68,9 +68,9 @@ export class UserService {
       client_id: user.clientId,
       clientSecret: user.clientSecret1,
       clientSecret2: user.clientSecret2,
-      company: { id: +user.companyId },
-      // branch: { id: +user.branchId },
-      role: { id: +user.roleId }
+      company: { id: +user.company },
+      branch: { id: +user.branch },
+      role: { id: +user.role }
     }
 
     return await this.repo.save(newUser)
@@ -97,7 +97,7 @@ export class UserService {
 
     // let newU = await this.repo.save(user)
     // return newU
-    return this.repo.update(id, updateUserDto);
+    // return this.repo.update(id, updateUserDto);
   }
 
   remove(id: number) {

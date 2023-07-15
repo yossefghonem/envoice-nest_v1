@@ -25,10 +25,13 @@ export class CreateUserDto {
     clientSecret2: string;
 
     @ApiProperty()
-    companyId: string;
+    company: string;
 
     @ApiProperty()
-    roleId: string;
+    role: string;
+
+    @ApiProperty()
+    branch: string;
 }
 
 export class LoginDto {

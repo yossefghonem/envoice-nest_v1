@@ -15,8 +15,8 @@ export class BranchService {
     ) { }
 
     async create(branch: CreateBranchDto, user: JwtUser) {
-        const userDb = await this.userService.findOne(+user.id)
-        console.log(userDb);
+        // const userDb = await this.userService.findOne(+user.id)
+        console.log(branch);
 
         // return userDb;
         const address: Address = branch.address

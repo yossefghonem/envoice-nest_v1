@@ -7,7 +7,7 @@ export class AddressDto {
     country?: string
 
     @ApiProperty({})
-    governate?: string
+    governerate?: string
 
     @ApiProperty({})
     regionCity?: string
