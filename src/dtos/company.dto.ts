@@ -11,7 +11,7 @@ export class CreateCompanyDto {
     certificate?: string;
 
     @ApiProperty({})
-    activityCode?: string;
+    activity?: string;
 }
 
 export class UpdateCompanyDto extends PartialType(CreateCompanyDto) { }

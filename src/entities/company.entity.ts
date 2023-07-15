@@ -32,8 +32,8 @@ export class Company extends OBaseEntity {
     @OneToMany(() => Branch, r => r.company, { eager: true, cascade: true })
     branch?: Branch[];
 
-    // @ApiPropertyOptional({ type: () => Activities })
-    @ManyToOne(() => Activities, r => r.id, { eager: true, cascade: true })
+    @ApiPropertyOptional({ type: () => Activities })
+    @ManyToOne(() => Activities, r => r.id, { eager: true })
     activity?: Activities;
 
     @ApiPropertyOptional({ type: () => License })

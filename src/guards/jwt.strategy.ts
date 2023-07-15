@@ -29,11 +29,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     console.log('====================================');
     console.log(payload);
     console.log('====================================');
-    const user = await this.licenseService.isValidLicense(payload.id);
-    console.log("5555555555555", user)
-    if (!user) {
-      throw new UnauthorizedException("User License is expired");
-    }
+    // const user = await this.licenseService.isValidLicense(payload.id);
+    // console.log("5555555555555", user)
+    // if (!user) {
+    //   throw new UnauthorizedException("User License is expired");
+    // }
 
     let tokenPayload: JwtUser
     tokenPayload = {

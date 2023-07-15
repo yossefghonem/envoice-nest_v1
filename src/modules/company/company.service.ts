@@ -33,7 +33,7 @@ export class CompanyService {
             name: body.name,
             taxNumber: body.taxNumber,
             certificate: body.certificate,
-            activity: { id: +body.activityCode },
+            activity: { id: +body.activity },
         }
 
         let company = await this.repo.save(newComp)
@@ -56,6 +56,8 @@ export class CompanyService {
     }
 
     update(id: number, comp: UpdateCompanyDto) {
+        console.log({ comp });
+
         return this.repo.update(id, comp);
     }
 

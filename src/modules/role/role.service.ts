@@ -31,9 +31,9 @@ export class RoleService {
     }
 
     async findAll(user: JwtUser) {
-        if (user.role === UserRole.SUPERADMIN)
-            return await this.repo.find();
-        return await this.repo.findBy({ name: UserRole.USER })
+        // if (user.role === UserRole.SUPERADMIN)
+        return await this.repo.find();
+        // return await this.repo.findBy({ name: UserRole.USER })
     }
 
     getDefault() {
