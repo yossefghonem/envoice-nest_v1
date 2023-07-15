@@ -31,9 +31,9 @@ export class Branch extends OBaseEntity {
     @JoinColumn()
     address?: Address;
 
-    // @ApiPropertyOptional({ type: () => User })
-    // @OneToMany(() => User, u => u.branch)
-    // users?: User[];
+    @ApiPropertyOptional({ type: () => User })
+    @OneToMany(() => User, r => r.branch)
+    users?: User[];
 
     @ApiPropertyOptional({ type: () => Client })
     @ManyToOne(() => Client, u => u.branch)
@@ -41,7 +41,5 @@ export class Branch extends OBaseEntity {
 
     @ApiPropertyOptional({ type: () => Company })
     @ManyToOne(() => Company, u => u.branch)
-    company: Company;
-
-
+    company?: Company;
 }

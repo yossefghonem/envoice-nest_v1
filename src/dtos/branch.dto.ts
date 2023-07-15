@@ -45,7 +45,7 @@ export class CreateBranchDto {
     invoiceSerial: number;
 
     @ApiProperty()
-    companyId: string;
+    company: string;
 
     @ApiProperty({ type: AddressDto })
     address: AddressDto;

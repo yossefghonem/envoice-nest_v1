@@ -10,7 +10,7 @@ export class BranchController {
   constructor(private readonly branchService: BranchService) { }
 
   @Post()
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   create(@Body() branch: CreateBranchDto, @Req() req: any) {
     console.log("1111111111111111", req.user);
 
@@ -18,7 +18,7 @@ export class BranchController {
   }
 
   @Get("all")
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   findAll(@Req() req: any) {
     return this.branchService.findAll(req.user);
   }

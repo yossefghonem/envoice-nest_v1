@@ -25,7 +25,7 @@ export class BranchService {
             name_en: branch.name_en,
             code: branch.code,
             address: address,
-            company: userDb.company
+            company: { id: +branch.company }
         }
 
         return await this.repo.save(newbranch);
@@ -34,7 +34,7 @@ export class BranchService {
     async findAll(user: JwtUser) {
         let branches = await this.repo.createQueryBuilder("b")
             .leftJoinAndSelect('b.company', 'company')
-            .leftJoinAndSelect('company.user', 'user')
+            // .leftJoinAndSelect('company.user', 'user')
             // .where('user.id = :id', { 'id': user.id })
             .getMany()
         return branches
