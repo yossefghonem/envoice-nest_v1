@@ -1,6 +1,12 @@
+import { Role } from '../entities/role.entity';
 import { Company } from './../entities/company.entity';
-import { PartialType } from "@nestjs/mapped-types";
-import { ApiProperty } from "@nestjs/swagger";
+//import { PartialType } from "@nestjs/mapped-types";
+import { ApiProperty, ApiPropertyOptional, PartialType } from "@nestjs/swagger";
+
+// export class UserCompanyDto {
+//     @ApiProperty()
+//     id: number
+// }
 
 export class CreateUserDto {
     @ApiProperty()
@@ -24,11 +30,11 @@ export class CreateUserDto {
     @ApiProperty()
     clientSecret2: string;
 
-    @ApiProperty()
-    companyId: string;
+    @ApiPropertyOptional({ type: () => Role.call })
+    role: Role;
 
-    @ApiProperty()
-    roleId: string;
+    @ApiPropertyOptional({ type: () => Company.call })
+    company?: Company;
 }
 
 export class LoginDto {

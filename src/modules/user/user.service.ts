@@ -64,12 +64,12 @@ export class UserService {
       email: user.email,
       password: user.password,
       phone: user.phone,
-      client_id: user.clientId,
-      clientSecret: user.clientSecret1,
+      clientId: user.clientId,
+      clientSecret1: user.clientSecret1,
       clientSecret2: user.clientSecret2,
-      company: { id: +user.companyId },
-     // branch: { id: +user.branchId },
-      role: { id: +user.roleId }
+      company: { id: +user.company },
+      // branch: { id: +user.branchId },
+      role: { id: +user.role }
     }
 
     return await this.repo.save(newUser)

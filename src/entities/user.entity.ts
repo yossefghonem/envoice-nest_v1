@@ -27,10 +27,10 @@ export class User extends OBaseEntity {
     phone: string;
 
     @Column({ nullable: true })
-    client_id?: string;
+    clientId?: string;
 
     @Column({ nullable: true })
-    clientSecret?: string;
+    clientSecret1?: string;
 
     @Column({ nullable: true })
     clientSecret2?: string;
