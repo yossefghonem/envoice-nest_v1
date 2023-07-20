@@ -15,8 +15,8 @@ export class BranchService {
     ) { }
 
     async create(branch: CreateBranchDto, user: JwtUser) {
-        const userDb = await this.userService.findOne(+user.id)
-        console.log(userDb);
+        // const userDb = await this.userService.findOne(+user.id)
+        console.log(branch);
 
         // return userDb;
         const address: Address = branch.address
@@ -25,7 +25,7 @@ export class BranchService {
             name_en: branch.name_en,
             code: branch.code,
             address: address,
-            company: userDb.company
+            company: { id: +branch.company }
         }
 
         return await this.repo.save(newbranch);
@@ -34,7 +34,7 @@ export class BranchService {
     async findAll(user: JwtUser) {
         let branches = await this.repo.createQueryBuilder("b")
             .leftJoinAndSelect('b.company', 'company')
-            .leftJoinAndSelect('company.user', 'user')
+            // .leftJoinAndSelect('company.user', 'user')
             // .where('user.id = :id', { 'id': user.id })
             .getMany()
         return branches

@@ -56,13 +56,13 @@ export class User extends OBaseEntity {
 
     @ApiPropertyOptional({ type: () => Role })
     @ManyToOne(() => Role, r => r.users, { eager: true })
-    role: Role;
+    role?: Role;
 
     @ApiPropertyOptional({ type: () => Company })
-    @ManyToOne(() => Company, r => r.user, { eager: true })
+    @ManyToOne(() => Company, r => r.users, { eager: true })
     company?: Company;
 
-    // @ApiPropertyOptional({ type: () => Branch })
-    // @ManyToOne(() => Branch, r => r.users, { eager: true, cascade: true })
-    // branch?: Branch;
+    @ApiPropertyOptional({ type: () => Branch })
+    @ManyToOne(() => Branch, r => r.users, { eager: true })
+    branch?: Branch;
 }

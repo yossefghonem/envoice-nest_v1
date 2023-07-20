@@ -18,7 +18,19 @@ import { FatoraModule } from './modules/fatora/fatora.module';
 import { GroupModule } from './modules/group/group.module';
 import { ItemModule } from './modules/item/item.module';
 import { LicenseModule } from './modules/license/license.module';
-const AllModules = [RoleModule, UserModule, AuthModule, PermissionModule];
+const AllModules = [
+  CompanyModule,
+  RoleModule,
+  AuthModule,
+  PermissionModule,
+  BranchModule,
+  StaticModule,
+  FatoraModule,
+  GroupModule,
+  ItemModule,
+  LicenseModule,
+  UserModule,
+];
 @Module({
   imports: [
     ...AllModules,
@@ -39,13 +51,7 @@ const AllModules = [RoleModule, UserModule, AuthModule, PermissionModule];
       //   trustServerCertificate: true,
       // },
     }),
-    BranchModule,
-    StaticModule,
-    CompanyModule,
-    FatoraModule,
-    GroupModule,
-    ItemModule,
-    LicenseModule,
+
 
     // ServeStaticModule.forRoot({
     //   rootPath: join(__dirname, '..', 'static'),

@@ -16,7 +16,7 @@ export class Address extends OBaseEntity {
     country?: string
 
     @Column({})
-    governate?: string
+    governerate?: string
 
     @Column({})
     regionCity?: string
@@ -38,9 +38,4 @@ export class Address extends OBaseEntity {
 
     @Column({})
     additionalInformation?: string
-
-    // @ApiPropertyOptional({ type: () => Branch })
-    // @ManyToOne(() => Branch, b => b.address, { cascade: true })
-    // branch?: Branch;
-
 }

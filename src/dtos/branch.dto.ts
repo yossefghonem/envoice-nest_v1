@@ -7,7 +7,7 @@ export class AddressDto {
     country?: string
 
     @ApiProperty({})
-    governate?: string
+    governerate?: string
 
     @ApiProperty({})
     regionCity?: string
@@ -45,7 +45,7 @@ export class CreateBranchDto {
     invoiceSerial: number;
 
     @ApiProperty()
-    companyId: string;
+    company: string;
 
     @ApiProperty({ type: AddressDto })
     address: AddressDto;

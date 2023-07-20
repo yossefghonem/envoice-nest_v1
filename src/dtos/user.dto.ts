@@ -35,6 +35,9 @@ export class CreateUserDto {
 
     @ApiPropertyOptional({ type: () => Company.call })
     company?: Company;
+
+    @ApiProperty()
+    branch: string;
 }
 
 export class LoginDto {
