@@ -1,6 +1,7 @@
 //import { PartialType } from "@nestjs/mapp";
-import { ApiProperty, PartialType } from "@nestjs/swagger";
+import { ApiProperty, ApiPropertyOptional, PartialType } from "@nestjs/swagger";
 import { ItemTypes } from "../enums/itemTypes.enum";
+import { Group } from "../entities/group.entity";
 
 export class CreateItemDto {
     @ApiProperty()
@@ -13,10 +14,9 @@ export class CreateItemDto {
     unit?: string;
     @ApiProperty()
     price?: string;
-    @ApiProperty()
-    gpcCode?: string;
-    @ApiProperty()
-    groupId: string;
+
+    @ApiPropertyOptional({ type: () => Group })
+    group: Group;
 }
 
 export class UpdateItemDto extends PartialType(CreateItemDto) { }

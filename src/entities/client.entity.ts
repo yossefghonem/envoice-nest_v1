@@ -11,14 +11,11 @@ import { Role } from './role.entity';
 import { Branch } from './branch.entity';
 import { User } from './user.entity';
 
-
 @Entity()
 export class Client extends OBaseEntity {
     @Column({})
+    @ApiProperty()
     name?: string;
-
-    @Column({})
-    email?: string;
 
     @Column({ unique: true })
     taxNumber?: string;
@@ -29,5 +26,4 @@ export class Client extends OBaseEntity {
     @ApiPropertyOptional({ type: () => Branch })
     @ManyToOne(() => Branch, b => b.clients, { eager: true })
     branch: Branch;
-
 }

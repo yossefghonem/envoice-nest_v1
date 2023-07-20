@@ -16,8 +16,7 @@ export class ItemService {
       code: body.code,
       type: ItemTypes[body.type],
       unit: body.unit,
-      gpcCode: body.gpcCode,
-      group: { id: +body.groupId },
+      group: { id: +body.group },
       price: body.price
     })
   }
@@ -32,9 +31,9 @@ export class ItemService {
 
   async update(id: number, updateItemDto: UpdateItemDto) {
     console.log('====================================');
-    console.log("uu",  updateItemDto);
+    console.log("uu", updateItemDto);
     console.log('====================================');
-    let it  = await this.repo.update(id, updateItemDto);
+    let it = await this.repo.update(id, updateItemDto);
     console.log('====================================');
     console.log(it);
     console.log('====================================');

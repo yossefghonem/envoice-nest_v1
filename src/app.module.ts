@@ -30,6 +30,7 @@ const AllModules = [
   ItemModule,
   LicenseModule,
   UserModule,
+  ClientModule
 ];
 @Module({
   imports: [
@@ -51,7 +52,6 @@ const AllModules = [
       //   trustServerCertificate: true,
       // },
     }),
-
 
     // ServeStaticModule.forRoot({
     //   rootPath: join(__dirname, '..', 'static'),

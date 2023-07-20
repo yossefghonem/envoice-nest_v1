@@ -4,29 +4,40 @@ import { Model } from 'mongoose';
 import { Client } from '../../entities/client.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateClientDto } from '../../dtos/client.dto';
+import { CreateClientDto, UpdateClientDto } from '../../dtos/client.dto';
 
 @Injectable()
 export class ClientService {
     constructor(@InjectRepository(Client) private readonly repo: Repository<Client>) { }
 
-    create(body: CreateClientDto) {
-        throw new Error('Method not implemented.');
+    async create(client: CreateClientDto) {
+        console.log(client)
+        const newClient: Client = {
+            name: client.name,
+            taxNumber: client.taxNumber,
+            phone: client.phone,
+            branch: { id: +client.branch }
+        }
+
+        const clientDB = await this.repo.save(newClient)
+        return await this.repo.findOneBy({ id: clientDB.id })
     }
 
-    getAll() {
-        return this.repo.find();
+    async findAll() {
+        let clients = await this.repo.find();
+        return clients
     }
 
-    // getAll() {
-    // const clients = this.clientRepo.find({});
-    //     return clients;
-    // }
+    findOne(id: number) {
+        const client = this.repo.findOneBy({ id: id });
+        return client;
+    }
 
-    // getOne(id: string){
-    //     const client = this.clientRepo.findOne({_id : id});
-    //     return client;
-    // }
+    async updated(id: number, updateClientDto: UpdateClientDto) {
+        return await this.repo.update(id, updateClientDto);
+    }
 
-    // functions
+    async remove(id: number) {
+        return await this.repo.delete(id);
+    }
 }

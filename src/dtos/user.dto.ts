@@ -1,3 +1,4 @@
+import { Branch } from '../entities/branch.entity';
 import { Role } from '../entities/role.entity';
 import { Company } from './../entities/company.entity';
 //import { PartialType } from "@nestjs/mapped-types";
@@ -36,8 +37,8 @@ export class CreateUserDto {
     @ApiPropertyOptional({ type: () => Company.call })
     company?: Company;
 
-    @ApiProperty()
-    branch: string;
+    @ApiPropertyOptional({ type: () => Branch.call })
+    branch: Branch;
 }
 
 export class LoginDto {

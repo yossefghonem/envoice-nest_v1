@@ -73,9 +73,8 @@ export class UserService {
       role: { id: +user.role }
     }
 
-    return await this.repo.save(newUser)
-    // let userDb = await this.repo.save(newUser)
-    // return this.repo.findOneBy({ id: userDb.id });
+    let userDb = await this.repo.save(newUser)
+    return this.repo.findOneBy({ id: userDb.id });
   }
 
   async findAll() {
@@ -93,11 +92,11 @@ export class UserService {
     console.log({ id, updateUserDto });
     // let user: User = await this.repo.findOneBy({ id: id })
     // console.log({ user });
-    // user.company = { id: 3 }
-
-    // let newU = await this.repo.save(user)
-    // return newU
-    // return this.repo.update(id, updateUserDto);
+    // // user.company = { id: 3 }
+    // if (!user) {
+    //   throw new Error('user not found');
+    // }
+    return this.repo.update(id, updateUserDto);
   }
 
   remove(id: number) {
