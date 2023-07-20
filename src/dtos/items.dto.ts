@@ -10,7 +10,7 @@ export class CreateItemDto {
     code?: string;
     @ApiProperty()
     type: ItemTypes;
-    @ApiProperty()
+    @ApiProperty({})
     unit?: string;
     @ApiProperty()
     price?: string;

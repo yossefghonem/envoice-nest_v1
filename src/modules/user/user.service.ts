@@ -78,7 +78,19 @@ export class UserService {
   }
 
   async findAll() {
-    let users = await this.repo.find();
+    let users = await this.repo
+      .createQueryBuilder('user')
+      .leftJoin('user.company', 'company')
+      .leftJoinAndSelect('user.role', 'role')
+      .select([
+        'user.id',
+        'user.name',
+        'user.email',
+        'user.phone',
+        'company.name',
+        'company.taxNumber',
+        'role.name'
+      ]).getMany()
     return users
   }
 
