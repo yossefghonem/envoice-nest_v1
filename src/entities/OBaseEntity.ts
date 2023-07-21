@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { CreateDateColumn, DeleteDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 
 export abstract class OBaseEntity {
@@ -10,8 +10,14 @@ export abstract class OBaseEntity {
   @CreateDateColumn({ type: 'timestamp' })
   @ApiProperty({ readOnly: true, required: false })
   createdAt?: Date;
-  
+
   @UpdateDateColumn({ type: 'timestamp' })
   @ApiProperty({ readOnly: true, required: false })
   updatedAt?: Date;
+
+  @ApiProperty({ required: false })
+  @DeleteDateColumn({ type: 'timestamp', nullable: true, default: null })
+  deletedAt?: Date;
+
+  // deletedDate: Date;
 }

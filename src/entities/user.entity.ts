@@ -63,6 +63,6 @@ export class User extends OBaseEntity {
     company?: Company;
 
     @ApiPropertyOptional({ type: () => Branch })
-    @ManyToOne(() => Branch, r => r.users, { eager: true })
+    @ManyToOne(() => Branch, r => r.users, { eager: true, cascade: ['soft-remove'] })
     branch?: Branch;
 }
