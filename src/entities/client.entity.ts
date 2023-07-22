@@ -1,15 +1,12 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Exclude } from 'class-transformer';
 import {
     Column,
     Entity,
-    ManyToOne,
+    JoinColumn,
+    OneToOne,
 } from 'typeorm';
-import { OverrideUtils } from '../shared/override-utility';
 import { OBaseEntity } from './OBaseEntity';
-import { Role } from './role.entity';
-import { Branch } from './branch.entity';
-import { User } from './user.entity';
+import { Address } from './address.entity';
 
 @Entity()
 export class Client extends OBaseEntity {
@@ -17,13 +14,16 @@ export class Client extends OBaseEntity {
     @ApiProperty()
     name?: string;
 
+    @ApiProperty()
     @Column({ unique: true })
     taxNumber?: string;
 
+    @ApiProperty()
     @Column({})
     phone: string;
 
-    @ApiPropertyOptional({ type: () => Branch })
-    @ManyToOne(() => Branch, b => b.clients, { eager: true })
-    branch: Branch;
+    @ApiPropertyOptional({ type: () => Address })
+    @OneToOne(() => Address, { eager: true })
+    @JoinColumn()
+    address?: Address;
 }

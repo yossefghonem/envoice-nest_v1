@@ -1,14 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Like, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { Activities } from '../../entities/activity.entity';
 import * as activities from './../../basic-json/activities.json'
-import * as units from './../../basic-json/units.json'
+import * as units from './../../basic-json/units.json';
+import * as tax_type from './../../basic-json/tax_type.json'
+import * as sub_tax from './../../basic-json/sub_tax.json'
+
 import * as fs from 'fs';
 import * as pash from 'path';
 // import * as gpcs from './../../basic-json/gpcCodes.json'
 import { GpcCode } from '../../entities/gpcCode.entity';
 import { Units } from '../../entities/units.entity';
+import { Tax } from '../../entities/tax-type.entity';
+import { SubTax } from './../../entities/sub_tax.entity';
 @Injectable()
 export class StaticService {
   constructor(
@@ -17,7 +22,11 @@ export class StaticService {
     @InjectRepository(GpcCode)
     private readonly gpcRepo: Repository<GpcCode>,
     @InjectRepository(Units)
-    private readonly unitRepo: Repository<Units>
+    private readonly unitRepo: Repository<Units>,
+    @InjectRepository(Tax)
+    private readonly taxRepo: Repository<Tax>,
+    @InjectRepository(SubTax)
+    private readonly subTaxRepo: Repository<SubTax>
   ) { }
 
   async seedActivites() {
@@ -101,5 +110,48 @@ export class StaticService {
     console.log("ssss");
     console.log('====================================');
     return await this.unitRepo.find()
+  }
+
+  // ==============================tax_type============================================================
+
+  async seedTax() {
+    if ((await this.taxRepo.count()) > 0)
+      return "tax_typ already stored";
+    return this.taxRepo.save(tax_type.map((act) => {
+      return {
+        code: act.code,
+        desc_en: act.desc_en,
+        desc_ar: act.desc_ar,
+      } as Tax
+    }))
+  }
+
+  async findAllTaxes() {
+    console.log('====================================');
+    console.log("ssss");
+    console.log('====================================');
+    return await this.taxRepo.find()
+  }
+
+  //=============sub_tax================
+  async seedSubTax() {
+    if ((await this.subTaxRepo.count()) > 0)
+      return "sub_tax already stored";
+    return this.subTaxRepo.save(sub_tax.map((act) => {
+      return {
+        code: act.code,
+        desc_en: act.desc_en,
+        desc_ar: act.desc_ar,
+        taxType: { code: act.tax_code },
+        tax_code: act.tax_code
+      } as SubTax
+    }))
+  }
+
+  async findAllSubTax() {
+    console.log('====================================');
+    console.log("ssss");
+    console.log('====================================');
+    return await this.subTaxRepo.find()
   }
 }

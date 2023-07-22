@@ -12,6 +12,15 @@ export class CreateCompanyDto {
 
     @ApiProperty({})
     activity?: string;
+
+    @ApiProperty({})
+    clientId: string;
+
+    @ApiProperty({})
+    clientSecret1?: string;
+
+    @ApiProperty({})
+    clientSecret2?: string;
 }
 
 export class UpdateCompanyDto extends PartialType(CreateCompanyDto) { }

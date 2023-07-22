@@ -65,9 +65,6 @@ export class UserService {
       email: user.email,
       password: user.password,
       phone: user.phone,
-      clientId: user.clientId,
-      clientSecret1: user.clientSecret1,
-      clientSecret2: user.clientSecret2,
       company: { id: +user.company },
       branch: { id: +user.branch },
       role: { id: +user.role }

@@ -16,7 +16,7 @@ export class ClientService {
             name: client.name,
             taxNumber: client.taxNumber,
             phone: client.phone,
-            branch: { id: +client.branch }
+            address: { id: +client.address }
         }
 
         const clientDB = await this.repo.save(newClient)

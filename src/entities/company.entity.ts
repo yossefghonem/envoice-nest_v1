@@ -24,6 +24,18 @@ export class Company extends OBaseEntity {
     @Column({ unique: true })
     taxNumber?: string;
 
+    @Column({ nullable: true })
+    clientId?: string;
+
+    @Column({ nullable: true })
+    clientSecret1?: string;
+
+    @Column({ nullable: true })
+    clientSecret2?: string;
+
+    @Column({ default: "B" })
+    type?: string;
+
     @ApiPropertyOptional({ type: () => User })
     @OneToMany(() => User, r => r.company, { cascade: true })
     users?: User[];

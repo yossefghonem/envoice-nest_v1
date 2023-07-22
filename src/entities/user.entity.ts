@@ -26,14 +26,6 @@ export class User extends OBaseEntity {
     @Column({})
     phone: string;
 
-    @Column({ nullable: true })
-    clientId?: string;
-
-    @Column({ nullable: true })
-    clientSecret1?: string;
-
-    @Column({ nullable: true })
-    clientSecret2?: string;
 
     @Column({
         nullable: false,

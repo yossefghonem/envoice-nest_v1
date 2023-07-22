@@ -35,12 +35,11 @@ export class Branch extends OBaseEntity {
     @OneToMany(() => User, r => r.branch, { cascade: ['soft-remove'] })
     users?: User[];
 
-    @ApiPropertyOptional({ type: () => Client })
-    @ManyToOne(() => Client, u => u.branch)
-    clients?: Client[];
+    // @ApiPropertyOptional({ type: () => Client })
+    // @ManyToOne(() => Client, u => u.branch)
+    // clients?: Client[];
 
     @ApiPropertyOptional({ type: () => Company })
     @ManyToOne(() => Company, u => u.branch)
     company?: Company;
-
 }

@@ -2,16 +2,17 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Permission } from '../../entities/permission.entity';
+import { CreatePermissionDto } from '../../dtos/permission.dto';
 
 @Injectable()
 export class PermissionService {
     constructor(
         @InjectRepository(Permission) private readonly repo: Repository<Permission>,
     ) {
-
     }
+
     // async onModuleInit() {
-    // const adminsCount = await this.repo.count({ where: { name: "superAdmin" }, loadEagerRelations: false })
+    // const adminsCount = await this.repo.count({ where: { url: "superAdmin" }, loadEagerRelations: false })
     // if (adminsCount === 0) {
     //     const newAdmin: User = {
     //         name: 'superAdmin',
@@ -20,9 +21,8 @@ export class PermissionService {
     // }
     // }
 
-
-    create(createUserDto: any) {
-        return 'This action adds a new user';
+    create(body: CreatePermissionDto) {
+        return this.repo.save(body)
     }
 
     async findAll() {
@@ -30,15 +30,15 @@ export class PermissionService {
         return roles
     }
 
-    findOne(id: number) {
-        return `This action returns a #${id} user`;
+    async findOne(id: number) {
+        return await this.repo.findOneBy({ id: id });
     }
 
-    update(id: number, updateUserDto: any) {
-        return `This action updates a #${id} user`;
+    async update(id: number, updateUserDto: any) {
+        return await this.repo.update(id, updateUserDto);
     }
 
-    remove(id: number) {
-        return `This action removes a #${id} user`;
+    async remove(id: number) {
+        return await this.repo.delete(id);
     }
 }

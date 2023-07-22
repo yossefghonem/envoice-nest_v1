@@ -27,14 +27,36 @@ export class StaticController {
     return this.staticService.findAllGpc(search);
   }
 
+  // ============================units================================================
+  @Post('seedUnit')
+  createUnits() {
+    return this.staticService.seedUnits();
+  }
+
   @Get("/units")
   findAllUnits() {
     return this.staticService.findAllUnits();
   }
 
-  // ============================units================================================
-  @Post('seedUnit')
-  createUnits() {
-    return this.staticService.seedUnits();
+  // =================tax_type============================
+  @Post('seedTaxes')
+  createTaxes() {
+    return this.staticService.seedTax();
+  }
+
+  @Get("/taxes")
+  findAllTaxes() {
+    return this.staticService.findAllTaxes();
+  }
+
+  // =================sub_tax============================
+  @Post('seedSubTax')
+  createSubTaxes() {
+    return this.staticService.seedSubTax();
+  }
+
+  @Get("/sub_tax")
+  findAllSubTaxes() {
+    return this.staticService.findAllSubTax();
   }
 }
