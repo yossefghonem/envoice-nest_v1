@@ -14,6 +14,7 @@ export class ItemService {
     return this.repo.save({
       name: body.name,
       code: body.code,
+      taxCode: body.taxCode,
       type: ItemTypes[body.type],
       unit: body.unit,
       group: { id: +body.group },

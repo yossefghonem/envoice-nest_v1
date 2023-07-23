@@ -20,10 +20,18 @@ export class Client extends OBaseEntity {
 
     @ApiProperty()
     @Column({})
-    phone: string;
+    email?: string;
+
+    @ApiProperty()
+    @Column({})
+    phone?: string;
+
+    @ApiProperty()
+    @Column({})
+    type?: string;
 
     @ApiPropertyOptional({ type: () => Address })
-    @OneToOne(() => Address, { eager: true })
+    @OneToOne(() => Address, { eager: true, cascade: true })
     @JoinColumn()
     address?: Address;
 }

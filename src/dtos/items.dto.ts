@@ -15,6 +15,9 @@ export class CreateItemDto {
     @ApiProperty()
     price?: string;
 
+    @ApiProperty()
+    taxCode?: string;
+
     @ApiPropertyOptional({ type: () => Group })
     group: Group;
 }
