@@ -44,13 +44,8 @@ export class UserService {
     if (!existsUser) {
       throw new UnauthorizedException('User Not Found')
     }
-
-    console.log("11", existsUser);
-    console.log("22", body.password);
-
     if (existsUser.password !== body.password)
       throw new UnauthorizedException('check your credintials');
-
     //remove password from responce
     delete existsUser.password
     existsUser["status"] = true
@@ -78,15 +73,21 @@ export class UserService {
     let users = await this.repo
       .createQueryBuilder('user')
       .leftJoin('user.company', 'company')
-      .leftJoinAndSelect('user.role', 'role')
+      .leftJoin('user.role', 'role')
+      .leftJoin('user.branch', 'branch')
       .select([
         'user.id',
         'user.name',
         'user.email',
         'user.phone',
+        'user.password',
         'company.name',
         'company.taxNumber',
-        'role.name'
+        'company.id',
+        'role.name',
+        'branch.name_ar',
+        'branch.id',
+        'role.id',
       ]).getMany()
     return users
   }

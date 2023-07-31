@@ -10,6 +10,12 @@ export class CreateClientDto {
     taxNumber: string
 
     @ApiProperty()
+    email: string
+
+    @ApiProperty()
+    type: string
+
+    @ApiProperty()
     phone: string
 
     @ApiPropertyOptional({ type: () => Address.call })
