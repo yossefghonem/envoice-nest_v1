@@ -14,6 +14,7 @@ import { Client } from './client.entity';
 import { Activities } from './activity.entity';
 import { Company } from './company.entity';
 import { License } from './license.entity';
+import { Invoice } from './invoice.entity';
 
 @Entity()
 export class User extends OBaseEntity {
@@ -24,8 +25,7 @@ export class User extends OBaseEntity {
     email?: string;
 
     @Column({})
-    phone: string;
-
+    phone?: string;
 
     @Column({
         nullable: false,
@@ -57,4 +57,7 @@ export class User extends OBaseEntity {
     @ApiPropertyOptional({ type: () => Branch })
     @ManyToOne(() => Branch, r => r.users, { eager: true, cascade: ['soft-remove'] })
     branch?: Branch;
+
+    @OneToMany(() => Invoice, u => u.user)
+    invoices?: Invoice[];
 }

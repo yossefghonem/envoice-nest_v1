@@ -1,6 +1,6 @@
 import { ApiPropertyOptional } from "@nestjs/swagger";
 import { Group } from "./group.entity";
-import { Column, Entity, ManyToOne } from "typeorm";
+import { Column, Entity, ManyToOne, OneToOne } from "typeorm";
 import { OBaseEntity } from "./OBaseEntity";
 import { ItemTypes } from "../enums/itemTypes.enum";
 @Entity()
@@ -26,5 +26,5 @@ export class Item extends OBaseEntity {
 
     @ApiPropertyOptional({ type: () => Group })
     @ManyToOne(() => Group, u => u.items)
-    group: Group;
+    group?: Group;
 }

@@ -11,7 +11,7 @@ async function bootstrap() {
 
   const PORT = process.env.PORT || 5000;
   const config = new DocumentBuilder()
-    .setTitle('Envoices')
+    .setTitle('Invoices')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);

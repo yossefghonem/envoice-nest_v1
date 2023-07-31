@@ -14,10 +14,12 @@ import { PermissionModule } from './modules/permission/permission.module';
 import { BranchModule } from './modules/branch/branch.module';
 import { StaticModule } from './modules/static/static.module';
 import { CompanyModule } from './modules/company/company.module';
-import { FatoraModule } from './modules/fatora/fatora.module';
 import { GroupModule } from './modules/group/group.module';
 import { ItemModule } from './modules/item/item.module';
 import { LicenseModule } from './modules/license/license.module';
+import { FileModule } from './modules/file/file.module';
+import { InvoiceLineModule } from './modules/invoice-line/invoice-line.module';
+import { InvoiceModule } from './modules/invoice/invoice.module';
 const AllModules = [
   CompanyModule,
   RoleModule,
@@ -25,7 +27,6 @@ const AllModules = [
   PermissionModule,
   BranchModule,
   StaticModule,
-  FatoraModule,
   GroupModule,
   ItemModule,
   LicenseModule,
@@ -52,6 +53,9 @@ const AllModules = [
       //   trustServerCertificate: true,
       // },
     }),
+    //FileModule,
+    InvoiceLineModule,
+    InvoiceModule,
 
     // ServeStaticModule.forRoot({
     //   rootPath: join(__dirname, '..', 'static'),
