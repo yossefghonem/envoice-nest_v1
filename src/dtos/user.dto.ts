@@ -8,6 +8,10 @@ import { ApiProperty, ApiPropertyOptional, PartialType } from "@nestjs/swagger";
 //     @ApiProperty()
 //     id: number
 // }
+export class CopmanyDto {
+    @ApiProperty({})
+    id: number;
+}
 
 export class CreateUserDto {
     @ApiProperty()
@@ -34,8 +38,8 @@ export class CreateUserDto {
     @ApiPropertyOptional({ type: () => Role.call })
     role: Role;
 
-    @ApiPropertyOptional({ type: () => Company.call })
-    company?: Company;
+    @ApiProperty({})
+    company?: CopmanyDto;
 
     @ApiPropertyOptional({ type: () => Branch.call })
     branch: Branch;

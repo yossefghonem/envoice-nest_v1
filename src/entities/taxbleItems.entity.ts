@@ -1,0 +1,36 @@
+import {
+    Column,
+    Entity,
+    JoinColumn,
+    ManyToOne,
+    OneToOne,
+} from 'typeorm';
+import { OBaseEntity } from './OBaseEntity';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Tax } from './tax-type.entity';
+import { SubTax } from './sub_tax.entity';
+import { InvoiceLine } from './invoice-line.entity';
+
+@Entity()
+export class TaxbleItem extends OBaseEntity {
+    @ApiProperty()
+    @Column()
+    rate?: string;
+
+    @ApiProperty()
+    @Column()
+    quantity?: string;
+
+    @ApiPropertyOptional({ type: () => Tax })
+    @OneToOne(() => Tax)
+    @JoinColumn()
+    taxType?: Tax;
+
+    @ApiPropertyOptional({ type: () => SubTax })
+    @OneToOne(() => SubTax)
+    @JoinColumn()
+    subTax?: SubTax;
+
+    @ManyToOne(() => InvoiceLine, L => L.id)
+    lines?: InvoiceLine
+}

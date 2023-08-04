@@ -22,7 +22,7 @@ export class InvoiceLineService {
             discount_rate: invoiceDto.discount_rate,
             discount_amount: invoiceDto.discount_amount,
             internalCode: invoiceDto.internalCode,
-            item: { id: +invoiceDto.item }
+            // item: { id: +invoiceDto.item }
         }
 
         return await this.repo.save(newLine)

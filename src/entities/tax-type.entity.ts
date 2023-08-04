@@ -20,5 +20,5 @@ export class Tax extends OBaseEntity {
 
     @ApiProperty({ type: () => SubTax })
     @OneToMany(() => SubTax, t => t.taxType, { eager: true })
-    subtax: SubTax[];
+    subtax?: SubTax[];
 }

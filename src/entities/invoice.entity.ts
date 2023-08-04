@@ -30,10 +30,10 @@ export class Invoice extends OBaseEntity {
     @Column({})
     internalID: string;
 
-    @OneToMany(() => InvoiceLine, i => i.invoice, { eager: true })
-    invoiceLine?: InvoiceLine[];
+    @OneToMany(() => InvoiceLine, i => i.invoice, { cascade:['insert','update'],eager: true})
+    invoiceLines: InvoiceLine[];
 
     @ManyToOne(() => User, i => i.invoices)
-    @JoinColumn({})
+    // @JoinColumn({})
     user: User;
 }

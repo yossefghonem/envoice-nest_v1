@@ -25,9 +25,9 @@ export class Item extends OBaseEntity {
     price?: string;
 
     @Column({
-        nullable: false,
+        nullable: true,
     })
-    taxCode: string;
+    taxCode?: string;
 
     @ApiPropertyOptional({ type: () => Group })
     @ManyToOne(() => Group, u => u.items)

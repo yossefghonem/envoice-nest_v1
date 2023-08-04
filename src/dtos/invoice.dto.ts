@@ -3,6 +3,7 @@ import { ApiProperty, ApiPropertyOptional, PartialType } from "@nestjs/swagger";
 
 import { InvoiceLine } from "../entities/invoice-line.entity";
 import { User } from "../entities/user.entity";
+import { TaxbleItem } from "../entities/taxbleItems.entity";
 export class CreateInvoiceDto {
     @ApiProperty()
     documentType?: string;
@@ -22,8 +23,11 @@ export class CreateInvoiceDto {
     @ApiProperty()
     internalID: string;
 
-    @ApiPropertyOptional({ type: () => InvoiceLine.call })
+    @ApiPropertyOptional({ type: () => InvoiceLine })
     invoiceLine: InvoiceLine[];
+
+    // @ApiPropertyOptional({ type: () => TaxbleItem.call })
+    // taxs: TaxbleItem[];
 
     @ApiPropertyOptional({ type: () => User.call })
     user: User;
