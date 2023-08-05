@@ -13,7 +13,6 @@ import { ApiPropertyOptional } from '@nestjs/swagger';
 
 @Entity()
 export class Invoice extends OBaseEntity {
-
     @Column({})
     documentType?: string;
 
@@ -27,13 +26,10 @@ export class Invoice extends OBaseEntity {
     totalSalesAmount: string;
 
     @Column({})
-    netAmount?: string;
-
-    @Column({})
     internalID: string;
 
     @ApiPropertyOptional({type:()=>[InvoiceLine]})
-    @OneToMany(() => InvoiceLine, (invoiceLines) => invoiceLines.invoice, { cascade:['insert','update'],eager: true})
+    @OneToMany(() => InvoiceLine, (invoiceLines) => invoiceLines.invoice, { cascade:true,eager: true})
     invoice_line: InvoiceLine[];
 
     @ManyToOne(() => User, i => i.invoices)

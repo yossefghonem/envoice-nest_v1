@@ -18,34 +18,33 @@ export class InvoiceLine extends OBaseEntity {
     @JoinColumn({ name: 'invoiceId' }) // Add JoinColumn with the appropriate column name
     invoice: Invoice;
     
+    @ApiProperty({})
+    @Column({})
+    quantity?: number;
+
+    // @ApiProperty({})
+    // @Column({})
+    // salesTotal?: number;
+
+    // @ApiProperty({})
+    // @Column({})
+    // total?: number;
 
     @ApiProperty({})
     @Column({})
-    quantity?: string;
+    valueDifference?: number;
 
     @ApiProperty({})
     @Column({})
-    salesTotal?: string;
+    totalTaxableFees?: number;
+
+    @ApiProperty({})
+    @Column({default:0})
+    price?: number;
 
     @ApiProperty({})
     @Column({})
-    total?: string;
-
-    @ApiProperty({})
-    @Column({})
-    valueDifference?: string;
-
-    @ApiProperty({})
-    @Column({})
-    totalTaxableFees?: string;
-
-    @ApiProperty({})
-    @Column({})
-    netTotal?: string;
-
-    @ApiProperty({})
-    @Column({})
-    itemsDiscount?: string;
+    itemsDiscount?: number;
 
     @ApiProperty({})
     @Column({})
@@ -56,11 +55,7 @@ export class InvoiceLine extends OBaseEntity {
     discount_rate?: string;
 
     @ApiProperty({})
-    @Column({})
-    discount_amount?: string;
-
-    @ApiProperty({})
-    @Column({})
+    @Column({default:"EGS"})
     internalCode: string;
 
     @ApiPropertyOptional({ type: () => Item })

@@ -18,7 +18,6 @@ import { GroupModule } from './modules/group/group.module';
 import { ItemModule } from './modules/item/item.module';
 import { LicenseModule } from './modules/license/license.module';
 import { FileModule } from './modules/file/file.module';
-import { InvoiceLineModule } from './modules/invoice-line/invoice-line.module';
 import { InvoiceModule } from './modules/invoice/invoice.module';
 const AllModules = [
   CompanyModule,
@@ -54,7 +53,6 @@ const AllModules = [
       // },
     }),
     //FileModule,
-    InvoiceLineModule,
     InvoiceModule,
 
     // ServeStaticModule.forRoot({
