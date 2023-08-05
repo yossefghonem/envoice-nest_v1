@@ -1,4 +1,5 @@
 
+import { TaxbleItem } from 'src/entities/taxbleItems.entity';
 import { Item } from '../entities/item.entity';
 
 import { ApiProperty, ApiPropertyOptional, PartialType } from "@nestjs/swagger";
@@ -39,6 +40,9 @@ export class CreateLineDto {
 
     @ApiPropertyOptional({ type: () => Item.call })
     item: Item;
+
+    @ApiPropertyOptional({ type: [TaxbleItem] })
+    taxbleItem: TaxbleItem[];
 }
 
 export class UpdateLineDto extends PartialType(CreateLineDto) { }
