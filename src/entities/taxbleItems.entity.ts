@@ -32,5 +32,5 @@ export class TaxbleItem extends OBaseEntity {
     subTax?: SubTax;
 
     @ManyToOne(() => InvoiceLine, L => L.id)
-    lines?: InvoiceLine
+    line?: InvoiceLine
 }

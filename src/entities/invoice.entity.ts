@@ -9,9 +9,11 @@ import {
 import { OBaseEntity } from './OBaseEntity';
 import { User } from './user.entity';
 import { InvoiceLine } from './invoice-line.entity';
+import { ApiPropertyOptional } from '@nestjs/swagger';
 
 @Entity()
 export class Invoice extends OBaseEntity {
+
     @Column({})
     documentType?: string;
 
@@ -30,8 +32,9 @@ export class Invoice extends OBaseEntity {
     @Column({})
     internalID: string;
 
-    @OneToMany(() => InvoiceLine, i => i.invoice, { cascade:['insert','update'],eager: true})
-    invoiceLines: InvoiceLine[];
+    @ApiPropertyOptional({type:()=>[InvoiceLine]})
+    @OneToMany(() => InvoiceLine, (invoiceLines) => invoiceLines.invoice, { cascade:['insert','update'],eager: true})
+    invoice_line: InvoiceLine[];
 
     @ManyToOne(() => User, i => i.invoices)
     // @JoinColumn({})

@@ -4,6 +4,7 @@ import { Invoice } from '../../entities/invoice.entity';
 import { Repository } from 'typeorm';
 import { CreateInvoiceDto, UpdateInvoiceDto } from '../../dtos/invoice.dto';
 import { InvoiceLine } from '../../entities/invoice-line.entity';
+import { TaxbleItem } from 'src/entities/taxbleItems.entity';
 
 @Injectable()
 export class InvoiceService {
@@ -15,34 +16,8 @@ export class InvoiceService {
     console.log('====================================');
     console.log(invoiceDto);
     console.log('====================================');
-      const invoiceL: InvoiceLine = [{
-              quantity: '1',
-              internalCode:1,
-              salesTotal: '1',
-              total: '1',
-              valueDifference: '1',
-              totalTaxableFees: '1',
-              netTotal: '1',
-              itemsDiscount: '1',
-              currencyExchangeRate: '1',
-              discount_rate: '1',
-              discount_amount: '1',
-              item: { id: 1 },
-              taxbleItem: [
-                  {
-                      id: 1,
-                      rate: '1',
-                      quantity: '1',
-                      taxType: {
-                          id: 1,
-                      },
-                      subTax: {
-                          id: 1,
-                      },
-                  },
-              ],
-          },
-      ];
+
+    
     const newInvoice: Invoice = {
       documentType: invoiceDto.documentType,
       version: invoiceDto.version,
@@ -51,33 +26,30 @@ export class InvoiceService {
       internalID: invoiceDto.internalID,
       netAmount: invoiceDto.netAmount,
       user: { id: +invoiceDto.user },
-      invoiceLines: invoiceL,
-      
-      /*
-            invoiceLines: invoiceDto.invoiceLine.map(line => {
-                return {
-                    quantity: line.quantity,
-                    salesTotal: line.salesTotal,
-                    total: '9',
-                    valueDifference: line.valueDifference,
-                    totalTaxableFees: line.totalTaxableFees,
-                    netTotal: line.netTotal,
-                    itemsDiscount: line.itemsDiscount,
-                    currencyExchangeRate: line.currencyExchangeRate,
-                    discount_rate: line.discount_rate,
-                    discount_amount: line.discount_amount,
-                    internalCode: line.internalCode,
-                    item: line.item,
-                    taxbleItem: line.taxbleItem.map(tax => {
-                        return {
-                            quantity: "1",
-                            rate: tax.rate,
-                            taxType: { id: 1 },
-                            subTax: { id: 1 }
-                        }
-                    })
-                }
-            }), */
+      invoice_line: invoiceDto.invoiceLines.map((line) => {
+        return {
+          quantity: line.quantity,
+          salesTotal: line.salesTotal,
+          total: '9',
+          valueDifference: line.valueDifference,
+          totalTaxableFees: line.totalTaxableFees,
+          netTotal: line.netTotal,
+          itemsDiscount: line.itemsDiscount,
+          currencyExchangeRate: line.currencyExchangeRate,
+          discount_rate: line.discount_rate,
+          discount_amount: line.discount_amount,
+          internalCode: line.internalCode,
+          item: line.item,
+          taxbleItem: line.taxbleItem.map((tax) => {
+            return {
+              quantity: tax.quantity,
+              rate: tax.rate,
+              taxType: tax.taxType,
+              subTax: tax.subTax,
+            } as TaxbleItem;
+          }),
+        } as InvoiceLine;
+      }),
     };
 
     console.log('====================================');

@@ -14,60 +14,61 @@ import { TaxbleItem } from './taxbleItems.entity';
 
 @Entity()
 export class InvoiceLine extends OBaseEntity {
-    @ApiPropertyOptional({ type:()=> Invoice })
-    @ManyToOne(() => Invoice,en=>en.invoiceLines, { lazy: true })
-    invoice?: Invoice;
+    @ManyToOne(() => Invoice, (invoice) => invoice.invoice_line)
+    @JoinColumn({ name: 'invoiceId' }) // Add JoinColumn with the appropriate column name
+    invoice: Invoice;
+    
 
+    @ApiProperty({})
     @Column({})
-    @ApiProperty()
     quantity?: string;
 
+    @ApiProperty({})
     @Column({})
-    @ApiProperty()
     salesTotal?: string;
 
+    @ApiProperty({})
     @Column({})
-    @ApiProperty()
     total?: string;
 
+    @ApiProperty({})
     @Column({})
-    @ApiProperty()
     valueDifference?: string;
 
+    @ApiProperty({})
     @Column({})
-    @ApiProperty()
     totalTaxableFees?: string;
 
+    @ApiProperty({})
     @Column({})
-    @ApiProperty()
     netTotal?: string;
 
+    @ApiProperty({})
     @Column({})
-    @ApiProperty()
     itemsDiscount?: string;
 
+    @ApiProperty({})
     @Column({})
-    @ApiProperty()
     currencyExchangeRate?: string;
 
+    @ApiProperty({})
     @Column({})
-    @ApiProperty()
     discount_rate?: string;
 
+    @ApiProperty({})
     @Column({})
-    @ApiProperty()
     discount_amount?: string;
 
+    @ApiProperty({})
     @Column({})
-    @ApiProperty()
     internalCode: string;
 
     @ApiPropertyOptional({ type: () => Item })
-    @OneToOne(() => Item, { eager: true })
+    @ManyToOne(() => Item, { eager: true }) //!!! issue was ther y pro
     @JoinColumn({})
     item?: Item;
 
     @ApiPropertyOptional({ type: () => TaxbleItem })
-    @OneToMany(() => TaxbleItem, i => i.lines, { eager: true, cascade: true })
+    @OneToMany(() => TaxbleItem, i => i.line, { eager: true, cascade: true })
     taxbleItem?: TaxbleItem[];
 }
