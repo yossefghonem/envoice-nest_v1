@@ -29,6 +29,7 @@ export class InvoiceService {
       totalSalesAmount: invoiceDto.totalSalesAmount,
       internalID: invoiceDto.internalID,
       user: { id: +invoiceDto.user },
+      client: { id: +invoiceDto.client },
       invoice_line: invoiceDto.invoiceLines.map((line) => {
         return {
           quantity: +line.quantity,

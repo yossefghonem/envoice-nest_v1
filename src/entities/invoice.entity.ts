@@ -10,6 +10,7 @@ import { OBaseEntity } from './OBaseEntity';
 import { User } from './user.entity';
 import { InvoiceLine } from './invoice-line.entity';
 import { ApiPropertyOptional } from '@nestjs/swagger';
+import { Client } from './client.entity';
 
 @Entity()
 export class Invoice extends OBaseEntity {
@@ -33,6 +34,9 @@ export class Invoice extends OBaseEntity {
     invoice_line: InvoiceLine[];
 
     @ManyToOne(() => User, i => i.invoices)
-    // @JoinColumn({})
     user: User;
+
+    
+    @ManyToOne(() => Client, i => i.invoices)
+    client: Client;
 }

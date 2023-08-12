@@ -3,6 +3,7 @@ import { User } from "../entities/user.entity";
 import { Item } from 'src/entities/item.entity';
 import { Tax } from 'src/entities/tax-type.entity';
 import { SubTax } from 'src/entities/sub_tax.entity';
+import { Client } from 'src/entities/client.entity';
 export class TaxbleItemDto{
     @ApiProperty({})
     rate:string;
@@ -59,11 +60,15 @@ export class CreateInvoiceDto {
     @ApiProperty()
     internalID: string;
 
+    @ApiPropertyOptional({ type: () => User.call })
+    user: User;
+    
+    @ApiPropertyOptional({ type: () => Client.call })
+    client: Client;
+    
     @ApiPropertyOptional({type:[LineDto]})
     invoiceLines: [LineDto];
 
-    @ApiPropertyOptional({ type: () => User.call })
-    user: User;
 }
 
 export class UpdateInvoiceDto extends PartialType(CreateInvoiceDto) { }

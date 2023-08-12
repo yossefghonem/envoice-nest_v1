@@ -3,10 +3,12 @@ import {
     Column,
     Entity,
     JoinColumn,
+    OneToMany,
     OneToOne,
 } from 'typeorm';
 import { OBaseEntity } from './OBaseEntity';
 import { Address } from './address.entity';
+import { Invoice } from './invoice.entity';
 
 @Entity()
 export class Client extends OBaseEntity {
@@ -34,4 +36,7 @@ export class Client extends OBaseEntity {
     @OneToOne(() => Address, { eager: true, cascade: true })
     @JoinColumn()
     address?: Address;
+
+    @OneToMany(() => Invoice, u => u.client)
+    invoices?: Invoice[];
 }
