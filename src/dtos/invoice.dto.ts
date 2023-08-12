@@ -1,116 +1,101 @@
 import { ApiProperty, ApiPropertyOptional, PartialType } from '@nestjs/swagger';
-import { User } from "../entities/user.entity";
+import { User } from '../entities/user.entity';
 import { Item } from 'src/entities/item.entity';
 import { Tax } from 'src/entities/tax-type.entity';
 import { SubTax } from 'src/entities/sub_tax.entity';
 import { Client } from 'src/entities/client.entity';
-export class TaxbleItemDto{
-    @ApiProperty({})
-    rate:string;
-    @ApiProperty({})
-    quantity:string;
-    @ApiPropertyOptional({type:()=>Tax.call})
-    taxType:Tax;
-    @ApiPropertyOptional({type:()=>SubTax.call})
-    subTax:SubTax;
+export class TaxbleItemDto {
+  @ApiProperty({})
+  rate: string;
+  @ApiProperty({})
+  quantity: string;
+  @ApiPropertyOptional({ type: () => Tax.call })
+  taxType: Tax;
+  @ApiPropertyOptional({ type: () => SubTax.call })
+  subTax: SubTax;
 }
 
 export class LineDto {
-    @ApiProperty()
-    quantity?: string;
+  @ApiProperty()
+  quantity?: string;
 
-    @ApiProperty()
-    price?: string;
+  @ApiProperty()
+  price?: string;
 
-    @ApiProperty()
-    valueDifference?: string;
+  @ApiProperty()
+  valueDifference?: string;
 
-    @ApiProperty()
-    totalTaxableFees?: string;
+  @ApiProperty()
+  totalTaxableFees?: string;
 
-    @ApiProperty()
-    itemsDiscount?: string;
+  @ApiProperty()
+  itemsDiscount?: string;
 
-    @ApiProperty({})
-    currencyExchangeRate?: string;
+  @ApiProperty({})
+  currencyExchangeRate?: string;
 
-    @ApiProperty()
-    discount_rate?: string;
+  @ApiProperty()
+  discount_rate?: string;
 
-    @ApiPropertyOptional({ type: () => Item.call })
-    item: Item;
+  @ApiPropertyOptional({ type: () => Item.call })
+  item: Item;
 
-    @ApiPropertyOptional({ type: [TaxbleItemDto] })
-    taxbleItem: TaxbleItemDto[];
+  @ApiPropertyOptional({ type: [TaxbleItemDto] })
+  taxbleItem: TaxbleItemDto[];
 }
 
 export class CreateInvoiceDto {
-    @ApiProperty()
-    documentType?: string;
+  @ApiProperty()
+  documentType?: string;
 
-    @ApiProperty()
-    version?: string;
+  @ApiProperty()
+  version?: string;
 
-    @ApiProperty()
-    docTtotalDiscountAmount?: string;
+  @ApiProperty()
+  docTtotalDiscountAmount?: string;
 
-    @ApiProperty()
-    totalSalesAmount: string;
+  @ApiProperty()
+  totalSalesAmount: string;
 
-    @ApiProperty()
-    internalID: string;
+  @ApiProperty()
+  internalID: string;
 
-    @ApiPropertyOptional({ type: () => User.call })
-    user: User;
-    
-    @ApiPropertyOptional({ type: () => Client.call })
-    client: Client;
-    
-    @ApiPropertyOptional({type:[LineDto]})
-    invoiceLines: [LineDto];
+  @ApiPropertyOptional({ type: () => User.call })
+  user: User;
 
+  @ApiPropertyOptional({ type: () => Client.call })
+  client: Client;
+
+  @ApiPropertyOptional({ type: [LineDto] })
+  invoiceLines: [LineDto];
 }
 
-export class UpdateInvoiceDto extends PartialType(CreateInvoiceDto) { }
+export class UpdateInvoiceDto extends PartialType(CreateInvoiceDto) {}
 
-export class InvoiceResponseDto{
-    document:{
-        issuer: {
-            address: {
-                branchID: "0",
-                country: "EG",
-                governate: "giza",
-                regionCity: "october City",
-                street: "الحصرى مجمع الميرلاند",
-                buildingNumber: "115",
-                postalCode: "1",
-                floor: "1",
-                room: "123",
-                landmark: "7660 Melody Trail",
-                additionalInformation: "beside Townhall"
-            },
-            type: "B",
-            id: "209779519",
-            name: "Issuer Company"
-        };
-        receiver: {
-            address: {
-                country: "EG",
-                governate: "Egypt",
-                regionCity: "اكتوبر",
-                street: "ق 286 مخازن الشباب اكتوبر ",
-                buildingNumber: "Bldg. 0",
-                postalCode: "68030",
-                floor: "1",
-                room: "123",
-                landmark: "7660 Melody Trail",
-                additionalInformation: "beside Townhall"
-            },
-            type: "B",
-            id: "543047296",
-            name: "Receiver"
-        };
-        documentType: "I",
+export class AddressDto {
+  branchID: string;
+  country: string;
+  governate: string;
+  regionCity: string;
+  street: string;
+  buildingNumber: string;
+  postalCode: string;
+  floor: string;
+  room: string;
+  landmark: string;
+  additionalInformation: string;
+}
+export class IssuerDto {
+  address: AddressDto;
+  type: string;
+  id: string;
+  name: string;
+}
+export class EnvoiceResponseDto {
+  issuer: IssuerDto;
+  receiver: IssuerDto;
+  documentType: string;
+  /*
         documentTypeVersion: "1.0",
         dateTimeIssued: "2022-11-03T23:59:59Z",
         taxpayerActivityCode: "4510",
@@ -184,5 +169,5 @@ export class InvoiceResponseDto{
         totalAmount: 0,
         extraDiscountAmount: 0,
         totalItemsDiscountAmount: 0
-    }
+*/
 }

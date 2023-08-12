@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Invoice } from '../../entities/invoice.entity';
 import { Repository } from 'typeorm';
-import { CreateInvoiceDto, UpdateInvoiceDto } from '../../dtos/invoice.dto';
+import { CreateInvoiceDto, EnvoiceResponseDto, UpdateInvoiceDto } from '../../dtos/invoice.dto';
 import { InvoiceLine } from '../../entities/invoice-line.entity';
 import { TaxbleItem } from 'src/entities/taxbleItems.entity';
 
@@ -54,12 +54,36 @@ export class InvoiceService {
     return await this.repo.save(newInvoice);
   }
 
-  async findAll() {
-    return this.repo.find();
+  async findAll()  {
+    // return envoiceResponseDto
+    const resss =await this.repo.find();
+
+    return resss
   }
 
-  async findOne(id: number) {
-    return this.repo.findOneBy({ id: id });
+  async findOne(id: number) :Promise<EnvoiceResponseDto> {
+    const enviceDb=await this.repo.findOneBy({ id: id });
+
+    console.log(enviceDb);
+    const res1:EnvoiceResponseDto={
+      issuer: {
+          address:{
+            branchID:enviceDb.user.branch.id+'',
+            country: enviceDb.user.branch.address.country,
+            governate: enviceDb.user.branch.address.governerate,
+            regionCity: enviceDb.user.branch.address.regionCity,
+            street: enviceDb.user.branch.address.street,
+            buildingNumber: enviceDb.user.branch.address.buildingNumber,
+            postalCode: string;
+            floor: string;
+            room: string;
+            landmark: string;
+            additionalInformation: string;
+          }
+      },
+      receiver,
+      documentType:enviceDb.documentType
+    }
   }
 
   async update(id: number, updateInvoiceDto: UpdateInvoiceDto) {
