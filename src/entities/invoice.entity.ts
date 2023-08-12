@@ -14,8 +14,11 @@ import { Client } from './client.entity';
 
 @Entity()
 export class Invoice extends OBaseEntity {
-    @Column({})
+    @Column({default:'I'})
     documentType?: string;
+   
+    @Column({default:'EG'})
+    currency?: string;
 
     @Column({ default: 1.0 })
     version?: string;
@@ -29,6 +32,21 @@ export class Invoice extends OBaseEntity {
     @Column({})
     internalID: string;
 
+    @Column({})
+    purchaseOrderReference: string;
+
+    @Column({})
+    purchaseOrderDescription: string;
+
+    @Column({})
+    salesOrderReference: string;
+
+    @Column({})
+    salesOrderDescription: string;
+
+    @Column({})
+    proformaInvoiceNumber: string;
+
     @ApiPropertyOptional({type:()=>[InvoiceLine]})
     @OneToMany(() => InvoiceLine, (invoiceLines) => invoiceLines.invoice, { cascade:true,eager: true})
     invoice_line: InvoiceLine[];
@@ -36,7 +54,6 @@ export class Invoice extends OBaseEntity {
     @ManyToOne(() => User, i => i.invoices)
     user: User;
 
-    
     @ManyToOne(() => Client, i => i.invoices)
     client: Client;
 }

@@ -52,7 +52,19 @@ export class InvoiceLine extends OBaseEntity {
 
     @ApiProperty({})
     @Column({})
-    discount_rate?: string;
+    discount_rate?: number;
+
+    @ApiProperty({})
+    @Column({})
+    discount_amount?: number;
+
+    @ApiProperty({})
+    @Column({})
+    salesTotal:number;
+
+    @ApiProperty({})
+    @Column({})
+    netTotal:number;
 
     @ApiProperty({})
     @Column({default:"EGS"})
