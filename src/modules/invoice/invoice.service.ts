@@ -141,7 +141,7 @@ export class InvoiceService {
       invoiceLines: envoiceDb.invoice_line.map(line => {
         return {
           description: line.item.name,
-          itemType: ItemTypes.EGS,//[line.item.type],
+          itemType: ItemTypes[line.item.type],
           itemCode: line.item.code,
           unitType: line.item.unit,
           quantity: line.quantity,
