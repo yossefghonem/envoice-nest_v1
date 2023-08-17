@@ -7,7 +7,10 @@ export class CreatePermissionDto {
     url: string
 
     @ApiProperty()
-    canRead: boolean;
+    canInsert: boolean;
+
+    @ApiProperty()
+    canVeiw: boolean;
 
     @ApiProperty()
     canUpdate: boolean;

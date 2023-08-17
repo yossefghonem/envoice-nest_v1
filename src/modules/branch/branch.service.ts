@@ -49,6 +49,6 @@ export class BranchService {
     }
 
     async remove(id: number) {
-        return await this.repo.softDelete(id)
+        return await this.repo.delete(id)
     }
 }

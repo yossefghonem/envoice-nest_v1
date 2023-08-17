@@ -11,7 +11,6 @@ import { CreateRoleDto, UpdateRoleDto } from '../../dtos/role.dto';
 export class RoleController {
   constructor(private readonly roleService: RoleService) { }
 
-
   @Post()
   create(@Body() role: CreateRoleDto) {
     return this.roleService.create(role);
@@ -23,7 +22,6 @@ export class RoleController {
     let role = await this.roleService.findAll(req.user);
     console.log({ role });
     return role;
-
   }
 
   @Get(':id')
@@ -41,4 +39,3 @@ export class RoleController {
     return this.roleService.remove(+id);
   }
 }
-

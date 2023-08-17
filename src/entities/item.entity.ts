@@ -5,10 +5,10 @@ import { OBaseEntity } from "./OBaseEntity";
 import { ItemTypes } from "../enums/itemTypes.enum";
 @Entity()
 export class Item extends OBaseEntity {
-    @Column({})
+    @Column({nullable: true})
     name?: string;
 
-    @Column({})
+    @Column({nullable: true})
     code?: string;
 
     @Column({

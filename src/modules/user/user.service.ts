@@ -7,6 +7,7 @@ import { RoleService } from '../role/role.service';
 import { Activities } from '../../entities/activity.entity';
 import { StaticService } from '../static/static.service';
 import { CompanyService } from '../company/company.service';
+import { Role } from '../../entities/role.entity';
 
 @Injectable()
 export class UserService {
@@ -23,6 +24,21 @@ export class UserService {
     const company = await this.compService.getDefaultCompany()
 
     if (adminsCount === 0) {
+      let adminRole: Role
+      if (role) {
+        adminRole = role
+      } else {
+        adminRole = {
+          name: "AdminRole", permissions: [{
+            url: "AllEntities",
+            canInsert: true,
+            canUpdate: true,
+            canView: true,
+            canDelete: true,
+          }]
+        } as Role
+      }
+
       const newAdmin: User = {
         name: 'المدير العام',
         email: 'admin@dev.com',
@@ -44,6 +60,7 @@ export class UserService {
     if (!existsUser) {
       throw new UnauthorizedException('User Not Found')
     }
+
     if (existsUser.password !== body.password)
       throw new UnauthorizedException('check your credintials');
     //remove password from responce

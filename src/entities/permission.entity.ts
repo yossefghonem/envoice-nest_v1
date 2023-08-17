@@ -13,19 +13,27 @@ import { Role } from './role.entity';
 
 @Entity()
 export class Permission extends OBaseEntity {
+    @ApiProperty()
     @Column({})
     url?: string;
 
+    @ApiProperty()
     @Column({})
-    canRead: boolean;
+    canInsert: boolean;
 
+    @ApiProperty()
+    @Column({})
+    canView: boolean;
+
+    @ApiProperty()
     @Column({})
     canUpdate: boolean;
 
+    @ApiProperty()
     @Column({})
     canDelete: boolean;
 
-    @ApiPropertyOptional({ type: () => Role })
+    //@ApiPropertyOptional({ type: () => Role })
     @OneToMany(() => Role, p => p.permissions)
     role: Role;
 }
