@@ -32,9 +32,8 @@ export class Client extends OBaseEntity {
     @Column({})
     type?: string;
 
-    @Column({})
+    @Column({default:'0'})
     branchId?: string;
-
 
     @ApiPropertyOptional({ type: () => Address })
     @OneToOne(() => Address, { eager: true, cascade: true })

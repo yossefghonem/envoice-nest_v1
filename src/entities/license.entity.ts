@@ -11,10 +11,8 @@ import { OBaseEntity } from './OBaseEntity';
 import { User } from './user.entity';
 import { Company } from './company.entity';
 
-
 @Entity()
 export class License extends OBaseEntity {
-
     @Column()
     startDate?: Date;
 
@@ -22,7 +20,7 @@ export class License extends OBaseEntity {
     endDate?: Date;
 
     @ApiPropertyOptional({ type: () => Company })
-    @OneToOne(() => Company, r => r.license, { eager: true })
+    @OneToOne(() => Company, r => r.license)
     @JoinColumn({ name: "companyId" })
     company: Company;
 }

@@ -38,6 +38,7 @@ export class InvoiceService {
       client: { id: +invoiceDto.client },
       invoice_line: invoiceDto.invoiceLines.map((line) => {
         return {
+          discount_amount:0,
           quantity: +line.quantity,
           price: +line.price,
           valueDifference: +line.valueDifference,
@@ -46,6 +47,9 @@ export class InvoiceService {
           currencyExchangeRate: line.currencyExchangeRate,
           discount_rate: +line.discount_rate,
           item: line.item,
+          salesTotal:10,
+          netTotal:22,
+
           // salesTotal:line.item.price * line.item.quantity,
 
           taxbleItem: line.taxbleItem.map((tax) => {
@@ -72,11 +76,11 @@ export class InvoiceService {
   async findOne(id: number): Promise<EnvoiceResponseDto> {
     const envoiceDb = await this.repo.findOneBy({ id: id });
 
-    console.log(envoiceDb);
+    console.log("222222",envoiceDb.invoice_line[0].taxbleItem);
     const document: EnvoiceResponseDto = {
       issuer: {
         address: {
-          branchID: envoiceDb.user.branch.code + '',
+          branchID: envoiceDb.user?.branch?.code || "0",
           country: envoiceDb.user.branch.address.country,
           governate: envoiceDb.user.branch.address.governerate,
           regionCity: envoiceDb.user.branch.address.regionCity,

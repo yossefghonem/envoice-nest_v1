@@ -51,9 +51,9 @@ export class Invoice extends OBaseEntity {
     @OneToMany(() => InvoiceLine, (invoiceLines) => invoiceLines.invoice, { cascade:true,eager: true})
     invoice_line: InvoiceLine[];
 
-    @ManyToOne(() => User, i => i.invoices)
+    @ManyToOne(() => User, i => i.invoices,{eager:true})
     user: User;
 
-    @ManyToOne(() => Client, i => i.invoices)
+    @ManyToOne(() => Client, i => i.invoices,{eager:true})
     client: Client;
 }

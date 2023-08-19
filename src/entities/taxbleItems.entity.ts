@@ -22,12 +22,12 @@ export class TaxbleItem extends OBaseEntity {
     quantity?: string;
 
     @ApiPropertyOptional({ type: () => Tax })
-    @ManyToOne(() => Tax)
+    @ManyToOne(() => Tax,{eager:true})
     @JoinColumn()
     taxType?: Tax;
 
     @ApiPropertyOptional({ type: () => SubTax })
-    @ManyToOne(() => SubTax)
+    @ManyToOne(() => SubTax,{eager:true})
     @JoinColumn()
     subTax?: SubTax;
 
