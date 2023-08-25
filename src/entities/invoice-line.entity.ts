@@ -21,11 +21,7 @@ export class InvoiceLine extends OBaseEntity {
     @ApiProperty({})
     @Column({})
     quantity?: number;
-
-    // @ApiProperty({})
-    // @Column({})
-    // salesTotal?: number;
-
+    
     // @ApiProperty({})
     // @Column({})
     // total?: number;
@@ -47,8 +43,8 @@ export class InvoiceLine extends OBaseEntity {
     itemsDiscount?: number;
 
     @ApiProperty({})
-    @Column({})
-    currencyExchangeRate?: string;
+    @Column({default:1})
+    currencyExchangeRate?: number;
 
     @ApiProperty({})
     @Column({})

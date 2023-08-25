@@ -26,7 +26,7 @@ export class InvoiceService {
     const newInvoice: Invoice = {
       documentType: invoiceDto.documentType,
       version: invoiceDto.version,
-      docTtotalDiscountAmount: invoiceDto.docTtotalDiscountAmount,
+      // docTtotalDiscountAmount: invoiceDto.docTtotalDiscountAmount,
       totalSalesAmount: invoiceDto.totalSalesAmount,
       internalID: invoiceDto.internalID,
       purchaseOrderReference: invoiceDto.purchaseOrderReference,
@@ -37,24 +37,23 @@ export class InvoiceService {
       user: { id: +invoiceDto.user },
       client: { id: +invoiceDto.client },
       invoice_line: invoiceDto.invoiceLines.map((line) => {
+        const salesTotal = line.price * line.quantity
+        const discountA = line.rate * salesTotal
         return {
-          discount_amount:0,
-          quantity: +line.quantity,
-          price: +line.price,
-          valueDifference: +line.valueDifference,
-          totalTaxableFees: +line.totalTaxableFees,
-          itemsDiscount: +line.itemsDiscount,
+          salesTotal: salesTotal,
+          discount_amount: discountA,
+          quantity: line.quantity,
+          price: line.price,
+          valueDifference: line.valueDifference,
+          totalTaxableFees: line.totalTaxableFees,
+          itemsDiscount: line.itemsDiscount,
           currencyExchangeRate: line.currencyExchangeRate,
-          discount_rate: +line.discount_rate,
+          discount_rate: line.discount_rate,
           item: line.item,
-          salesTotal:10,
-          netTotal:22,
-
-          // salesTotal:line.item.price * line.item.quantity,
-
+          netTotal: salesTotal - discountA,
           taxbleItem: line.taxbleItem.map((tax) => {
             return {
-              quantity: tax.quantity,
+              amount: tax.rate * (salesTotal - discountA),
               rate: tax.rate,
               taxType: tax.taxType,
               subTax: tax.subTax,
@@ -76,7 +75,21 @@ export class InvoiceService {
   async findOne(id: number): Promise<EnvoiceResponseDto> {
     const envoiceDb = await this.repo.findOneBy({ id: id });
 
-    console.log("222222",envoiceDb.invoice_line[0].taxbleItem);
+    // console.log("222222",envoiceDb.invoice_line[0].taxbleItem);
+    const totalDiscountAmount = envoiceDb.invoice_line.map(line => line.discount_amount).reduce((acc, line) => acc + line, 0);
+    const totalSalesAmount = envoiceDb.invoice_line.map(line => line.salesTotal).reduce((acc, line) => acc + line, 0);
+    const totals = envoiceDb.invoice_line.map(line => {
+      const netTotal=line.netTotal
+      const amount_t1:number = line.taxbleItem.filter((entry) => entry.taxType.code === "T1").map((entry) => entry.amount) [0] || 0
+      const amount_t4:number = line.taxbleItem.filter((entry) => entry.taxType.code === "T4").map((entry) => entry.amount)[0] || 0
+      return { netTotal,amountT1:amount_t1,amountT4:amount_t4 }
+    });
+    const totalAmountT1 = totals.reduce((acc, line) => acc + line.amountT1, 0);
+    const totalAmountT4 = totals.reduce((acc, line) => acc + line.amountT4, 0);
+    const totalNetTotal = totals.reduce((acc, line) => acc + line.netTotal, 0);
+
+    // .reduce((acc, line) => acc + line, 0);
+
     const document: EnvoiceResponseDto = {
       issuer: {
         address: {
@@ -115,7 +128,7 @@ export class InvoiceService {
         name: envoiceDb.client.name
       },
       documentType: envoiceDb.documentType,
-      documentTypeVersion: envoiceDb.docTtotalDiscountAmount,
+      documentTypeVersion: envoiceDb.version,
       dateTimeIssued: envoiceDb.createdAt,
       taxpayerActivityCode: envoiceDb.user.company.activity.code,
       internalID: envoiceDb.internalID,
@@ -143,6 +156,11 @@ export class InvoiceService {
         terms: "SomeValue"
       },
       invoiceLines: envoiceDb.invoice_line.map(line => {
+        const amount_of_t1:number = line.taxbleItem.filter((entry) => entry.taxType.code === "T1").map((entry) => entry.amount)[0] ||0
+        const amount_of_t4:number = line.taxbleItem.filter((entry) => entry.taxType.code === "T4").map((entry) => entry.amount)[0] ||0
+        console.log(amount_of_t1);
+        console.log(amount_of_t4);
+        
         return {
           description: line.item.name,
           itemType: ItemTypes[line.item.type],
@@ -150,21 +168,16 @@ export class InvoiceService {
           unitType: line.item.unit,
           quantity: line.quantity,
           internalCode: line.internalCode,
-          salesTotal: +line.item.price * line.quantity,
-          netTotal: (+line.item.price * line.quantity) - (line.discount_rate * (+line.item.price * line.quantity)),
-          total: ((+line.item.price * line.quantity) - (line.discount_rate * (+line.item.price * line.quantity))) + 9,
-          //  line.taxbleItem.map(tax=>{
-          // return {
-          // t1-t4
-          // }
-          // }), // T1+T4
+          salesTotal: line.salesTotal,
+          netTotal: line.netTotal,
+          total: line.netTotal + amount_of_t1- amount_of_t4 ,
           valueDifference: 0,
           totalTaxableFees: 0,
           itemsDiscount: 0,
           unitValue: {
             currencySold: envoiceDb.currency,
-            amountEGP: +line.item.price,
-            amountSold: +line.item.price,
+            amountEGP: 0,
+            amountSold: 0,
             currencyExchangeRate: 1
           },
           discount: {
@@ -174,23 +187,27 @@ export class InvoiceService {
           taxableItems: line.taxbleItem.map(tax => {
             return {
               taxType: tax.taxType.code,
-              amount: +tax.quantity,
+              amount: tax.amount,
               subType: tax.subTax.code,
               rate:+tax.rate
             }
           }),
         }as InvoicelineDto
       }),
-      totalDiscountAmount: 0,
-      totalSalesAmount: 0,
-      netAmount: 0,
+      totalDiscountAmount:totalDiscountAmount,
+      totalSalesAmount: totalSalesAmount,
+      netAmount:totalSalesAmount - totalDiscountAmount,
       taxTotals: [
         {
           taxType: "T1",
-          amount: 0
+          amount: totalAmountT1
+        },
+        {
+          taxType: "T4",
+          amount: totalAmountT4
         }
       ],
-      totalAmount: 0,
+      totalAmount: totalNetTotal +totalAmountT1 -totalAmountT4,
       extraDiscountAmount: 0,
       totalItemsDiscountAmount: 0
     }

@@ -20,14 +20,14 @@ export class Invoice extends OBaseEntity {
     @Column({default:'EG'})
     currency?: string;
 
-    @Column({ default: 1.0 })
+    @Column({ default: '1.0' })
     version?: string;
 
-    @Column({})
-    docTtotalDiscountAmount?: string;
+    // @Column({})
+    // docTtotalDiscountAmount?: number;
 
-    @Column({})
-    totalSalesAmount: string;
+    @Column({default:0})
+    totalSalesAmount: number;
 
     @Column({})
     internalID: string;

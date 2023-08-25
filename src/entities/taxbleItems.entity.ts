@@ -14,12 +14,12 @@ import { InvoiceLine } from './invoice-line.entity';
 @Entity()
 export class TaxbleItem extends OBaseEntity {
     @ApiProperty()
-    @Column()
-    rate?: string;
+    @Column({default:0})
+    rate?: number;
 
     @ApiProperty()
-    @Column()
-    quantity?: string;
+    @Column({default:0})
+    amount?: number;
 
     @ApiPropertyOptional({ type: () => Tax })
     @ManyToOne(() => Tax,{eager:true})

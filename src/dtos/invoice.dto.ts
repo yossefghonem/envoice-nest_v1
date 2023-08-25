@@ -6,9 +6,7 @@ import { SubTax } from 'src/entities/sub_tax.entity';
 import { Client } from 'src/entities/client.entity';
 export class TaxbleItemDto {
   @ApiProperty({})
-  rate: string;
-  @ApiProperty({})
-  quantity: string;
+  rate: number;
   @ApiPropertyOptional({ type: () => Tax.call })
   taxType: Tax;
   @ApiPropertyOptional({ type: () => SubTax.call })
@@ -17,25 +15,28 @@ export class TaxbleItemDto {
 
 export class LineDto {
   @ApiProperty()
-  quantity?: string;
+  quantity?: number;
 
   @ApiProperty()
-  price?: string;
+  price?: number;
 
   @ApiProperty()
-  valueDifference?: string;
+  valueDifference?: number;
 
   @ApiProperty()
-  totalTaxableFees?: string;
+  totalTaxableFees?: number;
 
   @ApiProperty()
-  itemsDiscount?: string;
+  itemsDiscount?: number;
 
   @ApiProperty({})
-  currencyExchangeRate?: string;
+  currencyExchangeRate?: number;
 
   @ApiProperty()
-  discount_rate?: string;
+  discount_rate?: number;
+
+  @ApiProperty()
+  rate?: number;
 
   @ApiPropertyOptional({ type: () => Item.call })
   item: Item;
@@ -52,10 +53,10 @@ export class CreateInvoiceDto {
   version?: string;
 
   @ApiProperty()
-  docTtotalDiscountAmount?: string;
+  docTtotalDiscountAmount?: number;
 
   @ApiProperty()
-  totalSalesAmount: string;
+  totalSalesAmount: number;
 
   @ApiProperty()
   internalID: string;
@@ -140,6 +141,7 @@ export class DiscountDto {
 }
 
 export class InvoicelineDto {
+  price: number;
   description: string;
   itemType: string
   itemCode: string
@@ -163,7 +165,11 @@ export class InvoicelineDto {
     }
   ]
 }
+export class TaxTotalsDto {
 
+  taxType: string
+  amount: number
+}
 export class EnvoiceResponseDto {
   issuer: IssuerDto;
   receiver: IssuerDto;
@@ -183,12 +189,7 @@ export class EnvoiceResponseDto {
   totalDiscountAmount: number;
   totalSalesAmount: number;
   netAmount: number;
-  taxTotals: [
-    {
-      taxType: string,
-      amount: number
-    }
-  ];
+  taxTotals: TaxTotalsDto[];
   totalAmount: number;
   extraDiscountAmount: number;
   totalItemsDiscountAmount: number
