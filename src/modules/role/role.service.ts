@@ -37,7 +37,7 @@ export class RoleService {
     }
 
     getDefault() {
-        return this.repo.findOneBy({ name: 'superAdmin' })
+        return this.repo.findOneBy({ name: UserRole.SUPERADMIN })
     }
 
     findOne(id: number) {

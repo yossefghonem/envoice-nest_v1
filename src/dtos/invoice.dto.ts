@@ -8,9 +8,9 @@ export class TaxbleItemDto {
   @ApiProperty({})
   rate: number;
   @ApiPropertyOptional({ type: () => Tax.call })
-  taxType: Tax;
+  taxId: Tax;
   @ApiPropertyOptional({ type: () => SubTax.call })
-  subTax: SubTax;
+  subTaxId: SubTax;
 }
 
 export class LineDto {
@@ -27,19 +27,19 @@ export class LineDto {
   totalTaxableFees?: number;
 
   @ApiProperty()
-  itemsDiscount?: number;
+  itemDiscound?: number;
 
   @ApiProperty({})
   currencyExchangeRate?: number;
 
   @ApiProperty()
-  discount_rate?: number;
+  discoundRate?: number;
 
   @ApiProperty()
   rate?: number;
 
   @ApiPropertyOptional({ type: () => Item.call })
-  item: Item;
+  itemId: Item;
 
   @ApiPropertyOptional({ type: [TaxbleItemDto] })
   taxbleItem: TaxbleItemDto[];
@@ -83,7 +83,7 @@ export class CreateInvoiceDto {
   client: Client;
 
   @ApiPropertyOptional({ type: [LineDto] })
-  invoiceLines: [LineDto];
+  lines: [LineDto];
 }
 
 export class UpdateInvoiceDto extends PartialType(CreateInvoiceDto) { }
