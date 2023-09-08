@@ -8,6 +8,7 @@ import { Activities } from '../../entities/activity.entity';
 import { StaticService } from '../static/static.service';
 import { CompanyService } from '../company/company.service';
 import { Role } from '../../entities/role.entity';
+import { UserRole } from 'src/enums/userRole.enum';
 
 @Injectable()
 export class UserService {
@@ -29,7 +30,8 @@ export class UserService {
         adminRole = role
       } else {
         adminRole = {
-          name: "AdminRole", permissions: [{
+          name: UserRole.SUPERADMIN,
+           permissions: [{
             url: "AllEntities",
             canInsert: true,
             canUpdate: true,

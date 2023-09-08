@@ -26,7 +26,7 @@ export class Invoice extends OBaseEntity {
     // @Column({})
     // docTtotalDiscountAmount?: number;
 
-    @Column({default:0})
+    @Column({type: "decimal", precision: 10, scale: 2, default: 0})
     totalSalesAmount: number;
 
     @Column({})

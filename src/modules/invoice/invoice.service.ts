@@ -27,41 +27,43 @@ export class InvoiceService {
       documentType: invoiceDto.documentType,
       version: invoiceDto.version,
       // docTtotalDiscountAmount: invoiceDto.docTtotalDiscountAmount,
-      totalSalesAmount: invoiceDto.totalSalesAmount,
-      internalID: invoiceDto.internalID,
+      totalSalesAmount: invoiceDto.totalSalesAmount||0,
+      internalID: invoiceDto.internalID||'1',
       purchaseOrderReference: invoiceDto.purchaseOrderReference,
       purchaseOrderDescription: invoiceDto.purchaseOrderDescription,
       salesOrderReference: invoiceDto.salesOrderReference,
       salesOrderDescription: invoiceDto.salesOrderDescription,
       proformaInvoiceNumber: invoiceDto.proformaInvoiceNumber,
-      user: { id: +invoiceDto.user },
+      user: { id: 2 },
       client: { id: +invoiceDto.client },
-      invoice_line: invoiceDto.invoiceLines.map((line) => {
+      invoice_line: invoiceDto.lines.map((line) => {
         const salesTotal = line.price * line.quantity
-        const discountA = line.rate * salesTotal
+        const discountA = (line.itemDiscound ||1) * salesTotal
         return {
           salesTotal: salesTotal,
           discount_amount: discountA,
           quantity: line.quantity,
           price: line.price,
-          valueDifference: line.valueDifference,
-          totalTaxableFees: line.totalTaxableFees,
-          itemsDiscount: line.itemsDiscount,
-          currencyExchangeRate: line.currencyExchangeRate,
-          discount_rate: line.discount_rate,
-          item: line.item,
+          valueDifference: line.valueDifference ||0,
+          totalTaxableFees: line.totalTaxableFees ||0,
+          itemDiscound: line.itemDiscound || 0,
+          currencyExchangeRate: line.currencyExchangeRate ||0,
+          discoundRate: line.discoundRate,// rate
+          item: line.itemId,
           netTotal: salesTotal - discountA,
           taxbleItem: line.taxbleItem.map((tax) => {
             return {
               amount: tax.rate * (salesTotal - discountA),
-              rate: tax.rate,
-              taxType: tax.taxType,
-              subTax: tax.subTax,
+              rate: 0.2,
+              taxType: tax.taxId,
+              subTax: tax.subTaxId,
             } as TaxbleItem;
           }),
         } as InvoiceLine;
       }),
     };
+    console.log(newInvoice);
+    
     return await this.repo.save(newInvoice);
   }
 
@@ -169,7 +171,7 @@ export class InvoiceService {
           quantity: line.quantity,
           internalCode: line.internalCode,
           salesTotal: line.salesTotal,
-          netTotal: line.netTotal,
+          netTotal:totalNetTotal,
           total: line.netTotal + amount_of_t1- amount_of_t4 ,
           valueDifference: 0,
           totalTaxableFees: 0,
@@ -181,8 +183,8 @@ export class InvoiceService {
             currencyExchangeRate: 1
           },
           discount: {
-            rate: line.discount_rate,
-            amount: line.discount_rate * (+line.item.price * line.quantity)
+            rate: line.discoundRate,
+            amount: line.discoundRate * (+line.item.price * line.quantity)
           },
           taxableItems: line.taxbleItem.map(tax => {
             return {

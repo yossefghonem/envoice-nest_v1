@@ -19,7 +19,7 @@ export class InvoiceLine extends OBaseEntity {
     invoice: Invoice;
     
     @ApiProperty({})
-    @Column({})
+    @Column({type: "decimal", precision: 10, scale: 2, default: 0})
     quantity?: number;
     
     // @ApiProperty({})
@@ -27,39 +27,39 @@ export class InvoiceLine extends OBaseEntity {
     // total?: number;
 
     @ApiProperty({})
-    @Column({})
+    @Column({type: "decimal", precision: 10, scale: 2, default: 0})
     valueDifference?: number;
 
     @ApiProperty({})
-    @Column({})
+    @Column({type: "decimal", precision: 10, scale: 2, default: 0})
     totalTaxableFees?: number;
 
     @ApiProperty({})
-    @Column({default:0})
+    @Column({type: "decimal", precision: 10, scale: 2, default: 0})
     price?: number;
 
     @ApiProperty({})
-    @Column({})
-    itemsDiscount?: number;
+    @Column({type: "decimal", precision: 10, scale: 2, default: 0})
+    itemDiscound?: number;
 
     @ApiProperty({})
-    @Column({default:1})
+    @Column({type: "decimal", precision: 10, scale: 2, default: 0})
     currencyExchangeRate?: number;
 
     @ApiProperty({})
-    @Column({})
-    discount_rate?: number;
+    @Column({type: "decimal", precision: 10, scale: 2, default: 0})
+    discoundRate?: number;
 
     @ApiProperty({})
-    @Column({})
-    discount_amount?: number;
+    @Column({type: "decimal", precision: 10, scale: 2, default: 0})
+        discount_amount?: number;
 
     @ApiProperty({})
-    @Column({})
+    @Column({type: "decimal", precision: 10, scale: 2, default: 0})
     salesTotal:number;
 
     @ApiProperty({})
-    @Column({})
+    @Column({type: "decimal", precision: 10, scale: 2, default: 0})
     netTotal:number;
 
     @ApiProperty({})

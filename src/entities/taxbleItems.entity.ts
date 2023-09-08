@@ -14,11 +14,11 @@ import { InvoiceLine } from './invoice-line.entity';
 @Entity()
 export class TaxbleItem extends OBaseEntity {
     @ApiProperty()
-    @Column({default:0})
+    @Column({type: "decimal", precision: 10, scale: 2, default: 0})
     rate?: number;
 
     @ApiProperty()
-    @Column({default:0})
+    @Column({type: "decimal", precision: 10, scale: 2, default: 0})
     amount?: number;
 
     @ApiPropertyOptional({ type: () => Tax })

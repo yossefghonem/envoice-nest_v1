@@ -7,11 +7,15 @@ import {
 import { OBaseEntity } from './OBaseEntity';
 import { User } from './user.entity';
 import { Permission } from './permission.entity';
-
+import { UserRole } from '../enums/userRole.enum';
 @Entity()
 export class Role extends OBaseEntity {
-    [x: string]: any;
-    @Column({})
+
+    @Column({
+    type: "enum",
+        enum: UserRole,
+        default: UserRole.USER    // type:()=>UserRole
+    })
     name?: string;
 
     @ApiPropertyOptional({ type: () => User })
