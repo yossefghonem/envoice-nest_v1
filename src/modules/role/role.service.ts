@@ -1,9 +1,7 @@
 import { JwtUser } from './../../guards/jwt.strategy';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from '../../entities/user.entity';
 import { Repository } from 'typeorm';
-import { LoginDto } from '../../dtos/user.dto';
 import { Role } from '../../entities/role.entity';
 import { CreateRoleDto, UpdateRoleDto } from '../../dtos/role.dto';
 import { UserRole } from '../../enums/userRole.enum';
@@ -16,10 +14,10 @@ export class RoleService {
     }
 
     async onModuleInit() {
-        const adminsCount = await this.repo.count({ where: { name: "superAdmin" }, loadEagerRelations: false })
+        const adminsCount = await this.repo.count({ where: { name: UserRole.SUPERADMIN }, loadEagerRelations: false })
         if (adminsCount === 0) {
             const newRole: Role = {
-                name: 'superAdmin',
+                name: UserRole.SUPERADMIN,
             }
 
             this.repo.save(newRole)

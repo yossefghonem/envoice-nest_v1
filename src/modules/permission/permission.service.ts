@@ -26,8 +26,7 @@ export class PermissionService {
     }
 
     async findAll() {
-        let roles = await this.repo.find();
-        return roles
+        return await this.repo.find();
     }
 
     async findOne(id: number) {

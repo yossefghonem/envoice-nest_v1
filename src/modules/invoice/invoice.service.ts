@@ -38,7 +38,7 @@ export class InvoiceService {
       client: { id: +invoiceDto.client },
       invoice_line: invoiceDto.lines.map((line) => {
         const salesTotal = line.price * line.quantity
-        const discountA = (line.itemDiscound ||1) * salesTotal
+        const discountA = (line.discoundRate || 0) * salesTotal
         return {
           salesTotal: salesTotal,
           discount_amount: discountA,
@@ -46,7 +46,7 @@ export class InvoiceService {
           price: line.price,
           valueDifference: line.valueDifference ||0,
           totalTaxableFees: line.totalTaxableFees ||0,
-          itemDiscound: line.itemDiscound || 0,
+          itemDiscound: line.discoundRate || 0,
           currencyExchangeRate: line.currencyExchangeRate ||0,
           discoundRate: line.discoundRate,// rate
           item: line.itemId,
@@ -89,7 +89,8 @@ export class InvoiceService {
     const totalAmountT1 = totals.reduce((acc, line) => acc + line.amountT1, 0);
     const totalAmountT4 = totals.reduce((acc, line) => acc + line.amountT4, 0);
     const totalNetTotal = totals.reduce((acc, line) => acc + line.netTotal, 0);
-
+    console.log("2222222",totalNetTotal);
+    
     // .reduce((acc, line) => acc + line, 0);
 
     const document: EnvoiceResponseDto = {
@@ -109,7 +110,7 @@ export class InvoiceService {
         },
         type: envoiceDb.user.company.type,
         id: envoiceDb.user.company.taxNumber,
-        name: envoiceDb.user.name
+        name: envoiceDb.user.company.name
       },
       receiver: {
         address: {
@@ -158,10 +159,9 @@ export class InvoiceService {
         terms: "SomeValue"
       },
       invoiceLines: envoiceDb.invoice_line.map(line => {
-        const amount_of_t1:number = line.taxbleItem.filter((entry) => entry.taxType.code === "T1").map((entry) => entry.amount)[0] ||0
-        const amount_of_t4:number = line.taxbleItem.filter((entry) => entry.taxType.code === "T4").map((entry) => entry.amount)[0] ||0
-        console.log(amount_of_t1);
-        console.log(amount_of_t4);
+        const amount_of_t1:number =  line.taxbleItem.filter((entry) => entry.taxType.code === "T1").map((entry) => entry.amount)[0] ||0
+        const amount_of_t4:number =  line.taxbleItem.filter((entry) => entry.taxType.code === "T4").map((entry) => entry.amount)[0] ||0
+       
         
         return {
           description: line.item.name,
@@ -171,14 +171,14 @@ export class InvoiceService {
           quantity: line.quantity,
           internalCode: line.internalCode,
           salesTotal: line.salesTotal,
-          netTotal:totalNetTotal,
-          total: line.netTotal + amount_of_t1- amount_of_t4 ,
+          netTotal:line.salesTotal - line.discount_amount,
+          total:( Number(line.netTotal) + Number(amount_of_t1)) - Number(amount_of_t4),
           valueDifference: 0,
           totalTaxableFees: 0,
           itemsDiscount: 0,
           unitValue: {
             currencySold: envoiceDb.currency,
-            amountEGP: 0,
+            amountEGP: line.price,
             amountSold: 0,
             currencyExchangeRate: 1
           },
@@ -196,20 +196,20 @@ export class InvoiceService {
           }),
         }as InvoicelineDto
       }),
-      totalDiscountAmount:totalDiscountAmount,
-      totalSalesAmount: totalSalesAmount,
+      totalDiscountAmount:+totalDiscountAmount,
+      totalSalesAmount: +totalSalesAmount,
       netAmount:totalSalesAmount - totalDiscountAmount,
       taxTotals: [
         {
           taxType: "T1",
-          amount: totalAmountT1
+          amount: +totalAmountT1
         },
         {
           taxType: "T4",
-          amount: totalAmountT4
+          amount: +totalAmountT4
         }
       ],
-      totalAmount: totalNetTotal +totalAmountT1 -totalAmountT4,
+      totalAmount: Number(totalNetTotal) + Number(totalAmountT1) - Number(totalAmountT4),
       extraDiscountAmount: 0,
       totalItemsDiscountAmount: 0
     }

@@ -26,9 +26,6 @@ export class LineDto {
   @ApiProperty()
   totalTaxableFees?: number;
 
-  @ApiProperty()
-  itemDiscound?: number;
-
   @ApiProperty({})
   currencyExchangeRate?: number;
 

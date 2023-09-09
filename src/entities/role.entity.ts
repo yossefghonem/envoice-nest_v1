@@ -12,7 +12,7 @@ import { UserRole } from '../enums/userRole.enum';
 export class Role extends OBaseEntity {
 
     @Column({
-    type: "enum",
+    type: String,
         enum: UserRole,
         default: UserRole.USER    // type:()=>UserRole
     })
