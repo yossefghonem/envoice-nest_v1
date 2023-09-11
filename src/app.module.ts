@@ -19,6 +19,7 @@ import { ItemModule } from './modules/item/item.module';
 import { LicenseModule } from './modules/license/license.module';
 import { FileModule } from './modules/file/file.module';
 import { InvoiceModule } from './modules/invoice/invoice.module';
+import { IntegrationModule } from './modules/integration/integration.module';
 const AllModules = [
   CompanyModule,
   RoleModule,
@@ -54,6 +55,7 @@ const AllModules = [
     }),
     //FileModule,
     InvoiceModule,
+    IntegrationModule,
 
     // ServeStaticModule.forRoot({
     //   rootPath: join(__dirname, '..', 'static'),

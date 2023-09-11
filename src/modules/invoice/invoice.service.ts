@@ -132,7 +132,7 @@ export class InvoiceService {
       },
       documentType: envoiceDb.documentType,
       documentTypeVersion: envoiceDb.version,
-      dateTimeIssued: envoiceDb.createdAt,
+      dateTimeIssued: new Date().toISOString().slice(0,-5) +'Z',
       taxpayerActivityCode: envoiceDb.user.company.activity.code,
       internalID: envoiceDb.internalID,
       purchaseOrderReference: envoiceDb.purchaseOrderReference,
@@ -215,6 +215,9 @@ export class InvoiceService {
     }
 
     return document;
+    // call integration
+    
+
   }
 
   async update(id: number, updateInvoiceDto: UpdateInvoiceDto) {

@@ -172,7 +172,7 @@ export class EnvoiceResponseDto {
   receiver: IssuerDto;
   documentType: string;
   documentTypeVersion: string;
-  dateTimeIssued: Date;
+  dateTimeIssued: string;
   taxpayerActivityCode: string;
   internalID: string;
   purchaseOrderReference: string

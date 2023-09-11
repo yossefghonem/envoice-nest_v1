@@ -56,4 +56,20 @@ export class Invoice extends OBaseEntity {
 
     @ManyToOne(() => Client, i => i.invoices,{eager:true})
     client: Client;
+
+    @Column({
+        default:false
+    })
+    send?: boolean;
+
+    @Column({
+        default:null
+    })
+    uuid?: string;
+    
+    @Column({
+        default:null
+    })
+    submissionId?: string;
+    
 }
