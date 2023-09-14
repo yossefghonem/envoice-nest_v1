@@ -1,4 +1,3 @@
-import { MongooseModule } from '@nestjs/mongoose';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -6,8 +5,6 @@ import { UserModule } from './modules/user/user.module';
 import { ClientModule } from './modules/client/client.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ServeStaticModule } from '@nestjs/serve-static';
-import { join } from 'path';
 import { AuthModule } from './modules/auth/auth.module';
 import { RoleModule } from './modules/role/role.module';
 import { PermissionModule } from './modules/permission/permission.module';
@@ -17,9 +14,11 @@ import { CompanyModule } from './modules/company/company.module';
 import { GroupModule } from './modules/group/group.module';
 import { ItemModule } from './modules/item/item.module';
 import { LicenseModule } from './modules/license/license.module';
-import { FileModule } from './modules/file/file.module';
 import { InvoiceModule } from './modules/invoice/invoice.module';
 import { IntegrationModule } from './modules/integration/integration.module';
+import { CacheModule } from '@nestjs/cache-manager';
+// import session from './config/session.config';
+
 const AllModules = [
   CompanyModule,
   RoleModule,
@@ -33,10 +32,17 @@ const AllModules = [
   UserModule,
   ClientModule
 ];
+
 @Module({
   imports: [
     ...AllModules,
     ConfigModule.forRoot({ isGlobal: true }),
+    // SessionModule.forRoot({
+    //   session
+    // }),
+    CacheModule.register({
+      ttl:3600000 // 1h
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,
@@ -63,5 +69,6 @@ const AllModules = [
   ],
   controllers: [AppController],
   providers: [AppService],
+  // exports: [AppService,SessionService],
 })
 export class AppModule { }

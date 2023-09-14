@@ -9,6 +9,7 @@ import { TaxbleItem } from '../../entities/taxbleItems.entity';
 @Module({
   imports:  [TypeOrmModule.forFeature([Invoice,InvoiceLine,TaxbleItem])],
   controllers: [InvoiceController],
-  providers: [InvoiceService]
+  providers: [InvoiceService],
+  exports:[InvoiceService]
 })
 export class InvoiceModule {  }
