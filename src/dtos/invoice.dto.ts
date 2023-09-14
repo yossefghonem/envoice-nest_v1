@@ -81,6 +81,13 @@ export class CreateInvoiceDto {
 
   @ApiPropertyOptional({ type: [LineDto] })
   lines: [LineDto];
+
+
+  @ApiProperty(
+    // required:false
+  )
+  status: string
+
 }
 
 export class UpdateInvoiceDto extends PartialType(CreateInvoiceDto) { }
