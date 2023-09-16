@@ -16,15 +16,15 @@ export class IntegrationController {
     // session.views = (session.views || 0) + 1;
     // session.token="ddddddd"
     // session.cookie.maxAge=360
-    this.integrationService.storeToken("token","ssss")
+    // this.integrationService.storeToken("token","ssss")
   }
 
 
-  @Get('get')
-  www() {
+  @Post('get')
+  async www(@Body() body:any) {
     // session.views = (session.views || 0) + 1;
     // session.token="ddddddd"
     // session.cookie.maxAge=360
-   return this.integrationService.getToken("token")
+   return this.integrationService.generateSigniture(body,"85216297","Egypt Trust CA G6")
   }
 }

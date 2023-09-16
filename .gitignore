@@ -34,3 +34,8 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 .env
+lib/bin
+src/modules/integration/Cades.txt
+src/modules/integration/CanonicalString.txt
+src/modules/integration/fullSignedDocument.json
+lib/obj

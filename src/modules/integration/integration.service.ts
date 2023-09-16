@@ -9,7 +9,8 @@ import { AxiosResponse } from 'axios';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { JwtUser } from 'src/guards/jwt.strategy';
 import { InvoiceService } from '../invoice/invoice.service';
-import { execaSync } from 'execa';
+// import { execaSync } from 'execa';
+import { spawn, execFile,execFileSync } from 'child_process';
 
 const baseURL = 'https://id.eta.gov.eg/';
 const baseDoc = 'https://api.invoicing.eta.gov.eg/';
@@ -87,33 +88,37 @@ export class IntegrationService {
             }),
           ),
       );
-            return sub;
-            // return res.status(201).json(sub.data)
-            // update Invoice status
-            // check submission status ...
-          //  await this.invoiceService.update(id,{status:'InvoiceStatus'})
+      return sub;
+      // return res.status(201).json(sub.data)
+      // update Invoice status
+      // check submission status ...
+      //  await this.invoiceService.update(id,{status:'InvoiceStatus'})
     } catch (error) {
       console.log('caaaatche', error.response.data.error);
       // return res.status(400).json(error.response.data)
     }
-
   }
 
   async generateSigniture(doc: any, pin: string, certificate: string) {
     try {
-      const ps = await execaSync(
-        path.join(__dirname, '../../lib/', 'EInvoicingSigner.exe'),
-        [path.join(__dirname), pin, certificate, JSON.stringify(doc)],
+      const out= execFileSync(
+        path.join(
+          process.cwd(),
+          'lib/bin/Debug/netcoreapp3.1',
+          'EInvoicingSigner.exe',
+        ),
+        [
+          path.join(process.cwd(), 'src/modules/integration'),
+          pin,
+          certificate,
+          JSON.stringify(doc),
+        ]
       );
-      console.log('while token generating......', ps.exitCode);
-      // return res.send(ps)
-      if (ps.exitCode == 0 && ps.stderr === '') {
-        return 1;
-      }
-      return 0;
+      const responce=await out.toString('utf-8')
+      return responce
+
     } catch (error) {
-      console.log('errrrrrrrrror', error);
-      return 0;
+      console.log("00000000",error.message.toString())
     }
   }
 
@@ -122,7 +127,7 @@ export class IntegrationService {
   }
 
   async getToken(id: number) {
-    const key = 'id_'+id;
+    const key = 'id_' + id;
     return (await this.cacheManager.get(key)) ?? false;
   }
 }
