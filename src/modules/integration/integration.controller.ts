@@ -23,11 +23,15 @@ export class IntegrationController {
   }
 
 
-  @Post('get')
+  @Post('generate')
   async www(@Body() body:any) {
     // session.views = (session.views || 0) + 1;
     // session.token="ddddddd"
     // session.cookie.maxAge=360
-   return this.integrationService.generateSigniture(body,"85216297","Egypt Trust CA G6")
+   
+
+    
+
+   return this.integrationService.generateSigniture(body,"43397696","Egypt Trust CA G6")
   }
 }
