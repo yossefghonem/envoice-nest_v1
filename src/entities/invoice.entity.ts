@@ -2,7 +2,6 @@
 import {
     Column,
     Entity,
-    JoinColumn,
     ManyToOne,
     OneToMany,
 } from 'typeorm';
@@ -11,6 +10,7 @@ import { User } from './user.entity';
 import { InvoiceLine } from './invoice-line.entity';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Client } from './client.entity';
+import { InvoiceStatus } from 'src/enums/invoice.enum';
 
 @Entity()
 export class Invoice extends OBaseEntity {
@@ -71,5 +71,12 @@ export class Invoice extends OBaseEntity {
         default:null
     })
     submissionId?: string;
+
+    @Column({
+        type:'enum',
+        enum:InvoiceStatus,
+        default:InvoiceStatus.PINDDING,
+    })
+    status?: string;
     
 }

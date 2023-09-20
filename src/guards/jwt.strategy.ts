@@ -10,8 +10,11 @@ import { LicenseService } from '../modules/license/license.service';
 
 export interface JwtUser {
   id: string;
-  taxNumber: string;
-  role: UserRole
+  pin: string;
+  role: UserRole;
+  client_id:string;
+  client_secret:string;
+  certificate:string;
 }
 
 @Injectable()
@@ -35,11 +38,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     //   throw new UnauthorizedException("User License is expired");
     // }
 
-    let tokenPayload: JwtUser
-    tokenPayload = {
+    const tokenPayload: JwtUser = {
       id: payload.id,
-      taxNumber: payload.taxNumber,
-      role: payload.role
+      pin: payload.taxNumber,
+      role: payload.role,
+      client_id:payload.client_id,
+      client_secret:payload.client_secret,
+      certificate:payload.certificate
     }
 
     return tokenPayload;

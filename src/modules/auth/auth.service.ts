@@ -23,6 +23,10 @@ export class AuthService {
           id: user.id,
           email: user.email,
           role: user.role.name,
+          client_id:user.company.clientId,
+          client_secret:user.company.clientSecret1,
+          taxNumber:user.company.taxNumber,
+          certificate:user.company.certificate
           // mobile: user.mobile,
           // userType: user.userType,
           // defaultLang: user.defaultLang,

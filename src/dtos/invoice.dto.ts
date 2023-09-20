@@ -4,6 +4,7 @@ import { Item } from 'src/entities/item.entity';
 import { Tax } from 'src/entities/tax-type.entity';
 import { SubTax } from 'src/entities/sub_tax.entity';
 import { Client } from 'src/entities/client.entity';
+import { InvoiceStatus } from 'src/enums/invoice.enum';
 export class TaxbleItemDto {
   @ApiProperty({})
   rate: number;
@@ -84,9 +85,9 @@ export class CreateInvoiceDto {
 
 
   @ApiProperty(
-    // required:false
+    // require:false
   )
-  status: string
+  status: InvoiceStatus
 
 }
 
@@ -120,7 +121,7 @@ export class PaymentDto {
   bankAccountIBAN: string
   swiftCode: string
   terms: string
-};
+}
 export class DeliveryDto {
   approach: string;
   packaging: string;
@@ -130,7 +131,7 @@ export class DeliveryDto {
   grossWeight: number;
   netWeight: number;
   terms: string;
-};
+}
 
 export class UnitValueDto {
   currencySold: string;

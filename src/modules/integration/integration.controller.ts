@@ -1,14 +1,17 @@
-import { Controller, Post, Body, Get, Session, Req } from '@nestjs/common';
+import { Controller, Post, Body, Get, Req } from '@nestjs/common';
 import { IntegrationService } from './integration.service';
 import { InvoiceLoginDto } from './dtos/invoiceLogin.dto';
 import {Request} from 'express'
+import { Role } from 'src/guards/roles.decorator';
+import { UserRole } from 'src/enums/userRole.enum';
 @Controller('integration')
 export class IntegrationController {
   constructor(private readonly integrationService: IntegrationService) {}
 
+  @Role([UserRole.SUPERADMIN])
   @Post()
-  login(@Body() body:InvoiceLoginDto){
-    return this.integrationService.invoiceLogin(body)
+  login(@Req() req:any){
+    return this.integrationService.invoiceLogin(req.user)
   }
 
   @Get()
