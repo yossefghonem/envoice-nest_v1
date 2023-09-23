@@ -36,6 +36,9 @@ export class Company extends OBaseEntity {
     @Column({ default: "B" })
     type?: string;
 
+    @Column({ default: "eps2003csp11.dll" })
+    DllLibPath?: string;
+
     @ApiPropertyOptional({ type: () => User })
     @OneToMany(() => User, r => r.company, { cascade: true })
     users?: User[];

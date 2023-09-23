@@ -24,15 +24,15 @@ export class IntegrationService {
     private readonly invoiceService: InvoiceService,
   ) {}
 
-  async invoiceLogin(user:JwtUser) {
+  async invoiceLogin(data:InvoiceLoginDto) {
     try {
-      const loginBody:InvoiceLoginDto={
-        client_id: user.client_id,
-        client_secret: user.client_secret,
-        grant_type:"",
-        scope:""
+      const loginBody={
+        client_id: data.client_id,
+        client_secret: data.client_secret,
+        grant_type:"client_credentials",
+        scope:"InvoicingAPI"
       }
-      await firstValueFrom(
+     return await firstValueFrom(
         this.http
           .post('https://id.eta.gov.eg/connect/token', loginBody, {
             headers: {
@@ -44,9 +44,9 @@ export class IntegrationService {
             map((response) => {
               if (response.status === 200) {
                 // save login data to session key:value
-                this.storeToken(user.id, response.data.token);
-                // return response.data;
+                // this.storeToken(user.id, response.data.token);
                 console.log(response?.data)
+                return response.data;
               }
             }),
           ),
@@ -67,7 +67,7 @@ export class IntegrationService {
 
     const token = await this.getToken(user.id);
     // if token expired or empty re-try login
-    if(!token) await this.invoiceLogin(user)
+    // if(!token) await this.invoiceLogin({user})
     // using exica generate signiture
     await this.generateSigniture(document, user.pin, user.certificate);
 
@@ -113,8 +113,10 @@ export class IntegrationService {
     }
   }
 
-  async generateSigniture(doc: any, pin: string, certificate: string) {
+  async generateSigniture(doc: any, pin: string, certificate: string,lib='eps2003csp11.dll') {
     try {
+      console.log(lib);
+      
       const out= execFileSync(
         path.join(
           process.cwd(),
@@ -126,6 +128,7 @@ export class IntegrationService {
           pin,
           certificate,
           JSON.stringify(doc),
+          lib
         ]
       );
       const responce=await out.toString('utf-8')

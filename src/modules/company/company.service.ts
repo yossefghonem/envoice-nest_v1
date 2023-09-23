@@ -41,7 +41,7 @@ export class CompanyService {
             activity: { id: +body.activity },
         }
 
-        let company = await this.repo.save(newComp)
+        const company = await this.repo.save(newComp)
         return this.repo.findOneBy({ id: company.id })
     }
 

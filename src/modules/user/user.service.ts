@@ -4,8 +4,6 @@ import { User } from '../../entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateUserDto, LoginDto, UpdateUserDto } from '../../dtos/user.dto';
 import { RoleService } from '../role/role.service';
-import { Activities } from '../../entities/activity.entity';
-import { StaticService } from '../static/static.service';
 import { CompanyService } from '../company/company.service';
 import { Role } from '../../entities/role.entity';
 import { UserRole } from 'src/enums/userRole.enum';
@@ -55,10 +53,10 @@ export class UserService {
   }
 
   async findUser(body: LoginDto): Promise<User | PromiseLike<User>> {
-    let existsUser = await this.repo.findOne({
+    const existsUser = await this.repo.findOne({
       where: [{ email: body.email }]
     });
-
+    
     if (!existsUser) {
       throw new UnauthorizedException('User Not Found')
     }
@@ -84,12 +82,12 @@ export class UserService {
       role: { id: +user.role }
     }
 
-    let userDb = await this.repo.save(newUser)
+    const userDb = await this.repo.save(newUser)
     return this.repo.findOneBy({ id: userDb.id });
   }
 
   async findAll() {
-    let users = await this.repo
+    const users = await this.repo
       .createQueryBuilder('user')
       .leftJoin('user.company', 'company')
       .leftJoin('user.role', 'role')
@@ -112,7 +110,7 @@ export class UserService {
   }
 
   async findOne(id: number) {
-    let user = await this.repo.findOneBy({ id: id })
+    const user = await this.repo.findOneBy({ id: id })
 
     return { ...user, role: user.role.name }
   }

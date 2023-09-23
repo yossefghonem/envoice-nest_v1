@@ -5,12 +5,4 @@ export class InvoiceLoginDto{
     client_id:string;
     @ApiProperty({})
     client_secret:string;
-    @ApiProperty({
-        default:"grant-type"
-    })
-    grant_type:string;
-    @ApiProperty({
-        default:"client"
-    })
-    scope:string;
 }

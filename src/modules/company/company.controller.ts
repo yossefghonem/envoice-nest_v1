@@ -9,14 +9,14 @@ import { ApiTags } from '@nestjs/swagger';
 export class CompanyController {
   constructor(private readonly companyService: CompanyService) { }
 
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() c: CreateCompanyDto, @Req() req: any) {
     // if(req.user.)
     return this.companyService.create(c);
   }
 
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Get("all")
   findAll(@Req() req: any) {
     return this.companyService.findAll(req.user);
