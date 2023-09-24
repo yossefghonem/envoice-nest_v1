@@ -8,8 +8,12 @@ import { LoginDto } from '../../dtos/user.dto';
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) { }
+
   @Post('/login')
   userLogin(@Body() user: LoginDto) {
+    console.log('====================================');
+    console.log(user);
+    console.log('====================================');
     return this.authService.Login(user);
   }
 }

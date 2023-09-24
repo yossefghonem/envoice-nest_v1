@@ -12,7 +12,7 @@ export class CompanyService {
 
     async onModuleInit() {
         const company = await this.repo.count({ where: { taxNumber: "20150012" }, loadEagerRelations: false })
-        console.log("wwwwwww", company);
+        console.log("companys", company);
 
         if (company === 0) {
             const newC: Company = {
@@ -31,9 +31,14 @@ export class CompanyService {
     }
 
     async create(body: CreateCompanyDto) {
+        console.log('====================================');
+        console.log(body);
+        console.log('====================================');
         const newComp: Company = {
             name: body.name,
             taxNumber: body.taxNumber,
+            pin: +body.pin,
+            dllLibPath: body.dllLibPath,
             certificate: body.certificate,
             clientId: body.clientId,
             clientSecret1: body.clientSecret1,
@@ -42,6 +47,9 @@ export class CompanyService {
         }
 
         const company = await this.repo.save(newComp)
+        console.log('====================================');
+        console.log(company);
+        console.log('====================================');
         return this.repo.findOneBy({ id: company.id })
     }
 

@@ -1,3 +1,15 @@
 {
-    "DockerRun.DisableAutoGenerateConfig": true
+    "DockerRun.DisableAutoGenerateConfig": true,
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "postgres",
+            "database": "postgres",
+            "username": "postgres",
+            "password": "0000"
+        }
+    ]
 }

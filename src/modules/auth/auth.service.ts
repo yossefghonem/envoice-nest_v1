@@ -20,7 +20,7 @@ export class AuthService {
     private integrationService: IntegrationService,
     private userService: UserService,
     private companyService: CompanyService,
-  ) {}
+  ) { }
   sign(user: User) {
     return {
       ...user,
@@ -31,9 +31,10 @@ export class AuthService {
           role: user.role?.name,
           client_id: user.company?.clientId,
           client_secret: user.company?.clientSecret1,
-          taxNumber: user.company?.taxNumber,
+          pin: user.company?.pin,
           certificate: user.company?.certificate,
           access_token: user.company?.clientSecret2,
+          dllLibPath: user.company?.dllLibPath,
         },
         { expiresIn: '1h' },
       ),
@@ -44,6 +45,9 @@ export class AuthService {
     let userStored: User;
     try {
       userStored = await this.userService.findUser(body);
+      console.log('====================================');
+      console.log(userStored);
+      console.log('====================================');
       if (userStored.role.name === UserRole.USER) {
         // login to envoice and store token in company
         const loginBody: InvoiceLoginDto = {
@@ -56,7 +60,9 @@ export class AuthService {
         await this.companyService.update(userStored.company.id, {
           clientSecret2: access_token,
         });
+        userStored = await this.userService.findUser(body);
       }
+
       console.log(userStored);
     } catch (error) {
       throw new UnauthorizedException(error.message, error.code);

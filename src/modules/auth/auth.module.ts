@@ -1,3 +1,4 @@
+import { IntegrationModule } from './../integration/integration.module';
 import { Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
@@ -9,6 +10,9 @@ import { JwtStrategy } from '../../guards/jwt.strategy';
 import { LicenseModule } from '../license/license.module';
 import { IntegrationService } from '../integration/integration.service';
 import { CompanyService } from '../company/company.service';
+import { HttpModule, HttpService } from '@nestjs/axios';
+import { InvoiceService } from '../invoice/invoice.service';
+import { CompanyModule } from '../company/company.module';
 
 @Module({
   imports: [
@@ -17,14 +21,16 @@ import { CompanyService } from '../company/company.service';
     JwtModule.register({
       secret: process.env.TOKEN_SECRET,
       signOptions: { algorithm: 'HS256', expiresIn: '1h' },
-
     }),
     // import modules
     UserModule,
-    LicenseModule
+    LicenseModule,
+    IntegrationModule,
+    CompanyModule
   ],
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy,IntegrationService,CompanyService],
+  providers: [AuthService, JwtStrategy],
   exports: [AuthService, JwtStrategy],
 })
+
 export class AuthModule { }

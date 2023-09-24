@@ -6,6 +6,11 @@ export class CreateCompanyDto {
 
     @ApiProperty({})
     taxNumber?: string;
+    @ApiProperty({})
+    pin?: number;
+
+    @ApiProperty({})
+    dllLibPath?: string;
 
     @ApiProperty({})
     certificate?: string;

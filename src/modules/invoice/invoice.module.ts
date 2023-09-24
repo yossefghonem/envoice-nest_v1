@@ -5,11 +5,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Invoice } from '../../entities/invoice.entity';
 import { InvoiceLine } from '../../entities/invoice-line.entity';
 import { TaxbleItem } from '../../entities/taxbleItems.entity';
+import { HttpModule, HttpService } from '@nestjs/axios';
 
 @Module({
-  imports:  [TypeOrmModule.forFeature([Invoice,InvoiceLine,TaxbleItem])],
+  imports: [TypeOrmModule.forFeature([Invoice, InvoiceLine, TaxbleItem]), HttpModule],
   controllers: [InvoiceController],
   providers: [InvoiceService],
-  exports:[InvoiceService]
+  exports: [InvoiceService]
 })
-export class InvoiceModule {  }
+export class InvoiceModule { }

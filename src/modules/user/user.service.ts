@@ -29,7 +29,7 @@ export class UserService {
       } else {
         adminRole = {
           name: UserRole.SUPERADMIN,
-           permissions: [{
+          permissions: [{
             url: "AllEntities",
             canInsert: true,
             canUpdate: true,
@@ -56,11 +56,10 @@ export class UserService {
     const existsUser = await this.repo.findOne({
       where: [{ email: body.email }]
     });
-    
+
     if (!existsUser) {
       throw new UnauthorizedException('User Not Found')
     }
-
     if (existsUser.password !== body.password)
       throw new UnauthorizedException('check your credintials');
     //remove password from responce

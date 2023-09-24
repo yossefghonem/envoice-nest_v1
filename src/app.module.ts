@@ -20,9 +20,9 @@ import { CacheModule } from '@nestjs/cache-manager';
 // import session from './config/session.config';
 
 const AllModules = [
+  AuthModule,
   CompanyModule,
   RoleModule,
-  AuthModule,
   PermissionModule,
   BranchModule,
   StaticModule,
@@ -41,7 +41,7 @@ const AllModules = [
     //   session
     // }),
     CacheModule.register({
-      ttl:3600000 // 1h
+      ttl: 3600000 // 1h
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',

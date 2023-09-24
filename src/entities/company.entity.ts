@@ -37,7 +37,10 @@ export class Company extends OBaseEntity {
     type?: string;
 
     @Column({ default: "eps2003csp11.dll" })
-    DllLibPath?: string;
+    dllLibPath?: string;
+
+    @Column({ default: 0 })
+    pin?: number;
 
     @ApiPropertyOptional({ type: () => User })
     @OneToMany(() => User, r => r.company, { cascade: true })
@@ -52,6 +55,6 @@ export class Company extends OBaseEntity {
     activity?: Activities;
 
     @ApiPropertyOptional({ type: () => License })
-    @OneToOne(() => License, r => r.company, { cascade: true ,eager:true})
+    @OneToOne(() => License, r => r.company, { cascade: true, eager: true })
     license?: License;
 }

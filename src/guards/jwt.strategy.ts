@@ -12,9 +12,11 @@ export interface JwtUser {
   id: string;
   pin: string;
   role: UserRole;
-  client_id:string;
-  client_secret:string;
-  certificate:string;
+  client_id: string;
+  client_secret: string;
+  certificate: string;
+  dllLibPath: string;
+  access_token: string;
 }
 
 @Injectable()
@@ -40,11 +42,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
     const tokenPayload: JwtUser = {
       id: payload.id,
-      pin: payload.taxNumber,
+      pin: payload.pin,
       role: payload.role,
-      client_id:payload.client_id,
-      client_secret:payload.client_secret,
-      certificate:payload.certificate
+      client_id: payload.client_id,
+      client_secret: payload.client_secret,
+      certificate: payload.certificate,
+      dllLibPath: payload.dllLibPath,
+      access_token: payload.access_token
     }
 
     return tokenPayload;

@@ -24,6 +24,7 @@ export class BranchService {
             name_ar: branch.name_ar,
             name_en: branch.name_en,
             code: branch.code,
+            invoiceSerial: branch.invoiceSerial,
             address: address,
             company: { id: +branch.company }
         }
