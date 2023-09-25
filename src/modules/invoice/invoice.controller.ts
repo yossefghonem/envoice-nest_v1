@@ -20,7 +20,7 @@ export class InvoiceController {
     return this.invoiceService.findAll();
   }
 
-  @Role([UserRole.SUPERADMIN])
+  @Role([UserRole.USER])
   @Get('submit/:id')
   submitDocument(@Req() req:any,@Param('id') id: string) {
     console.log(req.user)

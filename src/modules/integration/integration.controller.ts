@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Req } from '@nestjs/common';
+import { Controller, Post, Body, Get, Req,Param } from '@nestjs/common';
 import { IntegrationService } from './integration.service';
 import { InvoiceLoginDto } from './dtos/invoiceLogin.dto';
 import {Request} from 'express'
@@ -12,6 +12,14 @@ export class IntegrationController {
   @Post()
   login(@Req() req:any){
     return this.integrationService.invoiceLogin(req.user)
+  }
+
+  
+  @Role([UserRole.USER])
+  @Get('submit/:id')
+  submitDocument(@Req() req:any,@Param('id') id: string) {
+    console.log(req.user)
+    return this.integrationService.sendInvoice(+id,req.user);
   }
 
   @Get()
