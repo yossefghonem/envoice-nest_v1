@@ -88,7 +88,7 @@ export class IntegrationService {
         path.join(process.cwd(), 'src/modules/integration', 'FullSignedDocument.json'),
       );
       // return res.send(docs)
-      const sub = await firstValueFrom(
+      const docSub = await firstValueFrom(
         this.http
           .post(
             'https://api.invoicing.eta.gov.eg/api/v1.0/documentsubmissions',
@@ -102,14 +102,15 @@ export class IntegrationService {
           )
           .pipe(
             map((response) => {
-              if (response.status === 200) {
+              if (response?.status === 200) {
                 // save login data to session
+                console.log("sent results ???",response)
                 return response;
               }
             }),
           ),
       );
-
+console.log("final for submit",docSub)
       // return sub;
       // return res.status(201).json(sub.data)
       // update Invoice status

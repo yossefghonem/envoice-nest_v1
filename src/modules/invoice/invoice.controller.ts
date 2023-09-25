@@ -1,7 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Req } from '@nestjs/common';
 import { InvoiceService } from './invoice.service';
 import { CreateInvoiceDto, UpdateInvoiceDto } from '../../dtos/invoice.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { UserRole } from 'src/enums/userRole.enum';
+import { Role } from 'src/guards/roles.decorator';
 
 @ApiTags('Invoice')
 @Controller('invoice')
@@ -16,6 +18,13 @@ export class InvoiceController {
   @Get()
   findAll() {
     return this.invoiceService.findAll();
+  }
+
+  @Role([UserRole.SUPERADMIN])
+  @Get('submit/:id')
+  submitDocument(@Req() req:any,@Param('id') id: string) {
+    console.log(req.user)
+    return this.invoiceService.submitDocument(+id,req.user);
   }
 
   @Get(':id')

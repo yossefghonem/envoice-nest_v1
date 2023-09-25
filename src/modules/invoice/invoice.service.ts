@@ -11,8 +11,12 @@ import { ItemTypes } from '../../enums/itemTypes.enum';
 export class InvoiceService {
   constructor(
     @InjectRepository(Invoice) private readonly repo: Repository<Invoice>,
-  ) { }
-
+    ) { }
+    
+    submitDocument(id: number, user: any) {
+      console.log(id,user)
+      // throw new Error('Method not implemented.');
+    }
   /*
   valueDifference
   totalTaxableFees
