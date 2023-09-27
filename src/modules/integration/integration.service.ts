@@ -122,9 +122,11 @@ console.log("final for submit",docSub)
     }
   }
 
-  async generateSigniture(doc: any, pin: string, certificate: string, lib = 'eps2003csp11.dll') {
+  async generateSigniture(doc: any, pin: string, certificate: string, lib = 'SignatureP11.dll') {
     try {
-      console.log(lib);
+      console.log({
+        pin,certificate,lib,doc
+      });
       const out = execFileSync(
         path.join(
           process.cwd(),
@@ -142,8 +144,8 @@ console.log("final for submit",docSub)
       const responce = await out.toString('utf-8')
       return responce
     } catch (error) {
-      console.log("generate", error.message.toString())
-      throw new NotFoundException('generate signature', error)
+      console.log("error in generate", error.message.toString())
+      throw new NotFoundException('cant generate signature', error)
     }
   }
 

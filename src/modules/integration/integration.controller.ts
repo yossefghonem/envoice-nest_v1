@@ -38,8 +38,8 @@ export class IntegrationController {
     // session.cookie.maxAge=360
    
 
-    
+    // return body;
 
-   return this.integrationService.generateSigniture(body,"43397696","Egypt Trust CA G6")
+   return this.integrationService.generateSigniture(body.doc,body.pin,body.certificate)
   }
 }

@@ -24,6 +24,9 @@ POST {{base}}/integration/generate
 Content-Type: application/json
 
 {
+  "pin":123123,
+  "certificate":"Egypt Trust CA G6",
+  "doc":{
   "issuer": {
     "type": "B",
     "id": "232430373",
@@ -248,6 +251,7 @@ Content-Type: application/json
       ]
     }
   ]
+}
 }
 
 

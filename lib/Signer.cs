@@ -15,8 +15,8 @@ using Newtonsoft.Json;
 
 public class TokenSigner
     {
-    private  string DllLibPath = "eps2003csp11.dll";
-    // private string DllLibPath = "SignatureP11.dll";
+    // private  string DllLibPath = "eps2003csp11.dll";
+    private string DllLibPath = "SignatureP11.dll";
     private string TokenPin = "999999999";
     private string TokenCertificate = "Egypt Trust Sealing CA";
 
