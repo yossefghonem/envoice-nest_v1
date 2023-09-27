@@ -24,7 +24,7 @@ POST {{base}}/integration/generate
 Content-Type: application/json
 
 {
-  "pin":123123,
+  "pin":85216297,
   "certificate":"Egypt Trust CA G6",
   "doc":{
   "issuer": {
@@ -266,8 +266,8 @@ Content-Type: application/json
 POST https://id.eta.gov.eg/connect/token
 Content-Type: application/x-www-form-urlencoded
 
-client_id=803a3cc4-5042-469b-87da-909387f0afb2
-&client_secret=1b0e96dc-de2e-4b2b-97a7-3c6d942f45a7
+client_id=e7d8dc6a-7fa8-49b8-9726-48332fe485af
+&client_secret=eedf9a33-bc60-417e-99cc-bbf02faff8be
 &grant_type=client_credentials
 &scope=InvoicingAPI
 
