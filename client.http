@@ -27,231 +27,330 @@ Content-Type: application/json
   "pin":85216297,
   "certificate":"Egypt Trust CA G6",
   "doc":{
-  "issuer": {
-    "type": "B",
-    "id": "232430373",
-    "name": "السيد عبد الله الليثي و شركاه - الاسراء للاضاءه الحديثه",
-    "address": {
-      "branchID": "0",
-      "country": "EG",
-      "governate": "Egypt",
-      "regionCity": "Giza",
-      "street": "عطفة عبدالحق السنباطى الموسكى",
-      "buildingNumber": "1",
-      "postalCode": "",
-      "floor": "1",
-      "room": "",
-      "landmark": "",
-      "additionalInformation": "0"
-    }
-  },
-  "receiver": {
-    "type": "B",
-    "id": "308235878",
-    "name": "سيراميك اينوفا",
-    "address": {
-      "branchID": "0",
-      "country": "EG",
-      "governate": "Egypt",
-      "regionCity": "giza",
-      "street": "ق 2 اس م خدمات المجاورات التجمع الاول القاهرة الجديدة",
-      "buildingNumber": "1",
-      "postalCode": "",
-      "floor": "1",
-      "room": "",
-      "landmark": "",
-      "additionalInformation": "0"
-    }
-  },
-  "documentType": "I",
-  "documentTypeVersion": "1.0",
-  "dateTimeIssued": "2023-09-22T13:17:28Z",
-  "taxpayerActivityCode": "4759",
-  "extraDiscountAmount": 0,
-  "totalItemsDiscountAmount": 0,
-  "totalDiscountAmount": 0,
-  "netAmount": 5800,
-  "totalSalesAmount": 5800,
-  "internalID": "367",
-  "totalAmount": 6554,
-  "purchaseOrderReference": "0.0",
-  "purchaseOrderDescription": "0.0",
-  "salesOrderReference": "0.0",
-  "salesOrderDescription": "0.0",
-  "proformaInvoiceNumber": "0.0",
-  "payment": {
-    "bankName": "",
-    "bankAddress": "",
-    "bankAccountNo": "",
-    "bankAccountIBAN": "",
-    "swiftCode": "",
-    "terms": ""
-  },
-  "delivery": {
-    "approach": "0.0",
-    "packaging": "0.0",
-    "dateValidity": "2023-09-22T13:17:28Z",
-    "grossWeight": 0,
-    "netWeight": 0,
-    "terms": "0.0"
-  },
-  "taxTotals": [
-    {
-      "taxType": "T1",
-      "amount": 812
-    },
-    {
-      "taxType": "T4",
-      "amount": 58
-    }
-  ],
-  "invoiceLines": [
-    {
-      "description": "لمبة 120 سم ليد",
-      "itemType": "EGS",
-      "itemCode": "EG-232430373-10005573",
-      "unitType": "BOX",
-      "quantity": 25,
-      "internalCode": "EG-232430373-10005573",
-      "salesTotal": 3000,
-      "total": 3390,
-      "valueDifference": 0,
-      "totalTaxableFees": 0,
-      "netTotal": 3000,
-      "itemsDiscount": 0,
-      "unitValue": {
-        "currencySold": "EGP",
-        "amountEGP": 120
-      },
-      "discount": {
-        "rate": 0,
-        "amount": 0
-      },
-      "taxableItems": [
-        {
-          "taxType": "T1",
-          "amount": 420,
-          "subType": "V009",
-          "rate": 14
+        "issuer": {
+            "type": "B",
+            "id": "725973870",
+            "name": "حسين عبدة حسن بلوم",
+            "address": {
+                "branchID": "0",
+                "country": "EG",
+                "governate": "Egypt",
+                "regionCity": "Giza",
+                "street": "  6 حارة فايد ش الجمهورية - عابدين - القاهرة",
+                "buildingNumber": "1",
+                "postalCode": "",
+                "floor": "1",
+                "room": "",
+                "landmark": "",
+                "additionalInformation": "0"
+            }
         },
-        {
-          "taxType": "T4",
-          "amount": 30,
-          "subType": "W002",
-          "rate": 1
-        }
-      ]
-    },
-    {
-      "description": "لمبة 50 وات ليد",
-      "itemType": "EGS",
-      "itemCode": "EG-232430373-10005573",
-      "unitType": "BOX",
-      "quantity": 3,
-      "internalCode": "EG-232430373-10005573",
-      "salesTotal": 1050,
-      "total": 1186.5,
-      "valueDifference": 0,
-      "totalTaxableFees": 0,
-      "netTotal": 1050,
-      "itemsDiscount": 0,
-      "unitValue": {
-        "currencySold": "EGP",
-        "amountEGP": 350
-      },
-      "discount": {
-        "rate": 0,
-        "amount": 0
-      },
-      "taxableItems": [
-        {
-          "taxType": "T1",
-          "amount": 147,
-          "subType": "V009",
-          "rate": 14
+        "receiver": {
+            "type": "B",
+            "id": "442459076",
+            "name": "طاهر عبدالفتاح عبدالحليم خالد منصور",
+            "address": {
+                "branchID": "0",
+                "country": "EG",
+                "governate": "Egypt",
+                "regionCity": "Qalyubiyya",
+                "street": "كفر شبين شبين القناطر",
+                "buildingNumber": "1",
+                "postalCode": "",
+                "floor": "1",
+                "room": "",
+                "landmark": "",
+                "additionalInformation": "0"
+            }
         },
-        {
-          "taxType": "T4",
-          "amount": 10.5,
-          "subType": "W002",
-          "rate": 1
-        }
-      ]
-    },
-    {
-      "description": "باكو شريط لحام غزال",
-      "itemType": "EGS",
-      "itemCode": "EG-232430373-10005573",
-      "unitType": "BOX",
-      "quantity": 5,
-      "internalCode": "EG-232430373-10005573",
-      "salesTotal": 750,
-      "total": 847.5,
-      "valueDifference": 0,
-      "totalTaxableFees": 0,
-      "netTotal": 750,
-      "itemsDiscount": 0,
-      "unitValue": {
-        "currencySold": "EGP",
-        "amountEGP": 150
-      },
-      "discount": {
-        "rate": 0,
-        "amount": 0
-      },
-      "taxableItems": [
-        {
-          "taxType": "T1",
-          "amount": 105,
-          "subType": "V009",
-          "rate": 14
+        "documentType": "I",
+        "documentTypeVersion": "1.0",
+        "dateTimeIssued": "2023-09-27T08:36:29Z",
+        "taxpayerActivityCode": "4690",
+        "extraDiscountAmount": 0,
+        "totalItemsDiscountAmount": 0,
+        "totalDiscountAmount": 0,
+        "netAmount": 3685,
+        "totalSalesAmount": 3685,
+        "internalID": "128",
+        "totalAmount": 4200.9,
+        "purchaseOrderReference": "0.0",
+        "purchaseOrderDescription": "0.0",
+        "salesOrderReference": "0.0",
+        "salesOrderDescription": "0.0",
+        "proformaInvoiceNumber": "0.0",
+        "payment": {
+            "bankName": "",
+            "bankAddress": "",
+            "bankAccountNo": "",
+            "bankAccountIBAN": "",
+            "swiftCode": "",
+            "terms": ""
         },
-        {
-          "taxType": "T4",
-          "amount": 7.5,
-          "subType": "W002",
-          "rate": 1
-        }
-      ]
-    },
-    {
-      "description": "لمبة ثلاثية ",
-      "itemType": "EGS",
-      "itemCode": "EG-232430373-10005573",
-      "unitType": "BOX",
-      "quantity": 2,
-      "internalCode": "EG-232430373-10005573",
-      "salesTotal": 1000,
-      "total": 1130,
-      "valueDifference": 0,
-      "totalTaxableFees": 0,
-      "netTotal": 1000,
-      "itemsDiscount": 0,
-      "unitValue": {
-        "currencySold": "EGP",
-        "amountEGP": 500
-      },
-      "discount": {
-        "rate": 0,
-        "amount": 0
-      },
-      "taxableItems": [
-        {
-          "taxType": "T1",
-          "amount": 140,
-          "subType": "V009",
-          "rate": 14
+        "delivery": {
+            "approach": "0.0",
+            "packaging": "0.0",
+            "dateValidity": "2023-09-27T08:36:29Z",
+            "grossWeight": 0,
+            "netWeight": 0,
+            "terms": "0.0"
         },
-        {
-          "taxType": "T4",
-          "amount": 10,
-          "subType": "W002",
-          "rate": 1
-        }
-      ]
+        "taxTotals": [{
+                "taxType": "T1",
+                "amount": 515.9000000000001
+            },
+            {
+                "taxType": "T4",
+                "amount": 0
+            }
+        ],
+        "invoiceLines": [{
+                "description": "مسطرة 2 م ابيض",
+                "itemType": "EGS",
+                "itemCode": "EG-725973870-10005573",
+                "unitType": "BOX",
+                "quantity": 3,
+                "internalCode": "EG-725973870-10005573",
+                "salesTotal": 540,
+                "total": 615.6,
+                "valueDifference": 0,
+                "totalTaxableFees": 0,
+                "netTotal": 540,
+                "itemsDiscount": 0,
+                "unitValue": {
+                    "currencySold": "EGP",
+                    "amountEGP": 180
+                },
+                "discount": {
+                    "rate": 0,
+                    "amount": 0
+                },
+                "taxableItems": [{
+                        "taxType": "T1",
+                        "amount": 75.6,
+                        "subType": "V009",
+                        "rate": 14
+                    },
+                    {
+                        "taxType": "T4",
+                        "amount": 0,
+                        "subType": "W002",
+                        "rate": 0
+                    }
+                ]
+            },
+            {
+                "description": "مسطرة 1 م ابيض",
+                "itemType": "EGS",
+                "itemCode": "EG-725973870-10005573",
+                "unitType": "BOX",
+                "quantity": 3,
+                "internalCode": "EG-725973870-10005573",
+                "salesTotal": 270,
+                "total": 307.8,
+                "valueDifference": 0,
+                "totalTaxableFees": 0,
+                "netTotal": 270,
+                "itemsDiscount": 0,
+                "unitValue": {
+                    "currencySold": "EGP",
+                    "amountEGP": 90
+                },
+                "discount": {
+                    "rate": 0,
+                    "amount": 0
+                },
+                "taxableItems": [{
+                        "taxType": "T1",
+                        "amount": 37.8,
+                        "subType": "V009",
+                        "rate": 14
+                    },
+                    {
+                        "taxType": "T4",
+                        "amount": 0,
+                        "subType": "W002",
+                        "rate": 0
+                    }
+                ]
+            },
+            {
+                "description": "لمبة كاسة 4 ",
+                "itemType": "EGS",
+                "itemCode": "EG-725973870-10005573",
+                "unitType": "BOX",
+                "quantity": 2,
+                "internalCode": "EG-725973870-10005573",
+                "salesTotal": 140,
+                "total": 159.6,
+                "valueDifference": 0,
+                "totalTaxableFees": 0,
+                "netTotal": 140,
+                "itemsDiscount": 0,
+                "unitValue": {
+                    "currencySold": "EGP",
+                    "amountEGP": 70
+                },
+                "discount": {
+                    "rate": 0,
+                    "amount": 0
+                },
+                "taxableItems": [{
+                        "taxType": "T1",
+                        "amount": 19.6,
+                        "subType": "V009",
+                        "rate": 14
+                    },
+                    {
+                        "taxType": "T4",
+                        "amount": 0,
+                        "subType": "W002",
+                        "rate": 0
+                    }
+                ]
+            },
+            {
+                "description": "تراك 30 وات بولو ابيض",
+                "itemType": "EGS",
+                "itemCode": "EG-725973870-10005573",
+                "unitType": "BOX",
+                "quantity": 2,
+                "internalCode": "EG-725973870-10005573",
+                "salesTotal": 550,
+                "total": 627,
+                "valueDifference": 0,
+                "totalTaxableFees": 0,
+                "netTotal": 550,
+                "itemsDiscount": 0,
+                "unitValue": {
+                    "currencySold": "EGP",
+                    "amountEGP": 275
+                },
+                "discount": {
+                    "rate": 0,
+                    "amount": 0
+                },
+                "taxableItems": [{
+                        "taxType": "T1",
+                        "amount": 77,
+                        "subType": "V009",
+                        "rate": 14
+                    },
+                    {
+                        "taxType": "T4",
+                        "amount": 0,
+                        "subType": "W002",
+                        "rate": 0
+                    }
+                ]
+            },
+            {
+                "description": "ابليك 4102",
+                "itemType": "EGS",
+                "itemCode": "EG-725973870-10005573",
+                "unitType": "BOX",
+                "quantity": 1,
+                "internalCode": "EG-725973870-10005573",
+                "salesTotal": 215,
+                "total": 245.1,
+                "valueDifference": 0,
+                "totalTaxableFees": 0,
+                "netTotal": 215,
+                "itemsDiscount": 0,
+                "unitValue": {
+                    "currencySold": "EGP",
+                    "amountEGP": 215
+                },
+                "discount": {
+                    "rate": 0,
+                    "amount": 0
+                },
+                "taxableItems": [{
+                        "taxType": "T1",
+                        "amount": 30.1,
+                        "subType": "V009",
+                        "rate": 14
+                    },
+                    {
+                        "taxType": "T4",
+                        "amount": 0,
+                        "subType": "W002",
+                        "rate": 0
+                    }
+                ]
+            },
+            {
+                "description": "كشاف فلات 50 وات",
+                "itemType": "EGS",
+                "itemCode": "EG-725973870-10005573",
+                "unitType": "BOX",
+                "quantity": 2,
+                "internalCode": "EG-725973870-10005573",
+                "salesTotal": 650,
+                "total": 741,
+                "valueDifference": 0,
+                "totalTaxableFees": 0,
+                "netTotal": 650,
+                "itemsDiscount": 0,
+                "unitValue": {
+                    "currencySold": "EGP",
+                    "amountEGP": 325
+                },
+                "discount": {
+                    "rate": 0,
+                    "amount": 0
+                },
+                "taxableItems": [{
+                        "taxType": "T1",
+                        "amount": 91,
+                        "subType": "V009",
+                        "rate": 14
+                    },
+                    {
+                        "taxType": "T4",
+                        "amount": 0,
+                        "subType": "W002",
+                        "rate": 0
+                    }
+                ]
+            },
+            {
+                "description": "اسبوط مراية ابيض 801",
+                "itemType": "EGS",
+                "itemCode": "EG-725973870-10005573",
+                "unitType": "BOX",
+                "quantity": 6,
+                "internalCode": "EG-725973870-10005573",
+                "salesTotal": 1320,
+                "total": 1504.8,
+                "valueDifference": 0,
+                "totalTaxableFees": 0,
+                "netTotal": 1320,
+                "itemsDiscount": 0,
+                "unitValue": {
+                    "currencySold": "EGP",
+                    "amountEGP": 220
+                },
+                "discount": {
+                    "rate": 0,
+                    "amount": 0
+                },
+                "taxableItems": [{
+                        "taxType": "T1",
+                        "amount": 184.8,
+                        "subType": "V009",
+                        "rate": 14
+                    },
+                    {
+                        "taxType": "T4",
+                        "amount": 0,
+                        "subType": "W002",
+                        "rate": 0
+                    }
+                ]
+            }
+        ]
     }
-  ]
-}
 }
 
 
