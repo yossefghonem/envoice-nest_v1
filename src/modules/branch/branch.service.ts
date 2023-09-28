@@ -9,47 +9,51 @@ import { UserService } from '../user/user.service';
 
 @Injectable()
 export class BranchService {
-    constructor(
-        @InjectRepository(Branch) private readonly repo: Repository<Branch>
-        , private userService: UserService
-    ) { }
+  constructor(
+    @InjectRepository(Branch) private readonly repo: Repository<Branch>,
+    private userService: UserService,
+  ) {}
 
-    async create(branch: CreateBranchDto, user: JwtUser) {
-        // const userDb = await this.userService.findOne(+user.id)
-        console.log(branch);
+  async create(branch: CreateBranchDto, user: JwtUser) {
+    // const userDb = await this.userService.findOne(+user.id)
+    console.log(branch);
 
-        // return userDb;
-        const address: Address = branch.address
-        const newbranch: Branch = {
-            name_ar: branch.name_ar,
-            name_en: branch.name_en,
-            code: branch.code,
-            invoiceSerial: branch.invoiceSerial,
-            address: address,
-            company: { id: +branch.company }
-        }
+    // return userDb;
+    const address: Address = branch.address;
+    const newbranch: Branch = {
+      name_ar: branch.name_ar,
+      name_en: branch.name_en,
+      code: branch.code,
+      invoiceSerial: branch.invoiceSerial,
+      address: address,
+      company: { id: +branch.company },
+    };
 
-        return await this.repo.save(newbranch);
-    }
+    return await this.repo.save(newbranch);
+  }
 
-    async findAll(user: JwtUser) {
-        let branches = await this.repo.createQueryBuilder("b")
-            .leftJoinAndSelect('b.company', 'company')
-            // .leftJoinAndSelect('company.user', 'user')
-            // .where('user.id = :id', { 'id': user.id })
-            .getMany()
-        return branches
-    }
+  async findAll(user: JwtUser) {
+    let branches = await this.repo
+      .createQueryBuilder('b')
+      .leftJoinAndSelect('b.company', 'company')
+      .leftJoinAndSelect('b.address', 'address')
+      .leftJoinAndSelect('address.country', 'coutry')
+      // .where('user.id = :id', { 'id': user.id })
+      .getMany();
+    console.log(branches);
 
-    async findOne(id: number) {
-        return await this.repo.findOneBy({ id: id })
-    }
+    return branches;
+  }
 
-    async update(id: number, branch: UpdateBranchDto) {
-        return await this.repo.update(id, branch)
-    }
+  async findOne(id: number) {
+    return await this.repo.findOneBy({ id: id });
+  }
 
-    async remove(id: number) {
-        return await this.repo.delete(id)
-    }
+  async update(id: number, branch: UpdateBranchDto) {
+    return await this.repo.update(id, branch);
+  }
+
+  async remove(id: number) {
+    return await this.repo.delete(id);
+  }
 }

@@ -1,49 +1,52 @@
-import {
-    Column,
-    Entity,
-} from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 import { OBaseEntity } from './OBaseEntity';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Country } from './country.entity';
 
 @Entity()
 export class Address extends OBaseEntity {
-    @ApiProperty()
-    @Column({})
-    country?: string
+  //   @ApiProperty()
+  //   @Column({})
+  //   country?: string;
 
-    @ApiProperty()
-    @Column({})
-    governerate?: string
+  @ApiPropertyOptional({ type: () => Country })
+  @OneToOne(() => Country, (r) => r.id, { eager: true })
+  @JoinColumn({ name: 'countryId' })
+  country?: Country;
 
-    @ApiProperty()
-    @Column({})
-    regionCity?: string
+  @ApiProperty()
+  @Column({})
+  governerate?: string;
 
-    @ApiProperty()
-    @Column({})
-    street?: string
+  @ApiProperty()
+  @Column({})
+  regionCity?: string;
 
-    @ApiProperty()
-    @Column({})
-    buildingNumber?: string
+  @ApiProperty()
+  @Column({})
+  street?: string;
 
-    @ApiProperty()
-    @Column({})
-    postalCode?: string
+  @ApiProperty()
+  @Column({})
+  buildingNumber?: string;
 
-    @ApiProperty()
-    @Column({})
-    floor?: string
+  @ApiProperty()
+  @Column({})
+  postalCode?: string;
 
-    @ApiProperty()
-    @Column({})
-    landmark?: string
+  @ApiProperty()
+  @Column({})
+  floor?: string;
 
-    @ApiProperty()
-    @Column({})
-    additionalInformation?: string
+  @ApiProperty()
+  @Column({})
+  landmark?: string;
 
-    // @ApiPropertyOptional({ type: () => Client })
-    // @OneToMany(() => Client, e => e.address)
-    // client?: Client;
+  @ApiProperty()
+  @Column({})
+  additionalInformation?: string;
+
+  // @ApiPropertyOptional({ type: () => Client })
+  // @OneToMany(() => Client, e => e.address)
+  // client?: Client;
 }

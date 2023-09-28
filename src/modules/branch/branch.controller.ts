@@ -20,7 +20,7 @@ export class BranchController {
   @Get("all")
   // @UseGuards(JwtAuthGuard)
   findAll(@Req() req: any) {
-    return this.branchService.findAll(req.user);
+    return  this.branchService.findAll(req.user);
   }
 
   @Get(':id')

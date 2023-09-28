@@ -3,16 +3,16 @@ import { StaticService } from './static.service';
 import { ApiTags } from '@nestjs/swagger';
 
 @Controller('static')
-@ApiTags("static")
+@ApiTags('static')
 export class StaticController {
-  constructor(private readonly staticService: StaticService) { }
+  constructor(private readonly staticService: StaticService) {}
 
   @Post('seedActivity')
   create() {
     return this.staticService.seedActivites();
   }
 
-  @Get("activities")
+  @Get('activities')
   findAll() {
     return this.staticService.findAll();
   }
@@ -22,7 +22,7 @@ export class StaticController {
     return this.staticService.seedGpcCode();
   }
 
-  @Get("gpc")
+  @Get('gpc')
   findAllGpc(@Query() search: string) {
     return this.staticService.findAllGpc(search);
   }
@@ -33,7 +33,7 @@ export class StaticController {
     return this.staticService.seedUnits();
   }
 
-  @Get("/units")
+  @Get('/units')
   findAllUnits() {
     return this.staticService.findAllUnits();
   }
@@ -44,7 +44,7 @@ export class StaticController {
     return this.staticService.seedTax();
   }
 
-  @Get("/taxes")
+  @Get('/taxes')
   findAllTaxes() {
     return this.staticService.findAllTaxes();
   }
@@ -55,8 +55,19 @@ export class StaticController {
     return this.staticService.seedSubTax();
   }
 
-  @Get("/sub_tax")
+  @Get('/sub_tax')
   findAllSubTaxes() {
     return this.staticService.findAllSubTax();
+  }
+
+  // =================tax_type============================
+  @Post('country')
+  createCountry() {
+    return this.staticService.seedCountry();
+  }
+
+  @Get('/country')
+  findAllCountry() {
+    return this.staticService.findAllCountry();
   }
 }

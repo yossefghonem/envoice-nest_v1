@@ -7,11 +7,21 @@ import { GpcCode } from '../../entities/gpcCode.entity';
 import { Units } from '../../entities/units.entity';
 import { Tax } from '../../entities/tax-type.entity';
 import { SubTax } from '../../entities/sub_tax.entity';
+import { Country } from 'src/entities/country.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Activities, GpcCode, Units, Tax, SubTax])],
+  imports: [
+    TypeOrmModule.forFeature([
+      Activities,
+      GpcCode,
+      Units,
+      Tax,
+      SubTax,
+      Country,
+    ]),
+  ],
   controllers: [StaticController],
   providers: [StaticService],
-  exports: [StaticService]
+  exports: [StaticService],
 })
-export class StaticModule { }
+export class StaticModule {}
