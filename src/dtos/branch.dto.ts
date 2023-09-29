@@ -2,7 +2,7 @@ import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { Country } from 'src/entities/country.entity';
 
 export class AddressDto {
-  @ApiProperty({})
+  @ApiProperty({ type: Country })
   country?: Country;
 
   @ApiProperty({})

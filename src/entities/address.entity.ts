@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from 'typeorm';
 import { OBaseEntity } from './OBaseEntity';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Country } from './country.entity';
@@ -10,8 +10,8 @@ export class Address extends OBaseEntity {
   //   country?: string;
 
   @ApiPropertyOptional({ type: () => Country })
-  @OneToOne(() => Country, (r) => r.id, { eager: true })
-  @JoinColumn({ name: 'countryId' })
+  @ManyToOne(() => Country, (r) => r.id, { eager: true })
+  // @JoinColumn({ name: 'countryId' })
   country?: Country;
 
   @ApiProperty()
