@@ -35,6 +35,7 @@ export class AuthService {
           certificate: user.company?.certificate,
           access_token: user.company?.clientSecret2,
           dllLibPath: user.company?.dllLibPath,
+          companyId: user.company?.id,
         },
         { expiresIn: '1h' },
       ),

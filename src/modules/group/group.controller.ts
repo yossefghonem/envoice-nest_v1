@@ -1,21 +1,34 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Req,
+} from '@nestjs/common';
 import { GroupService } from './group.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateGroupDto, UpdateGroupDto } from '../../dtos/group.dto';
+import { Role } from 'src/guards/roles.decorator';
+import { UserRole } from 'src/enums/userRole.enum';
 
 @Controller('group')
 @ApiTags('group')
 export class GroupController {
-  constructor(private readonly groupService: GroupService) { }
+  constructor(private readonly groupService: GroupService) {}
 
+  @Role([UserRole.ADMIN, UserRole.SUPERADMIN, UserRole.SUBUSER, UserRole.USER])
   @Post()
-  create(@Body() createGroupDto: CreateGroupDto) {
-    return this.groupService.create(createGroupDto);
+  create(@Body() createGroupDto: CreateGroupDto, @Req() req: any) {
+    return this.groupService.create(createGroupDto, req.user);
   }
 
-  @Get("all")
-  findAll() {
-    return this.groupService.findAll();
+  @Role([UserRole.ADMIN, UserRole.SUPERADMIN, UserRole.SUBUSER, UserRole.USER])
+  @Get('all')
+  findAll(@Req() req: any) {
+    return this.groupService.findAll(req.user);
   }
 
   @Get(':id')

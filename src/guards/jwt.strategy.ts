@@ -17,6 +17,7 @@ export interface JwtUser {
   certificate: string;
   dllLibPath: string;
   access_token: string;
+  companyId: string;
 }
 
 @Injectable()
@@ -48,8 +49,9 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       client_secret: payload.client_secret,
       certificate: payload.certificate,
       dllLibPath: payload.dllLibPath,
-      access_token: payload.access_token
-    }
+      access_token: payload.access_token,
+      companyId: payload.companyId,
+    };
 
     return tokenPayload;
   }
