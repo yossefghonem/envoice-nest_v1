@@ -17,6 +17,7 @@ import { LicenseModule } from './modules/license/license.module';
 import { InvoiceModule } from './modules/invoice/invoice.module';
 import { IntegrationModule } from './modules/integration/integration.module';
 import { CacheModule } from '@nestjs/cache-manager';
+import { AddressModule } from './modules/address/address.module';
 // import session from './config/session.config';
 
 const AllModules = [
@@ -62,6 +63,7 @@ const AllModules = [
     //FileModule,
     InvoiceModule,
     IntegrationModule,
+    AddressModule,
 
     // ServeStaticModule.forRoot({
     //   rootPath: join(__dirname, '..', 'static'),

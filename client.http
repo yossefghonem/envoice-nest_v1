@@ -365,8 +365,8 @@ Content-Type: application/json
 POST https://id.eta.gov.eg/connect/token
 Content-Type: application/x-www-form-urlencoded
 
-client_id=e7d8dc6a-7fa8-49b8-9726-48332fe485af
-&client_secret=eedf9a33-bc60-417e-99cc-bbf02faff8be
+client_id=cbc0d4fe-7863-4283-8bf7-e6b6f298f3ab
+&client_secret=9a1f7eb3-501a-48f3-86b5-12d0cea17841
 &grant_type=client_credentials
 &scope=InvoicingAPI
 

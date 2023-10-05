@@ -20,8 +20,9 @@ export class BranchService {
 
     // return userDb;
 
+    // branch.address.country = { id: +branch.address.country };
+
     const address: Address = branch.address;
-    // address.country = { id: +branch.address.country };
 
     const newbranch: Branch = {
       name_ar: branch.name_ar,
@@ -36,7 +37,7 @@ export class BranchService {
   }
 
   async findAll(user: JwtUser) {
-    let branches = await this.repo
+    const branches = await this.repo
       .createQueryBuilder('b')
       .leftJoinAndSelect('b.company', 'company')
       .leftJoinAndSelect('b.address', 'address')

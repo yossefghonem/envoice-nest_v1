@@ -10,7 +10,7 @@ export class Address extends OBaseEntity {
   //   country?: string;
 
   @ApiPropertyOptional({ type: () => Country })
-  @ManyToOne(() => Country, (r) => r.id, { eager: true })
+  @ManyToOne(() => Country, (r) => r.id, { eager: true ,cascade:true})
   // @JoinColumn({ name: 'countryId' })
   country?: Country;
 

@@ -57,6 +57,8 @@ export class AuthService {
         const access_token = await this.integrationService.invoiceLogin(
           loginBody,
         );
+        console.log(access_token);
+        
         await this.companyService.update(userStored.company.id, {
           clientSecret2: access_token,
         });

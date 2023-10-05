@@ -1,5 +1,10 @@
 import { HttpService } from '@nestjs/axios';
-import { BadRequestException, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InvoiceLoginDto } from './dtos/invoiceLogin.dto';
 import { Cache } from 'cache-manager';
 import * as path from 'path';
@@ -22,7 +27,7 @@ export class IntegrationService {
     private http: HttpService,
     // @Inject(CACHE_MANAGER) private cacheManager: Cache,
     private readonly invoiceService: InvoiceService,
-  ) { }
+  ) {}
 
   async invoiceLogin(data: InvoiceLoginDto) {
     console.log('====================================');
@@ -35,9 +40,9 @@ export class IntegrationService {
       const loginBody = {
         client_id: data.client_id,
         client_secret: data.client_secret,
-        grant_type: "client_credentials",
-        scope: "InvoicingAPI"
-      }
+        grant_type: 'client_credentials',
+        scope: 'InvoicingAPI',
+      };
 
       return await firstValueFrom(
         this.http
@@ -52,14 +57,14 @@ export class IntegrationService {
               if (response.status === 200) {
                 // save login data to session key:value
                 // this.storeToken(user.id, response.data.token);
-                console.log(response?.data)
+                console.log(response?.data);
                 return response.data?.access_token;
               }
             }),
           ),
       );
     } catch (error) {
-      console.error('Error during invoice login:', error?.response);
+      console.error('Error during invoice login:', error);
       throw new BadRequestException(error?.response?.data);
     }
   }
@@ -73,19 +78,28 @@ export class IntegrationService {
   async sendInvoice(id: number, user: JwtUser) {
     // get invoice by id
     const document = await this.invoiceService.findOne(id);
-console.log(document)
+    console.log(document);
     // const token = await this.getToken(user.id);
     // if token expired or empty re-try login
     // if(!token) await this.invoiceLogin({user})
     // using exica generate signiture
-    await this.generateSigniture(document, user.pin, user.certificate, user.dllLibPath);
+    await this.generateSigniture(
+      document,
+      user.pin,
+      user.certificate,
+      user.dllLibPath,
+    );
 
     // call integration service
 
     try {
       console.log('start sending request ................');
       const docs = await this.requireUncached(
-        path.join(process.cwd(), 'src/modules/integration', 'FullSignedDocument.json'),
+        path.join(
+          process.cwd(),
+          'src/modules/integration',
+          'FullSignedDocument.json',
+        ),
       );
       // return res.send(docs)
       const docSub = await firstValueFrom(
@@ -104,28 +118,38 @@ console.log(document)
             map((response) => {
               if (response?.status === 200) {
                 // save login data to session
-                console.log("sent results ???",response)
+                console.log('sent results ???', response);
                 return response;
               }
             }),
           ),
       );
-console.log("final for submit",docSub)
+      console.log('final for submit', docSub);
       // return sub;
       // return res.status(201).json(sub.data)
       // update Invoice status
       // check submission status ...
-      return await this.invoiceService.update(id, { status: InvoiceStatus.ACCEPTED })
+      return await this.invoiceService.update(id, {
+        status: InvoiceStatus.ACCEPTED,
+      });
     } catch (error) {
       console.log('caaaatche', error.response.data.error);
       // return res.status(400).json(error.response.data)
     }
   }
 
-  async generateSigniture(doc: any, pin: string, certificate: string, lib = 'SignatureP11.dll') {
+  async generateSigniture(
+    doc: any,
+    pin: string,
+    certificate: string,
+    lib = 'SignatureP11.dll',
+  ) {
     try {
       console.log({
-        pin,certificate,lib,doc
+        pin,
+        certificate,
+        lib,
+        doc,
       });
       const out = execFileSync(
         path.join(
@@ -138,14 +162,14 @@ console.log("final for submit",docSub)
           pin,
           certificate,
           JSON.stringify(doc),
-          lib
-        ]
+          lib,
+        ],
       );
-      const responce = await out.toString('utf-8')
-      return responce
+      const responce = await out.toString('utf-8');
+      return responce;
     } catch (error) {
-      console.log("error in generate", error.message.toString())
-      throw new NotFoundException('cant generate signature', error)
+      console.log('error in generate', error.message.toString());
+      throw new NotFoundException('cant generate signature', error);
     }
   }
 
