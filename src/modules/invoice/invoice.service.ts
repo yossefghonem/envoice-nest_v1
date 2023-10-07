@@ -6,6 +6,7 @@ import { CreateInvoiceDto, EnvoiceResponseDto, InvoicelineDto, UpdateInvoiceDto 
 import { InvoiceLine } from '../../entities/invoice-line.entity';
 import { TaxbleItem } from 'src/entities/taxbleItems.entity';
 import { ItemTypes } from '../../enums/itemTypes.enum';
+import { JwtUser } from 'src/guards/jwt.strategy';
 
 @Injectable()
 export class InvoiceService {
@@ -22,7 +23,7 @@ export class InvoiceService {
   totalTaxableFees
   itemsDiscount
   */
-  async create(invoiceDto: CreateInvoiceDto) {
+  async create(invoiceDto: CreateInvoiceDto,user:JwtUser) {
     console.log('====================================');
     console.log(invoiceDto);
     console.log('====================================');
@@ -32,13 +33,13 @@ export class InvoiceService {
       version: invoiceDto.version,
       // docTtotalDiscountAmount: invoiceDto.docTtotalDiscountAmount,
       totalSalesAmount: invoiceDto.totalSalesAmount||0,
-      internalID: invoiceDto.internalID||'1',
+      internalID: invoiceDto.internalID ||'1',
       purchaseOrderReference: invoiceDto.purchaseOrderReference,
       purchaseOrderDescription: invoiceDto.purchaseOrderDescription,
       salesOrderReference: invoiceDto.salesOrderReference,
       salesOrderDescription: invoiceDto.salesOrderDescription,
       proformaInvoiceNumber: invoiceDto.proformaInvoiceNumber,
-      user: { id: 2 },
+      user: { id: +user.id },
       client: { id: +invoiceDto.client },
       invoice_line: invoiceDto.lines.map((line) => {
         const salesTotal = line.price * line.quantity
@@ -58,7 +59,7 @@ export class InvoiceService {
           taxbleItem: line.taxbleItem.map((tax) => {
             return {
               amount: tax.rate * (salesTotal - discountA),
-              rate: 0.2,
+              rate: tax.rate,
               taxType: tax.taxId,
               subTax: tax.subTaxId,
             } as TaxbleItem;
@@ -93,7 +94,6 @@ export class InvoiceService {
     const totalAmountT1 = totals.reduce((acc, line) => acc + line.amountT1, 0);
     const totalAmountT4 = totals.reduce((acc, line) => acc + line.amountT4, 0);
     const totalNetTotal = totals.reduce((acc, line) => acc + line.netTotal, 0);
-    console.log("2222222",totalNetTotal);
     
     // .reduce((acc, line) => acc + line, 0);
 
@@ -172,30 +172,31 @@ export class InvoiceService {
           itemType: ItemTypes[line.item.type],
           itemCode: line.item.code,
           unitType: line.item.unit,
-          quantity: line.quantity,
+          quantity: +line.quantity,
           internalCode: line.internalCode,
-          salesTotal: line.salesTotal,
+          salesTotal: +line.salesTotal,
           netTotal:line.salesTotal - line.discount_amount,
           total:( Number(line.netTotal) + Number(amount_of_t1)) - Number(amount_of_t4),
           valueDifference: 0,
           totalTaxableFees: 0,
           itemsDiscount: 0,
           unitValue: {
-            currencySold: envoiceDb.currency,
-            amountEGP: line.price,
-            amountSold: 0,
-            currencyExchangeRate: 1
+            currencySold:'EGP', 
+            // envoiceDb.currency,
+            amountEGP: +line.price,
+            // amountSold: 0,
+            // currencyExchangeRate: 1
           },
           discount: {
-            rate: line.discoundRate,
-            amount: line.discoundRate * (+line.item.price * line.quantity)
+            rate: +line.discoundRate,
+            amount: +line.discoundRate * (+line.item.price * line.quantity)
           },
           taxableItems: line.taxbleItem.map(tax => {
             return {
               taxType: tax.taxType.code,
-              amount: tax.amount,
+              amount: +tax.amount,
               subType: tax.subTax.code,
-              rate:+tax.rate
+              rate:  tax.rate
             }
           }),
         }as InvoicelineDto

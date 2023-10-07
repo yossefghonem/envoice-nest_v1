@@ -17,7 +17,7 @@ export class Invoice extends OBaseEntity {
     @Column({default:'I'})
     documentType?: string;
    
-    @Column({default:'EG'})
+    @Column({default:'EGP'})
     currency?: string;
 
     @Column({ default: '1.0' })

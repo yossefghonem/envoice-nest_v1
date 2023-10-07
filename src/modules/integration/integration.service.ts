@@ -78,8 +78,8 @@ export class IntegrationService {
   async sendInvoice(id: number, user: JwtUser) {
     // get invoice by id
     const document = await this.invoiceService.findOne(id);
-    console.log(document);
-    return document;
+    // console.log(document);
+    // return document;
     // const token = await this.getToken(user.id);
     // if token expired or empty re-try login
     // if(!token) await this.invoiceLogin({user})
@@ -117,15 +117,16 @@ export class IntegrationService {
           )
           .pipe(
             map((response) => {
-              if (response?.status === 200) {
+              console.log('sent results ???', response);
+              // if (response?.status === 200) {
                 // save login data to session
-                console.log('sent results ???', response);
                 return response;
-              }
+              // }
             }),
           ),
       );
-      console.log('final for submit', docSub);
+      console.log('final for submit', docSub.data);
+      return docSub.data
       // return sub;
       // return res.status(201).json(sub.data)
       // update Invoice status

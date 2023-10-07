@@ -10,9 +10,10 @@ import { Role } from 'src/guards/roles.decorator';
 export class InvoiceController {
   constructor(private readonly invoiceService: InvoiceService) { }
 
+  @Role([UserRole.USER])
   @Post()
-  create(@Body() daat: CreateInvoiceDto) {
-    return this.invoiceService.create(daat);
+  create(@Body() daat: CreateInvoiceDto,@Req() req:any) {
+    return this.invoiceService.create(daat, req.user);
   }
 
   @Get()
