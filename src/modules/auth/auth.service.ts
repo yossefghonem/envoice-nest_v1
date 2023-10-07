@@ -20,7 +20,7 @@ export class AuthService {
     private integrationService: IntegrationService,
     private userService: UserService,
     private companyService: CompanyService,
-  ) { }
+  ) {}
   sign(user: User) {
     return {
       ...user,
@@ -58,15 +58,12 @@ export class AuthService {
         const access_token = await this.integrationService.invoiceLogin(
           loginBody,
         );
-        console.log(access_token);
-        
+
         await this.companyService.update(userStored.company.id, {
           clientSecret2: access_token,
         });
         userStored = await this.userService.findUser(body);
       }
-
-      console.log(userStored);
     } catch (error) {
       throw new UnauthorizedException(error.message, error.code);
     }

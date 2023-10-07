@@ -79,6 +79,7 @@ export class IntegrationService {
     // get invoice by id
     const document = await this.invoiceService.findOne(id);
     console.log(document);
+    return document;
     // const token = await this.getToken(user.id);
     // if token expired or empty re-try login
     // if(!token) await this.invoiceLogin({user})
