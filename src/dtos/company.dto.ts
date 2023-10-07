@@ -1,31 +1,34 @@
 import { ApiProperty, PartialType } from "@nestjs/swagger";
 
 export class CreateCompanyDto {
-    @ApiProperty({})
-    name?: string;
+  @ApiProperty({
+    type: String,
+  })
+  name: string;
 
-    @ApiProperty({})
-    taxNumber?: string;
-    @ApiProperty({})
-    pin?: number;
+  @ApiProperty({})
+  taxNumber: string;
 
-    @ApiProperty({})
-    dllLibPath?: string;
+  @ApiProperty({})
+  pin: number;
 
-    @ApiProperty({})
-    certificate?: string;
+  @ApiProperty({})
+  dllLibPath?: string;
 
-    @ApiProperty({})
-    activity?: string;
+  @ApiProperty({})
+  certificate?: string;
 
-    @ApiProperty({})
-    clientId: string;
+  @ApiProperty({})
+  activity?: string;
 
-    @ApiProperty({})
-    clientSecret1?: string;
+  @ApiProperty({})
+  clientId: string;
 
-    @ApiProperty({})
-    clientSecret2?: string;
+  @ApiProperty({})
+  clientSecret1?: string;
+
+  @ApiProperty({})
+  clientSecret2?: string;
 }
 
 export class UpdateCompanyDto extends PartialType(CreateCompanyDto) { }

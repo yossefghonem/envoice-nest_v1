@@ -24,24 +24,24 @@ export class LicenseService {
     let licDb = await this.repo.save({
       startDate: body.startDate,
       endDate: body.endDate,
-      company: { id: +body.companyId }
-    })
+      company: { id: +body.companyId },
+    });
     return this.repo.findOneBy({ id: licDb.id });
   }
 
   findAll() {
-    return this.repo.find()
+    return this.repo.find();
   }
 
   findOne(id: number) {
-    return this.repo.findOneBy({ id })
+    return this.repo.findOneBy({ id });
   }
 
   update(id: number, updateLicenseDto: UpdateLicenseDto) {
-    return this.repo.update(id, updateLicenseDto)
+    return this.repo.update(id, updateLicenseDto);
   }
 
   remove(id: number) {
-    return this.repo.delete(id)
+    return this.repo.delete(id);
   }
 }

@@ -25,56 +25,56 @@ export class CompanyService {
         }
     }
 
-    async getDefaultCompany(): Promise<Company> {
-        const company = await this.repo.findOneBy({ taxNumber: '20150012' })
-        return company
-    }
+  async getDefaultCompany(): Promise<Company> {
+    const company = await this.repo.findOneBy({ taxNumber: '20150012' });
+    return company;
+  }
 
-    async create(body: CreateCompanyDto) {
-        console.log('====================================');
-        console.log(body);
-        console.log('====================================');
-        const newComp: Company = {
-            name: body.name,
-            taxNumber: body.taxNumber,
-            pin: +body.pin,
-            dllLibPath: body.dllLibPath,
-            certificate: body.certificate,
-            clientId: body.clientId,
-            clientSecret1: body.clientSecret1,
-            clientSecret2: body.clientSecret2,
-            activity: { id: +body.activity },
-        }
+  async create(body: CreateCompanyDto) {
+    console.log('====================================');
+    console.log(body);
+    console.log('====================================');
+    const newComp: Company = {
+      name: body.name,
+      taxNumber: body.taxNumber,
+      pin: +body.pin,
+      dllLibPath: body.dllLibPath,
+      certificate: body.certificate,
+      clientId: body.clientId,
+      clientSecret1: body.clientSecret1,
+      clientSecret2: body.clientSecret2,
+      activity: { id: +body.activity },
+    };
 
-        const company = await this.repo.save(newComp)
-        console.log('====================================');
-        console.log(company);
-        console.log('====================================');
-        return this.repo.findOneBy({ id: company.id })
-    }
+    const company = await this.repo.save(newComp);
+    console.log('====================================');
+    console.log(company);
+    console.log('====================================');
+    return this.repo.findOneBy({ id: company.id });
+  }
 
-    async findAll(user: JwtUser) {
-        return await this.repo.find()
-        // if (user.role === UserRole.SUPERADMIN)
-        //     return await this.repo.find();
-        // return await this.repo.createQueryBuilder("c")
-        //     .leftJoin("c.user", "user")
-        //     .leftJoinAndSelect("c.activity", "activities")
-        //     .where("user.id = :id", { id: user.id })
-        //     .getMany()
-    }
+  async findAll(user: JwtUser) {
+    return await this.repo.find();
+    // if (user.role === UserRole.SUPERADMIN)
+    //     return await this.repo.find();
+    // return await this.repo.createQueryBuilder("c")
+    //     .leftJoin("c.user", "user")
+    //     .leftJoinAndSelect("c.activity", "activities")
+    //     .where("user.id = :id", { id: user.id })
+    //     .getMany()
+  }
 
-    findOne(id: number) {
-        return this.repo.findOneBy({ id: id });
-    }
+  findOne(id: number) {
+    return this.repo.findOneBy({ id: id });
+  }
 
-    update(id: number, comp: UpdateCompanyDto) {
-        console.log({ comp });
+  update(id: number, comp: UpdateCompanyDto) {
+    console.log({ comp });
 
-        return this.repo.update(id, comp);
-    }
+    return this.repo.update(id, comp);
+  }
 
-    remove(id: number) {
-        return this.repo.delete(id);
-    }
+  remove(id: number) {
+    return this.repo.delete(id);
+  }
 }

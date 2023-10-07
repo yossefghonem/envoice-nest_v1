@@ -1,21 +1,34 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Req,
+} from '@nestjs/common';
 import { ItemService } from './item.service';
 import { CreateItemDto, UpdateItemDto } from '../../dtos/items.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { Role } from 'src/guards/roles.decorator';
+import { UserRole } from 'src/enums/userRole.enum';
 
-@ApiTags("Items")
+@ApiTags('Items')
 @Controller('item')
 export class ItemController {
-  constructor(private readonly itemService: ItemService) { }
+  constructor(private readonly itemService: ItemService) {}
 
+  @Role([UserRole.USER])
   @Post()
-  create(@Body() createItemDto: CreateItemDto) {
-    return this.itemService.create(createItemDto);
+  create(@Body() createItemDto: CreateItemDto, @Req() req: any) {
+    return this.itemService.create(createItemDto, req.user);
   }
 
+  @Role([UserRole.USER])
   @Get('all')
-  findAll() {
-    return this.itemService.findAll();
+  findAll(@Req() req: any) {
+    return this.itemService.findAll(req.user);
   }
 
   @Get(':id')

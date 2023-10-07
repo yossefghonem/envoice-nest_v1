@@ -54,17 +54,17 @@ export class UserService {
 
   async findUser(body: LoginDto): Promise<User | PromiseLike<User>> {
     const existsUser = await this.repo.findOne({
-      where: [{ email: body.email }]
+      where: [{ email: body.email }],
     });
 
     if (!existsUser) {
-      throw new UnauthorizedException('User Not Found')
+      throw new UnauthorizedException('User Not Found');
     }
     if (existsUser.password !== body.password)
       throw new UnauthorizedException('check your credintials');
     //remove password from responce
-    delete existsUser.password
-    existsUser["status"] = true
+    delete existsUser.password;
+    existsUser['status'] = true;
     return existsUser;
   }
 
@@ -78,10 +78,10 @@ export class UserService {
       phone: user.phone,
       company: { id: +user.company },
       branch: { id: +user.branch },
-      role: { id: +user.role }
-    }
+      role: { id: +user.role },
+    };
 
-    const userDb = await this.repo.save(newUser)
+    const userDb = await this.repo.save(newUser);
     return this.repo.findOneBy({ id: userDb.id });
   }
 
@@ -104,14 +104,15 @@ export class UserService {
         'branch.name_ar',
         'branch.id',
         'role.id',
-      ]).getMany()
-    return users
+      ])
+      .getMany();
+    return users;
   }
 
   async findOne(id: number) {
-    const user = await this.repo.findOneBy({ id: id })
+    const user = await this.repo.findOneBy({ id: id });
 
-    return { ...user, role: user.role.name }
+    return { ...user, role: user.role.name };
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
