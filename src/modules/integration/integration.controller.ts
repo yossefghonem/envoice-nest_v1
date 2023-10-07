@@ -40,6 +40,6 @@ export class IntegrationController {
 
     // return body;
 
-   return this.integrationService.generateSigniture(body.doc,body.pin,body.certificate)
+   return this.integrationService.generateSigniture(body.doc,body.pin,body.certificate,body.lib)
   }
 }

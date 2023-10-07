@@ -24,334 +24,126 @@ POST {{base}}/integration/generate
 Content-Type: application/json
 
 {
-  "pin":85216297,
+  "pin":37901634,
+  "lib":"eps2003csp11.dll",
   "certificate":"Egypt Trust CA G6",
   "doc":{
-        "issuer": {
-            "type": "B",
-            "id": "725973870",
-            "name": "حسين عبدة حسن بلوم",
-            "address": {
-                "branchID": "0",
-                "country": "EG",
-                "governate": "Egypt",
-                "regionCity": "Giza",
-                "street": "  6 حارة فايد ش الجمهورية - عابدين - القاهرة",
-                "buildingNumber": "1",
-                "postalCode": "",
-                "floor": "1",
-                "room": "",
-                "landmark": "",
-                "additionalInformation": "0"
-            }
+    "issuer": {
+        "address": {
+            "branchID": "0",
+            "country": "EG",
+            "governate": "EGYPT",
+            "regionCity": "cairo",
+            "street": "6ا ش عبد الحق السنباطى الموسكى القاهرة",
+            "buildingNumber": "6",
+            "postalCode": "1",
+            "floor": "1",
+            "room": "0",
+            "landmark": "1",
+            "additionalInformation": "1"
         },
-        "receiver": {
-            "type": "B",
-            "id": "442459076",
-            "name": "طاهر عبدالفتاح عبدالحليم خالد منصور",
-            "address": {
-                "branchID": "0",
-                "country": "EG",
-                "governate": "Egypt",
-                "regionCity": "Qalyubiyya",
-                "street": "كفر شبين شبين القناطر",
-                "buildingNumber": "1",
-                "postalCode": "",
-                "floor": "1",
-                "room": "",
-                "landmark": "",
-                "additionalInformation": "0"
-            }
+        "type": "B",
+        "id": "232316236",
+        "name": "محمد على حافظ وشركاه"
+    },
+    "receiver": {
+        "address": {
+            "branchID": "0",
+            "country": "EG",
+            "governate": "EGYPT",
+            "regionCity": "cairo",
+            "street": "1",
+            "buildingNumber": "1",
+            "postalCode": "1",
+            "floor": "1",
+            "room": "0",
+            "landmark": "1",
+            "additionalInformation": "1"
         },
-        "documentType": "I",
-        "documentTypeVersion": "1.0",
-        "dateTimeIssued": "2023-09-27T08:36:29Z",
-        "taxpayerActivityCode": "4690",
-        "extraDiscountAmount": 0,
-        "totalItemsDiscountAmount": 0,
-        "totalDiscountAmount": 0,
-        "netAmount": 3685,
-        "totalSalesAmount": 3685,
-        "internalID": "128",
-        "totalAmount": 4200.9,
-        "purchaseOrderReference": "0.0",
-        "purchaseOrderDescription": "0.0",
-        "salesOrderReference": "0.0",
-        "salesOrderDescription": "0.0",
-        "proformaInvoiceNumber": "0.0",
-        "payment": {
-            "bankName": "",
-            "bankAddress": "",
-            "bankAccountNo": "",
-            "bankAccountIBAN": "",
-            "swiftCode": "",
-            "terms": ""
-        },
-        "delivery": {
-            "approach": "0.0",
-            "packaging": "0.0",
-            "dateValidity": "2023-09-27T08:36:29Z",
-            "grossWeight": 0,
-            "netWeight": 0,
-            "terms": "0.0"
-        },
-        "taxTotals": [{
-                "taxType": "T1",
-                "amount": 515.9000000000001
+        "type": "P",
+        "id": "",
+        "name": "عميل نقدى"
+    },
+    "documentType": "I",
+    "documentTypeVersion": "1.0",
+    "dateTimeIssued": "2023-10-07T15:44:49Z",
+    "taxpayerActivityCode": "4759",
+    "internalID": "1",
+    "purchaseOrderReference": "0",
+    "purchaseOrderDescription": "0",
+    "salesOrderReference": "0",
+    "salesOrderDescription": "0",
+    "proformaInvoiceNumber": "0",
+    "payment": {
+        "bankName": "SomeValue",
+        "bankAddress": "SomeValue",
+        "bankAccountNo": "SomeValue",
+        "bankAccountIBAN": "",
+        "swiftCode": "",
+        "terms": "SomeValue"
+    },
+    "delivery": {
+        "approach": "SomeValue",
+        "packaging": "SomeValue",
+        "dateValidity": "2022-03-28T09:30:10Z",
+        "exportPort": "SomeValue",
+        "countryOfOrigin": "EG",
+        "grossWeight": 10.5,
+        "netWeight": 20.5,
+        "terms": "SomeValue"
+    },
+    "invoiceLines": [
+        {
+            "description": "لفة سلك 1.5مم",
+            "itemType": "EGS",
+            "itemCode": "EG-232316236-10005572",
+            "unitType": "Milliampere ( mA )",
+            "quantity": "1.00",
+            "internalCode": "EGS",
+            "salesTotal": "830.00",
+            "netTotal": 830,
+            "total": 12450,
+            "valueDifference": 0,
+            "totalTaxableFees": 0,
+            "itemsDiscount": 0,
+            "unitValue": {
+                "currencySold": "EG",
+                "amountEGP": "830.00",
+                "amountSold": 0,
+                "currencyExchangeRate": 1
             },
-            {
-                "taxType": "T4",
+            "discount": {
+                "rate": "0.00",
                 "amount": 0
-            }
-        ],
-        "invoiceLines": [{
-                "description": "مسطرة 2 م ابيض",
-                "itemType": "EGS",
-                "itemCode": "EG-725973870-10005573",
-                "unitType": "BOX",
-                "quantity": 3,
-                "internalCode": "EG-725973870-10005573",
-                "salesTotal": 540,
-                "total": 615.6,
-                "valueDifference": 0,
-                "totalTaxableFees": 0,
-                "netTotal": 540,
-                "itemsDiscount": 0,
-                "unitValue": {
-                    "currencySold": "EGP",
-                    "amountEGP": 180
-                },
-                "discount": {
-                    "rate": 0,
-                    "amount": 0
-                },
-                "taxableItems": [{
-                        "taxType": "T1",
-                        "amount": 75.6,
-                        "subType": "V009",
-                        "rate": 14
-                    },
-                    {
-                        "taxType": "T4",
-                        "amount": 0,
-                        "subType": "W002",
-                        "rate": 0
-                    }
-                ]
             },
-            {
-                "description": "مسطرة 1 م ابيض",
-                "itemType": "EGS",
-                "itemCode": "EG-725973870-10005573",
-                "unitType": "BOX",
-                "quantity": 3,
-                "internalCode": "EG-725973870-10005573",
-                "salesTotal": 270,
-                "total": 307.8,
-                "valueDifference": 0,
-                "totalTaxableFees": 0,
-                "netTotal": 270,
-                "itemsDiscount": 0,
-                "unitValue": {
-                    "currencySold": "EGP",
-                    "amountEGP": 90
-                },
-                "discount": {
-                    "rate": 0,
-                    "amount": 0
-                },
-                "taxableItems": [{
-                        "taxType": "T1",
-                        "amount": 37.8,
-                        "subType": "V009",
-                        "rate": 14
-                    },
-                    {
-                        "taxType": "T4",
-                        "amount": 0,
-                        "subType": "W002",
-                        "rate": 0
-                    }
-                ]
-            },
-            {
-                "description": "لمبة كاسة 4 ",
-                "itemType": "EGS",
-                "itemCode": "EG-725973870-10005573",
-                "unitType": "BOX",
-                "quantity": 2,
-                "internalCode": "EG-725973870-10005573",
-                "salesTotal": 140,
-                "total": 159.6,
-                "valueDifference": 0,
-                "totalTaxableFees": 0,
-                "netTotal": 140,
-                "itemsDiscount": 0,
-                "unitValue": {
-                    "currencySold": "EGP",
-                    "amountEGP": 70
-                },
-                "discount": {
-                    "rate": 0,
-                    "amount": 0
-                },
-                "taxableItems": [{
-                        "taxType": "T1",
-                        "amount": 19.6,
-                        "subType": "V009",
-                        "rate": 14
-                    },
-                    {
-                        "taxType": "T4",
-                        "amount": 0,
-                        "subType": "W002",
-                        "rate": 0
-                    }
-                ]
-            },
-            {
-                "description": "تراك 30 وات بولو ابيض",
-                "itemType": "EGS",
-                "itemCode": "EG-725973870-10005573",
-                "unitType": "BOX",
-                "quantity": 2,
-                "internalCode": "EG-725973870-10005573",
-                "salesTotal": 550,
-                "total": 627,
-                "valueDifference": 0,
-                "totalTaxableFees": 0,
-                "netTotal": 550,
-                "itemsDiscount": 0,
-                "unitValue": {
-                    "currencySold": "EGP",
-                    "amountEGP": 275
-                },
-                "discount": {
-                    "rate": 0,
-                    "amount": 0
-                },
-                "taxableItems": [{
-                        "taxType": "T1",
-                        "amount": 77,
-                        "subType": "V009",
-                        "rate": 14
-                    },
-                    {
-                        "taxType": "T4",
-                        "amount": 0,
-                        "subType": "W002",
-                        "rate": 0
-                    }
-                ]
-            },
-            {
-                "description": "ابليك 4102",
-                "itemType": "EGS",
-                "itemCode": "EG-725973870-10005573",
-                "unitType": "BOX",
-                "quantity": 1,
-                "internalCode": "EG-725973870-10005573",
-                "salesTotal": 215,
-                "total": 245.1,
-                "valueDifference": 0,
-                "totalTaxableFees": 0,
-                "netTotal": 215,
-                "itemsDiscount": 0,
-                "unitValue": {
-                    "currencySold": "EGP",
-                    "amountEGP": 215
-                },
-                "discount": {
-                    "rate": 0,
-                    "amount": 0
-                },
-                "taxableItems": [{
-                        "taxType": "T1",
-                        "amount": 30.1,
-                        "subType": "V009",
-                        "rate": 14
-                    },
-                    {
-                        "taxType": "T4",
-                        "amount": 0,
-                        "subType": "W002",
-                        "rate": 0
-                    }
-                ]
-            },
-            {
-                "description": "كشاف فلات 50 وات",
-                "itemType": "EGS",
-                "itemCode": "EG-725973870-10005573",
-                "unitType": "BOX",
-                "quantity": 2,
-                "internalCode": "EG-725973870-10005573",
-                "salesTotal": 650,
-                "total": 741,
-                "valueDifference": 0,
-                "totalTaxableFees": 0,
-                "netTotal": 650,
-                "itemsDiscount": 0,
-                "unitValue": {
-                    "currencySold": "EGP",
-                    "amountEGP": 325
-                },
-                "discount": {
-                    "rate": 0,
-                    "amount": 0
-                },
-                "taxableItems": [{
-                        "taxType": "T1",
-                        "amount": 91,
-                        "subType": "V009",
-                        "rate": 14
-                    },
-                    {
-                        "taxType": "T4",
-                        "amount": 0,
-                        "subType": "W002",
-                        "rate": 0
-                    }
-                ]
-            },
-            {
-                "description": "اسبوط مراية ابيض 801",
-                "itemType": "EGS",
-                "itemCode": "EG-725973870-10005573",
-                "unitType": "BOX",
-                "quantity": 6,
-                "internalCode": "EG-725973870-10005573",
-                "salesTotal": 1320,
-                "total": 1504.8,
-                "valueDifference": 0,
-                "totalTaxableFees": 0,
-                "netTotal": 1320,
-                "itemsDiscount": 0,
-                "unitValue": {
-                    "currencySold": "EGP",
-                    "amountEGP": 220
-                },
-                "discount": {
-                    "rate": 0,
-                    "amount": 0
-                },
-                "taxableItems": [{
-                        "taxType": "T1",
-                        "amount": 184.8,
-                        "subType": "V009",
-                        "rate": 14
-                    },
-                    {
-                        "taxType": "T4",
-                        "amount": 0,
-                        "subType": "W002",
-                        "rate": 0
-                    }
-                ]
-            }
-        ]
-    }
+            "taxableItems": [
+                {
+                    "taxType": "T1",
+                    "amount": "11620.00",
+                    "subType": "V009",
+                    "rate": 0.2
+                }
+            ]
+        }
+    ],
+    "totalDiscountAmount": 0,
+    "totalSalesAmount": 830,
+    "netAmount": 830,
+    "taxTotals": [
+        {
+            "taxType": "T1",
+            "amount": 11620
+        },
+        {
+            "taxType": "T4",
+            "amount": 0
+        }
+    ],
+    "totalAmount": 12450,
+    "extraDiscountAmount": 0,
+    "totalItemsDiscountAmount": 0
 }
+  }
 
 
 
@@ -380,233 +172,123 @@ Authorization: Bearer {{access_token}}
 
 {"documents":[{
   "issuer": {
-    "type": "B",
-    "id": "232430373",
-    "name": "السيد عبد الله الليثي و شركاه - الاسراء للاضاءه الحديثه",
     "address": {
       "branchID": "0",
       "country": "EG",
-      "governate": "Egypt",
-      "regionCity": "Giza",
-      "street": "عطفة عبدالحق السنباطى الموسكى",
-      "buildingNumber": "1",
-      "postalCode": "",
+      "governate": "EGYPT",
+      "regionCity": "cairo",
+      "street": "6ا ش عبد الحق السنباطى الموسكى القاهرة",
+      "buildingNumber": "6",
+      "postalCode": "1",
       "floor": "1",
-      "room": "",
-      "landmark": "",
-      "additionalInformation": "0"
-    }
+      "room": "0",
+      "landmark": "1",
+      "additionalInformation": "1"
+    },
+    "type": "B",
+    "id": "232316236",
+    "name": "محمد على حافظ وشركاه"
   },
   "receiver": {
-    "type": "B",
-    "id": "308235878",
-    "name": "سيراميك اينوفا",
     "address": {
       "branchID": "0",
       "country": "EG",
-      "governate": "Egypt",
-      "regionCity": "giza",
-      "street": "ق 2 اس م خدمات المجاورات التجمع الاول القاهرة الجديدة",
+      "governate": "EGYPT",
+      "regionCity": "cairo",
+      "street": "1",
       "buildingNumber": "1",
-      "postalCode": "",
+      "postalCode": "1",
       "floor": "1",
-      "room": "",
-      "landmark": "",
-      "additionalInformation": "0"
-    }
+      "room": "0",
+      "landmark": "1",
+      "additionalInformation": "1"
+    },
+    "type": "P",
+    "id": "",
+    "name": "عميل نقدى"
   },
   "documentType": "I",
   "documentTypeVersion": "1.0",
-  "dateTimeIssued": "2023-09-22T13:17:28Z",
+  "dateTimeIssued": "2023-10-07T15:44:49Z",
   "taxpayerActivityCode": "4759",
-  "extraDiscountAmount": 0,
-  "totalItemsDiscountAmount": 0,
-  "totalDiscountAmount": 0,
-  "netAmount": 5800,
-  "totalSalesAmount": 5800,
-  "internalID": "367",
-  "totalAmount": 6554,
-  "purchaseOrderReference": "0.0",
-  "purchaseOrderDescription": "0.0",
-  "salesOrderReference": "0.0",
-  "salesOrderDescription": "0.0",
-  "proformaInvoiceNumber": "0.0",
+  "internalID": "1",
+  "purchaseOrderReference": "0",
+  "purchaseOrderDescription": "0",
+  "salesOrderReference": "0",
+  "salesOrderDescription": "0",
+  "proformaInvoiceNumber": "0",
   "payment": {
-    "bankName": "",
-    "bankAddress": "",
-    "bankAccountNo": "",
+    "bankName": "SomeValue",
+    "bankAddress": "SomeValue",
+    "bankAccountNo": "SomeValue",
     "bankAccountIBAN": "",
     "swiftCode": "",
-    "terms": ""
+    "terms": "SomeValue"
   },
   "delivery": {
-    "approach": "0.0",
-    "packaging": "0.0",
-    "dateValidity": "2023-09-22T13:17:28Z",
-    "grossWeight": 0,
-    "netWeight": 0,
-    "terms": "0.0"
+    "approach": "SomeValue",
+    "packaging": "SomeValue",
+    "dateValidity": "2022-03-28T09:30:10Z",
+    "exportPort": "SomeValue",
+    "countryOfOrigin": "EG",
+    "grossWeight": 10.5,
+    "netWeight": 20.5,
+    "terms": "SomeValue"
   },
+  "invoiceLines": [
+    {
+      "description": "لفة سلك 1.5مم",
+      "itemType": "EGS",
+      "itemCode": "EG-232316236-10005572",
+      "unitType": "Milliampere ( mA )",
+      "quantity": "1.00",
+      "internalCode": "EGS",
+      "salesTotal": "830.00",
+      "netTotal": 830,
+      "total": 12450,
+      "valueDifference": 0,
+      "totalTaxableFees": 0,
+      "itemsDiscount": 0,
+      "unitValue": {
+        "currencySold": "EG",
+        "amountEGP": "830.00",
+        "amountSold": 0,
+        "currencyExchangeRate": 1
+      },
+      "discount": {
+        "rate": "0.00",
+        "amount": 0
+      },
+      "taxableItems": [
+        {
+          "taxType": "T1",
+          "amount": "11620.00",
+          "subType": "V009",
+          "rate": 0.2
+        }
+      ]
+    }
+  ],
+  "totalDiscountAmount": 0,
+  "totalSalesAmount": 830,
+  "netAmount": 830,
   "taxTotals": [
     {
       "taxType": "T1",
-      "amount": 812
+      "amount": 11620
     },
     {
       "taxType": "T4",
-      "amount": 58
+      "amount": 0
     }
   ],
-  "invoiceLines": [
-    {
-      "description": "لمبة 120 سم ليد",
-      "itemType": "EGS",
-      "itemCode": "EG-232430373-10005573",
-      "unitType": "BOX",
-      "quantity": 25,
-      "internalCode": "EG-232430373-10005573",
-      "salesTotal": 3000,
-      "total": 3390,
-      "valueDifference": 0,
-      "totalTaxableFees": 0,
-      "netTotal": 3000,
-      "itemsDiscount": 0,
-      "unitValue": {
-        "currencySold": "EGP",
-        "amountEGP": 120
-      },
-      "discount": {
-        "rate": 0,
-        "amount": 0
-      },
-      "taxableItems": [
-        {
-          "taxType": "T1",
-          "amount": 420,
-          "subType": "V009",
-          "rate": 14
-        },
-        {
-          "taxType": "T4",
-          "amount": 30,
-          "subType": "W002",
-          "rate": 1
-        }
-      ]
-    },
-    {
-      "description": "لمبة 50 وات ليد",
-      "itemType": "EGS",
-      "itemCode": "EG-232430373-10005573",
-      "unitType": "BOX",
-      "quantity": 3,
-      "internalCode": "EG-232430373-10005573",
-      "salesTotal": 1050,
-      "total": 1186.5,
-      "valueDifference": 0,
-      "totalTaxableFees": 0,
-      "netTotal": 1050,
-      "itemsDiscount": 0,
-      "unitValue": {
-        "currencySold": "EGP",
-        "amountEGP": 350
-      },
-      "discount": {
-        "rate": 0,
-        "amount": 0
-      },
-      "taxableItems": [
-        {
-          "taxType": "T1",
-          "amount": 147,
-          "subType": "V009",
-          "rate": 14
-        },
-        {
-          "taxType": "T4",
-          "amount": 10.5,
-          "subType": "W002",
-          "rate": 1
-        }
-      ]
-    },
-    {
-      "description": "باكو شريط لحام غزال",
-      "itemType": "EGS",
-      "itemCode": "EG-232430373-10005573",
-      "unitType": "BOX",
-      "quantity": 5,
-      "internalCode": "EG-232430373-10005573",
-      "salesTotal": 750,
-      "total": 847.5,
-      "valueDifference": 0,
-      "totalTaxableFees": 0,
-      "netTotal": 750,
-      "itemsDiscount": 0,
-      "unitValue": {
-        "currencySold": "EGP",
-        "amountEGP": 150
-      },
-      "discount": {
-        "rate": 0,
-        "amount": 0
-      },
-      "taxableItems": [
-        {
-          "taxType": "T1",
-          "amount": 105,
-          "subType": "V009",
-          "rate": 14
-        },
-        {
-          "taxType": "T4",
-          "amount": 7.5,
-          "subType": "W002",
-          "rate": 1
-        }
-      ]
-    },
-    {
-      "description": "لمبة ثلاثية ",
-      "itemType": "EGS",
-      "itemCode": "EG-232430373-10005573",
-      "unitType": "BOX",
-      "quantity": 2,
-      "internalCode": "EG-232430373-10005573",
-      "salesTotal": 1000,
-      "total": 1130,
-      "valueDifference": 0,
-      "totalTaxableFees": 0,
-      "netTotal": 1000,
-      "itemsDiscount": 0,
-      "unitValue": {
-        "currencySold": "EGP",
-        "amountEGP": 500
-      },
-      "discount": {
-        "rate": 0,
-        "amount": 0
-      },
-      "taxableItems": [
-        {
-          "taxType": "T1",
-          "amount": 140,
-          "subType": "V009",
-          "rate": 14
-        },
-        {
-          "taxType": "T4",
-          "amount": 10,
-          "subType": "W002",
-          "rate": 1
-        }
-      ]
-    }
-  ],
+  "totalAmount": 12450,
+  "extraDiscountAmount": 0,
+  "totalItemsDiscountAmount": 0,
   "signatures": [
     {
       "signatureType": "I",
-      "value": "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"
+      "value": "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"
     }
   ]
 }]}
