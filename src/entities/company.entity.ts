@@ -49,6 +49,6 @@ export class Company extends OBaseEntity {
   activity?: Activities;
 
   @ApiPropertyOptional({ type: () => License })
-  @OneToOne(() => License, (r) => r.company, { cascade: true })
+  @OneToOne(() => License, (r) => r.company)
   license?: License;
 }

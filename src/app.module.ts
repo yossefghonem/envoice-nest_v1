@@ -31,7 +31,7 @@ const AllModules = [
   ItemModule,
   LicenseModule,
   UserModule,
-  ClientModule
+  ClientModule,
 ];
 
 @Module({
