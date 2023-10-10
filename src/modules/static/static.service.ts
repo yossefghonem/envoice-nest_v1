@@ -105,7 +105,8 @@ export class StaticService {
 
   //==========================units================================================
   async seedUnits() {
-    if ((await this.unitRepo.count()) > 0) return 'units already stored';
+    // if ((await this.unitRepo.count()) > 0) return 'units already stored';
+    await this.unitRepo.delete({});
     return this.unitRepo.save(
       units.map((act) => {
         return {
