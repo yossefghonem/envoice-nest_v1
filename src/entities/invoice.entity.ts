@@ -1,10 +1,4 @@
-
-import {
-    Column,
-    Entity,
-    ManyToOne,
-    OneToMany,
-} from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { OBaseEntity } from './OBaseEntity';
 import { User } from './user.entity';
 import { InvoiceLine } from './invoice-line.entity';
@@ -59,7 +53,7 @@ export class Invoice extends OBaseEntity {
   user: User;
 
   @ManyToOne(() => Company, (i) => i.invoices, { eager: true })
-  coompany: Company;
+  coompany?: Company;
 
   @ManyToOne(() => Client, (i) => i.invoices, { eager: true })
   client: Client;
