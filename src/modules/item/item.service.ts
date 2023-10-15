@@ -26,11 +26,12 @@ export class ItemService {
   }
 
   findAll(user: JwtUser) {
-    return this.repo.find({});
+    // return this.repo.find({});
     return this.repo
       .createQueryBuilder('item')
       .leftJoinAndSelect('item.company', 'company')
-      .where('company.id = :id', { id: user.companyId });
+      .where('company.id = :id', { id: user.companyId })
+      .getMany();
   }
 
   findOne(id: number) {
@@ -42,9 +43,7 @@ export class ItemService {
     console.log('uu', updateItemDto);
     console.log('====================================');
 
-    let it = await this.repo.update(id, updateItemDto);
-
-    return it;
+    return this.repo.update(id, updateItemDto);
   }
 
   async remove(id: number) {
