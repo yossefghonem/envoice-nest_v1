@@ -64,8 +64,8 @@ export class IntegrationService {
           ),
       );
     } catch (error) {
-      console.error('Error during invoice login:', error);
-      throw new BadRequestException(error?.response?.data);
+      console.error('Error during invoice login:', error.response.data);
+      throw new BadRequestException('error  api login');
     }
   }
 
@@ -119,14 +119,14 @@ export class IntegrationService {
             map((response) => {
               console.log('sent results ???', response);
               // if (response?.status === 200) {
-                // save login data to session
-                return response;
+              // save login data to session
+              return response;
               // }
             }),
           ),
       );
       console.log('final for submit', docSub.data);
-      return docSub.data
+      return docSub.data;
       // return sub;
       // return res.status(201).json(sub.data)
       // update Invoice status

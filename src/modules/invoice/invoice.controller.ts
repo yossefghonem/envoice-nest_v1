@@ -1,4 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Req } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Req,
+} from '@nestjs/common';
 import { InvoiceService } from './invoice.service';
 import { CreateInvoiceDto, UpdateInvoiceDto } from '../../dtos/invoice.dto';
 import { ApiTags } from '@nestjs/swagger';
@@ -8,24 +17,25 @@ import { Role } from 'src/guards/roles.decorator';
 @ApiTags('Invoice')
 @Controller('invoice')
 export class InvoiceController {
-  constructor(private readonly invoiceService: InvoiceService) { }
+  constructor(private readonly invoiceService: InvoiceService) {}
 
   @Role([UserRole.USER])
   @Post()
-  create(@Body() daat: CreateInvoiceDto,@Req() req:any) {
+  create(@Body() daat: CreateInvoiceDto, @Req() req: any) {
     return this.invoiceService.create(daat, req.user);
   }
 
+  @Role([UserRole.USER])
   @Get()
-  findAll() {
-    return this.invoiceService.findAll();
+  findAll(@Req() req: any) {
+    return this.invoiceService.findAll(req.user);
   }
 
   @Role([UserRole.USER])
   @Get('submit/:id')
-  submitDocument(@Req() req:any,@Param('id') id: string) {
-    console.log(req.user)
-    return this.invoiceService.submitDocument(+id,req.user);
+  submitDocument(@Req() req: any, @Param('id') id: string) {
+    console.log(req.user);
+    return this.invoiceService.submitDocument(+id, req.user);
   }
 
   @Get(':id')
@@ -35,11 +45,11 @@ export class InvoiceController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateData: UpdateInvoiceDto) {
-    return this.invoiceService.update(+id, updateData)
+    return this.invoiceService.update(+id, updateData);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.invoiceService.remove(+id)
+    return this.invoiceService.remove(+id);
   }
 }

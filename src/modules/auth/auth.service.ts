@@ -36,6 +36,7 @@ export class AuthService {
           access_token: user.company?.clientSecret2,
           dllLibPath: user.company?.dllLibPath,
           companyId: user.company?.id,
+          internalId: user.branch.invoiceSerial,
         },
         { expiresIn: '1h' },
       ),
@@ -64,10 +65,9 @@ export class AuthService {
         });
         userStored = await this.userService.findUser(body);
       }
+      return this.sign(userStored);
     } catch (error) {
       throw new UnauthorizedException(error.message, error.code);
     }
-
-    return this.sign(userStored);
   }
 }
