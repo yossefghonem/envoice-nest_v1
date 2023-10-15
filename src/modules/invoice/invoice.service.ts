@@ -246,7 +246,7 @@ export class InvoiceService {
               taxType: tax.taxType.code,
               amount: +tax.amount,
               subType: tax.subTax.code,
-              rate: +tax.rate,
+              rate: +tax.rate * 10,
             };
           }),
         } as InvoicelineDto;
