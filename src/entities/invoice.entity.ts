@@ -53,7 +53,7 @@ export class Invoice extends OBaseEntity {
   user: User;
 
   @ManyToOne(() => Company, (i) => i.invoices, { eager: true })
-  coompany?: Company;
+  company?: Company;
 
   @ManyToOne(() => Client, (i) => i.invoices, { eager: true })
   client: Client;
