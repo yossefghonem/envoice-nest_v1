@@ -36,6 +36,7 @@ export class InvoiceService {
     const newInvoice: Invoice = {
       documentType: invoiceDto.documentType,
       version: invoiceDto.version,
+      coompany: { id: +user.companyId },
       // docTtotalDiscountAmount: invoiceDto.docTtotalDiscountAmount,
       totalSalesAmount: invoiceDto.totalSalesAmount || 0,
       internalID: invoiceDto.internalID || '1',
@@ -80,36 +81,34 @@ export class InvoiceService {
   async findAll(user: JwtUser) {
     // const resss = await this.repo.find();
     // return resss
-    return (
-      this.repo
-        .createQueryBuilder('i')
-        .leftJoin('i.user', 'user')
-        .leftJoin('i.client', 'client')
-        // .leftJoin('user.company', 'comp')
-        .leftJoin('user.branch', 'branch')
-        .leftJoin('branch.address', 'address')
-        .leftJoin('address.country', 'country')
-        .where('user.id = :id', { id: +user.id })
-        .select([
-          'i.createdAt',
-          'client.name',
-          'user.id',
-          'branch.id',
-          'branch.name_en',
-          'client.taxNumber',
-          'country.desc_ar',
-          'i.totalSalesAmount',
-          'i.totalSalesAmount',
-          'i.totalSalesAmount',
-          'i.totalSalesAmount',
-          'i.id',
-          'i.uuid',
-          'i.status',
-          'country.id',
-          'address.id',
-        ])
-        .getMany()
-    );
+    return this.repo
+      .createQueryBuilder('i')
+      .leftJoin('i.user', 'user')
+      .leftJoin('i.client', 'client')
+      .leftJoin('i.company', 'comp')
+      .leftJoin('user.branch', 'branch')
+      .leftJoin('branch.address', 'address')
+      .leftJoin('address.country', 'country')
+      .where('comp.id = :id', { id: +user.companyId })
+      .select([
+        'i.createdAt',
+        'client.name',
+        'user.id',
+        'branch.id',
+        'branch.name_en',
+        'client.taxNumber',
+        'country.desc_ar',
+        'i.totalSalesAmount',
+        'i.totalSalesAmount',
+        'i.totalSalesAmount',
+        'i.totalSalesAmount',
+        'i.id',
+        'i.uuid',
+        'i.status',
+        'country.id',
+        'address.id',
+      ])
+      .getMany();
   }
 
   async findOne(id: number): Promise<EnvoiceResponseDto> {

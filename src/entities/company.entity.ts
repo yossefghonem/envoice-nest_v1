@@ -6,6 +6,7 @@ import { Branch } from './branch.entity';
 import { Activities } from './activity.entity';
 import { User } from './user.entity';
 import { License } from './license.entity';
+import { Invoice } from './invoice.entity';
 
 @Entity()
 export class Company extends OBaseEntity {
@@ -43,6 +44,9 @@ export class Company extends OBaseEntity {
   @ApiPropertyOptional({ type: () => Branch })
   @OneToMany(() => Branch, (r) => r.company, { eager: true })
   branch?: Branch[];
+
+  @OneToMany(() => Invoice, (u) => u.user)
+  invoices?: Invoice[];
 
   @ApiPropertyOptional({ type: () => Activities })
   @ManyToOne(() => Activities, (r) => r.id, { eager: true })

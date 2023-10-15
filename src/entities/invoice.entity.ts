@@ -11,72 +11,78 @@ import { InvoiceLine } from './invoice-line.entity';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Client } from './client.entity';
 import { InvoiceStatus } from 'src/enums/invoice.enum';
+import { Company } from './company.entity';
 
 @Entity()
 export class Invoice extends OBaseEntity {
-    @Column({default:'I'})
-    documentType?: string;
-   
-    @Column({default:'EGP'})
-    currency?: string;
+  @Column({ default: 'I' })
+  documentType?: string;
 
-    @Column({ default: '1.0' })
-    version?: string;
+  @Column({ default: 'EGP' })
+  currency?: string;
 
-    // @Column({})
-    // docTtotalDiscountAmount?: number;
+  @Column({ default: '1.0' })
+  version?: string;
 
-    @Column({type: "decimal", precision: 10, scale: 2, default: 0})
-    totalSalesAmount: number;
+  // @Column({})
+  // docTtotalDiscountAmount?: number;
 
-    @Column({})
-    internalID: string;
+  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
+  totalSalesAmount: number;
 
-    @Column({})
-    purchaseOrderReference: string;
+  @Column({})
+  internalID: string;
 
-    @Column({})
-    purchaseOrderDescription: string;
+  @Column({})
+  purchaseOrderReference: string;
 
-    @Column({})
-    salesOrderReference: string;
+  @Column({})
+  purchaseOrderDescription: string;
 
-    @Column({})
-    salesOrderDescription: string;
+  @Column({})
+  salesOrderReference: string;
 
-    @Column({})
-    proformaInvoiceNumber: string;
+  @Column({})
+  salesOrderDescription: string;
 
-    @ApiPropertyOptional({type:()=>[InvoiceLine]})
-    @OneToMany(() => InvoiceLine, (invoiceLines) => invoiceLines.invoice, { cascade:true,eager: true})
-    invoice_line: InvoiceLine[];
+  @Column({})
+  proformaInvoiceNumber: string;
 
-    @ManyToOne(() => User, i => i.invoices,{eager:true})
-    user: User;
+  @ApiPropertyOptional({ type: () => [InvoiceLine] })
+  @OneToMany(() => InvoiceLine, (invoiceLines) => invoiceLines.invoice, {
+    cascade: true,
+    eager: true,
+  })
+  invoice_line: InvoiceLine[];
 
-    @ManyToOne(() => Client, i => i.invoices,{eager:true})
-    client: Client;
+  @ManyToOne(() => User, (i) => i.invoices, { eager: true })
+  user: User;
 
-    @Column({
-        default:false
-    })
-    send?: boolean;
+  @ManyToOne(() => Company, (i) => i.invoices, { eager: true })
+  coompany: Company;
 
-    @Column({
-        default:null
-    })
-    uuid?: string;
-    
-    @Column({
-        default:null
-    })
-    submissionId?: string;
+  @ManyToOne(() => Client, (i) => i.invoices, { eager: true })
+  client: Client;
 
-    @Column({
-        type:'enum',
-        enum:InvoiceStatus,
-        default:InvoiceStatus.PINDDING,
-    })
-    status?: string;
-    
+  @Column({
+    default: false,
+  })
+  send?: boolean;
+
+  @Column({
+    default: null,
+  })
+  uuid?: string;
+
+  @Column({
+    default: null,
+  })
+  submissionId?: string;
+
+  @Column({
+    type: 'enum',
+    enum: InvoiceStatus,
+    default: InvoiceStatus.PINDDING,
+  })
+  status?: string;
 }
