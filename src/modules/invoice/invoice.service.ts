@@ -107,6 +107,7 @@ export class InvoiceService {
         'i.status',
         'country.id',
         'address.id',
+        'i.internalId',
       ])
       .getMany();
   }
