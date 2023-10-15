@@ -57,7 +57,7 @@ export class CreateInvoiceDto {
   totalSalesAmount: number;
 
   @ApiProperty()
-  internalID: string;
+  internalId: string;
 
   @ApiProperty()
   purchaseOrderReference: string;
@@ -72,7 +72,7 @@ export class CreateInvoiceDto {
   salesOrderDescription: string;
 
   @ApiProperty()
-  proformaInvoiceNumber: string
+  proformaInvoiceNumber: string;
 
   @ApiPropertyOptional({ type: () => User.call })
   user: User;
@@ -83,15 +83,12 @@ export class CreateInvoiceDto {
   @ApiPropertyOptional({ type: [LineDto] })
   lines: [LineDto];
 
-
-  @ApiProperty(
-    // require:false
-  )
-  status: InvoiceStatus
-
+  @ApiProperty()
+  // require:false
+  status: InvoiceStatus;
 }
 
-export class UpdateInvoiceDto extends PartialType(CreateInvoiceDto) { }
+export class UpdateInvoiceDto extends PartialType(CreateInvoiceDto) {}
 
 export class AddressDto {
   branchID: string;
@@ -118,9 +115,9 @@ export class PaymentDto {
   bankName: string;
   bankAddress: string;
   bankAccountNo: string;
-  bankAccountIBAN: string
-  swiftCode: string
-  terms: string
+  bankAccountIBAN: string;
+  swiftCode: string;
+  terms: string;
 }
 export class DeliveryDto {
   approach: string;
@@ -148,32 +145,31 @@ export class DiscountDto {
 export class InvoicelineDto {
   price: number;
   description: string;
-  itemType: string
-  itemCode: string
-  unitType: string
-  quantity: number
-  internalCode: string
-  salesTotal: number
-  netTotal: number
-  total: number
-  valueDifference: number
-  totalTaxableFees: number
-  itemsDiscount: number
-  unitValue: UnitValueDto
-  discount: DiscountDto
+  itemType: string;
+  itemCode: string;
+  unitType: string;
+  quantity: number;
+  internalCode: string;
+  salesTotal: number;
+  netTotal: number;
+  total: number;
+  valueDifference: number;
+  totalTaxableFees: number;
+  itemsDiscount: number;
+  unitValue: UnitValueDto;
+  discount: DiscountDto;
   taxableItems: [
     {
-      taxType: string,
-      amount: number,
-      subType: string,
-      rate: number
-    }
-  ]
+      taxType: string;
+      amount: number;
+      subType: string;
+      rate: number;
+    },
+  ];
 }
 export class TaxTotalsDto {
-
-  taxType: string
-  amount: number
+  taxType: string;
+  amount: number;
 }
 export class EnvoiceResponseDto {
   issuer: IssuerDto;
@@ -183,7 +179,7 @@ export class EnvoiceResponseDto {
   dateTimeIssued: string;
   taxpayerActivityCode: string;
   internalID: string;
-  purchaseOrderReference: string
+  purchaseOrderReference: string;
   purchaseOrderDescription: string;
   salesOrderReference: string;
   salesOrderDescription: string;
@@ -197,5 +193,5 @@ export class EnvoiceResponseDto {
   taxTotals: TaxTotalsDto[];
   totalAmount: number;
   extraDiscountAmount: number;
-  totalItemsDiscountAmount: number
+  totalItemsDiscountAmount: number;
 }

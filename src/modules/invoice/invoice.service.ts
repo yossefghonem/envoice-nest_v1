@@ -39,7 +39,7 @@ export class InvoiceService {
       company: { id: +user.companyId },
       // docTtotalDiscountAmount: invoiceDto.docTtotalDiscountAmount,
       totalSalesAmount: invoiceDto.totalSalesAmount || 0,
-      internalId: invoiceDto.internalID || '1',
+      internalId: invoiceDto.internalId || '1',
       purchaseOrderReference: invoiceDto.purchaseOrderReference,
       purchaseOrderDescription: invoiceDto.purchaseOrderDescription,
       salesOrderReference: invoiceDto.salesOrderReference,
