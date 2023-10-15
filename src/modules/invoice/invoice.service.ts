@@ -226,7 +226,7 @@ export class InvoiceService {
           internalCode: line.internalCode,
           salesTotal: +line.salesTotal,
           netTotal: line.salesTotal - line.discount_amount,
-          total: line.netTotal + amount_of_t1 - amount_of_t4,
+          total: +line.netTotal + +amount_of_t1 - +amount_of_t4,
           valueDifference: 0,
           totalTaxableFees: 0,
           itemsDiscount: 0,
