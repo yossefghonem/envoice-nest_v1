@@ -25,7 +25,7 @@ export class Invoice extends OBaseEntity {
   totalSalesAmount: number;
 
   @Column({})
-  internalID: string;
+  internalId: string;
 
   @Column({})
   purchaseOrderReference: string;
