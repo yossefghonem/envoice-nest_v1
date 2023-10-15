@@ -36,7 +36,7 @@ export class InvoiceService {
     const newInvoice: Invoice = {
       documentType: invoiceDto.documentType,
       version: invoiceDto.version,
-      coompany: { id: +user.companyId },
+      company: { id: +user.companyId },
       // docTtotalDiscountAmount: invoiceDto.docTtotalDiscountAmount,
       totalSalesAmount: invoiceDto.totalSalesAmount || 0,
       internalID: invoiceDto.internalID || '1',
