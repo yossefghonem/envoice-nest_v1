@@ -9,22 +9,21 @@ import { Cache } from 'cache-manager';
 // @UseGuards(JwtAuthGuard)
 @Controller()
 export class AppController {
-  constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache,
-  private readonly appService: AppService) { }
+  constructor(private readonly appService: AppService) {}
 
   @Get('save')
- async getHelloppp(@Req() req:Request) {
-  // this.cacheManager.store.set()
-  return await this.cacheManager.set('key', 'value');
+  async getHelloppp(@Req() req: Request) {
+    // this.cacheManager.store.set()
+    // return await this.cacheManager.set('key', 'value');
   }
 
   @Get()
-  async getHello(@Req() req:Request) {
+  async getHello(@Req() req: Request) {
     // return this.sessionSer.getToken();
     // return req.session
     // req.session.cookie.domain="ddddddd"
     // req.session.cookie.secure=true
     // req.session.cookie.maxAge=36000
-   return await this.cacheManager.get('key')
+    // return await this.cacheManager.get('key');
   }
 }

@@ -38,8 +38,8 @@ export class OverrideUtils {
 
   static encryptPassword(password: string) {
     console.log(password);
-    var decrypted = CryptoJS.AES.decrypt(password, process.env.JWT_SECRET);
-    var value = decrypted.toString(CryptoJS.enc.Utf8);
+    let decrypted = CryptoJS.AES.decrypt(password, process.env.JWT_SECRET);
+    let value = decrypted.toString(CryptoJS.enc.Utf8);
 
     if (value) {
       console.log({ value });
@@ -147,7 +147,7 @@ export class OverrideUtils {
   public static toEnglishDigits(str) {
 
     // convert persian digits [۰۱۲۳۴۵۶۷۸۹]
-    var e = '۰'.charCodeAt(0);
+    let e = '۰'.charCodeAt(0);
     str = str.replace(/[۰-۹]/g, function (t: string) {
       return t.charCodeAt(0) - e;
     });
@@ -175,8 +175,8 @@ export class OverrideUtils {
    * @returns {string}
    */
   public static randomRate(): number {
-    var precision = 100; // 2 decimals
-    var randomnum = Math.floor(Math.random() * (5 * precision - 1 * precision) + 1 * precision) / (1 * precision);
+    let precision = 100; // 2 decimals
+    let randomnum = Math.floor(Math.random() * (5 * precision - 1 * precision) + 1 * precision) / (1 * precision);
     return randomnum;
 
     // return randomnum < 5 ? randomnum : 5;

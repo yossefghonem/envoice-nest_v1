@@ -16,9 +16,7 @@ import { ItemModule } from './modules/item/item.module';
 import { LicenseModule } from './modules/license/license.module';
 import { InvoiceModule } from './modules/invoice/invoice.module';
 import { IntegrationModule } from './modules/integration/integration.module';
-import { CacheModule } from '@nestjs/cache-manager';
 import { AddressModule } from './modules/address/address.module';
-// import session from './config/session.config';
 
 const AllModules = [
   AuthModule,
@@ -38,12 +36,6 @@ const AllModules = [
   imports: [
     ...AllModules,
     ConfigModule.forRoot({ isGlobal: true }),
-    // SessionModule.forRoot({
-    //   session
-    // }),
-    CacheModule.register({
-      ttl: 3600000 // 1h
-    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,
@@ -73,4 +65,4 @@ const AllModules = [
   providers: [AppService],
   // exports: [AppService,SessionService],
 })
-export class AppModule { }
+export class AppModule {}
