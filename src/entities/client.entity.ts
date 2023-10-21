@@ -19,7 +19,7 @@ export class Client extends OBaseEntity {
   name?: string;
 
   @ApiProperty()
-  @Column({ unique: true })
+  @Column({ nullable: true })
   taxNumber?: string;
 
   @ApiProperty()
