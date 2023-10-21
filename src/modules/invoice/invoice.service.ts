@@ -117,21 +117,23 @@ export class InvoiceService {
 
     // console.log("222222",envoiceDb.invoice_line[0].taxbleItem);
     const totalDiscountAmount = envoiceDb.invoice_line
-      .map((line) => line.discount_amount)
+      .map((line) => +line.discount_amount)
       .reduce((acc, line) => acc + line, 0);
+    console.log('tttt', totalDiscountAmount);
+
     const totalSalesAmount = envoiceDb.invoice_line
-      .map((line) => line.salesTotal)
+      .map((line) => +line.salesTotal)
       .reduce((acc, line) => acc + line, 0);
     const totals = envoiceDb.invoice_line.map((line) => {
-      const netTotal = line.netTotal;
+      const netTotal = +line.netTotal;
       const amount_t1: number =
         line.taxbleItem
           .filter((entry) => entry.taxType.code === 'T1')
-          .map((entry) => entry.amount)[0] || 0;
+          .map((entry) => +entry.amount)[0] || 0;
       const amount_t4: number =
         line.taxbleItem
           .filter((entry) => entry.taxType.code === 'T4')
-          .map((entry) => entry.amount)[0] || 0;
+          .map((entry) => +entry.amount)[0] || 0;
       return { netTotal, amountT1: amount_t1, amountT4: amount_t4 };
     });
     const totalAmountT1 = totals.reduce((acc, line) => acc + line.amountT1, 0);
@@ -251,21 +253,20 @@ export class InvoiceService {
           }),
         } as InvoicelineDto;
       }),
-      totalDiscountAmount: +totalDiscountAmount,
-      totalSalesAmount: +totalSalesAmount,
+      totalDiscountAmount: totalDiscountAmount,
+      totalSalesAmount: totalSalesAmount,
       netAmount: totalSalesAmount - totalDiscountAmount,
       taxTotals: [
         {
           taxType: 'T1',
-          amount: +totalAmountT1,
+          amount: totalAmountT1,
         },
         {
           taxType: 'T4',
-          amount: +totalAmountT4,
+          amount: totalAmountT4,
         },
       ],
-      totalAmount:
-        Number(totalNetTotal) + Number(totalAmountT1) - Number(totalAmountT4),
+      totalAmount: +(totalNetTotal + totalAmountT1 - totalAmountT4).toFixed(2),
       extraDiscountAmount: 0,
       totalItemsDiscountAmount: 0,
     };
