@@ -226,27 +226,30 @@ export class InvoiceService {
           unitType: line.item.unit,
           quantity: +line.quantity,
           internalCode: line.internalCode,
-          salesTotal: +line.salesTotal,
-          netTotal: line.salesTotal - line.discount_amount,
-          total: +line.netTotal + +amount_of_t1 - +amount_of_t4,
+          salesTotal: +line.salesTotal.toFixed(2),
+          netTotal: +(line.salesTotal - line.discount_amount).toFixed(2),
+          total: +(+line.netTotal + +amount_of_t1 - +amount_of_t4).toFixed(2),
           valueDifference: 0,
           totalTaxableFees: 0,
           itemsDiscount: 0,
           unitValue: {
             currencySold: 'EGP',
             // envoiceDb.currency,
-            amountEGP: +line.price,
+            amountEGP: +line.price.toFixed(2),
             // amountSold: 0,
             // currencyExchangeRate: 1
           },
           discount: {
             rate: +line.discoundRate,
-            amount: +line.discoundRate * (+line.item.price * line.quantity),
+            amount: +(
+              +line.discoundRate *
+              (+line.item.price * line.quantity)
+            ).toFixed(2),
           },
           taxableItems: line.taxbleItem.map((tax) => {
             return {
               taxType: tax.taxType.code,
-              amount: +tax.amount,
+              amount: +tax.amount.toFixed(2),
               subType: tax.subTax.code,
               rate: Math.round(+tax.rate * 100),
             };
