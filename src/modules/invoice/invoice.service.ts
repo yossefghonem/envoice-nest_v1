@@ -259,11 +259,11 @@ export class InvoiceService {
       taxTotals: [
         {
           taxType: 'T1',
-          amount: totalAmountT1,
+          amount: +totalAmountT1.toFixed(2),
         },
         {
           taxType: 'T4',
-          amount: totalAmountT4,
+          amount: +totalAmountT4.toFixed(2),
         },
       ],
       totalAmount: +(totalNetTotal + totalAmountT1 - totalAmountT4).toFixed(2),
