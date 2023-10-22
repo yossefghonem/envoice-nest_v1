@@ -36,7 +36,7 @@ export class AuthService {
           access_token: user.company?.clientSecret2,
           dllLibPath: user.company?.dllLibPath,
           companyId: user.company?.id,
-          internalId: user.branch.invoiceSerial,
+          internalId: user?.branch?.invoiceSerial,
         },
         { expiresIn: '1h' },
       ),
