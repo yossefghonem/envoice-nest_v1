@@ -256,8 +256,8 @@ export class InvoiceService {
           }),
         } as InvoicelineDto;
       }),
-      totalDiscountAmount: +totalDiscountAmount.toFixed(2),
-      totalSalesAmount: +totalSalesAmount.toFixed(2),
+      totalDiscountAmount: +totalDiscountAmount,
+      totalSalesAmount: +totalSalesAmount,
       netAmount: +(totalSalesAmount - totalDiscountAmount).toFixed(2),
       taxTotals: [
         {
