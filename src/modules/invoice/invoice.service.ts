@@ -48,7 +48,7 @@ export class InvoiceService {
       user: { id: +user.id },
       client: { id: +invoiceDto.client },
       invoice_line: invoiceDto.lines.map((line) => {
-        const salesTotal = line.price * line.quantity;
+        const salesTotal: number = +line.price * +line.quantity;
         const discountA = (line.discoundRate || 0) * salesTotal;
         return {
           salesTotal: salesTotal,
@@ -226,7 +226,7 @@ export class InvoiceService {
           unitType: line.item.unit,
           quantity: +line.quantity,
           internalCode: line.internalCode,
-          salesTotal: +line.salesTotal.toFixed(2),
+          salesTotal: +line.salesTotal?.toFixed(2),
           netTotal: +(line.salesTotal - line.discount_amount).toFixed(2),
           total: +(+line.netTotal + +amount_of_t1 - +amount_of_t4).toFixed(2),
           valueDifference: 0,
