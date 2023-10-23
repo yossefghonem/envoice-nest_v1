@@ -121,8 +121,8 @@ export class InvoiceService {
       .reduce((acc, line) => acc + line, 0);
     console.log('tttt', totalDiscountAmount);
 
-    const totalSalesAmount = envoiceDb.invoice_line
-      .map((line) => +line.salesTotal)
+    const totalSalesAmount: number = envoiceDb.invoice_line
+      .map((line) => line.salesTotal)
       .reduce((acc, line) => acc + line, 0);
     const totals = envoiceDb.invoice_line.map((line) => {
       const netTotal = +line.netTotal;
@@ -235,7 +235,7 @@ export class InvoiceService {
           unitValue: {
             currencySold: 'EGP',
             // envoiceDb.currency,
-            amountEGP: +line.price.toFixed(2),
+            amountEGP: +line.price,
             // amountSold: 0,
             // currencyExchangeRate: 1
           },
@@ -249,16 +249,16 @@ export class InvoiceService {
           taxableItems: line.taxbleItem.map((tax) => {
             return {
               taxType: tax.taxType.code,
-              amount: +tax.amount.toFixed(2),
+              amount: +tax.amount,
               subType: tax.subTax.code,
               rate: Math.round(+tax.rate * 100),
             };
           }),
         } as InvoicelineDto;
       }),
-      totalDiscountAmount: totalDiscountAmount,
-      totalSalesAmount: totalSalesAmount,
-      netAmount: totalSalesAmount - totalDiscountAmount,
+      totalDiscountAmount: +totalDiscountAmount.toFixed(2),
+      totalSalesAmount: +totalSalesAmount.toFixed(2),
+      netAmount: +(totalSalesAmount - totalDiscountAmount).toFixed(2),
       taxTotals: [
         {
           taxType: 'T1',
