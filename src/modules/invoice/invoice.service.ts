@@ -178,7 +178,7 @@ export class InvoiceService {
             envoiceDb.user.branch.address.additionalInformation,
         },
         type: envoiceDb.client.type,
-        id: envoiceDb?.client?.taxNumber,
+        id: envoiceDb?.client?.taxNumber || '',
         name: envoiceDb.client.name,
       },
       documentType: envoiceDb.documentType,

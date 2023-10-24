@@ -135,7 +135,7 @@ export class IntegrationService {
         status: InvoiceStatus.ACCEPTED,
       });
     } catch (error) {
-      console.log('caaaatche', error.response.data.error);
+      console.log('cant sent invoice', error.response);
       // return res.status(400).json(error.response.data)
     }
   }
