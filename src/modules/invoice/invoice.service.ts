@@ -121,9 +121,10 @@ export class InvoiceService {
       .reduce((acc, line) => acc + line, 0);
     console.log('tttt', totalDiscountAmount);
 
-    const totalSalesAmount: number = envoiceDb.invoice_line
+    const totalSalesAmount: number = +envoiceDb.invoice_line
       .map((line) => +line.salesTotal)
-      .reduce((acc, line) => acc + line, 0);
+      .reduce((acc, line) => acc + line, 0)
+      .toFixed(2);
     const totals = envoiceDb.invoice_line.map((line) => {
       const netTotal = +line.netTotal;
       const amount_t1: number =
