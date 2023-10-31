@@ -17,11 +17,6 @@ export class AppController {
 
   @Get()
   async getHello(@Req() req: Request) {
-    // return this.sessionSer.getToken();
-    // return req.session
-    // req.session.cookie.domain="ddddddd"
-    // req.session.cookie.secure=true
-    // req.session.cookie.maxAge=36000
-    // return await this.cacheManager.get('key');
+   return 'Hello world';
   }
 }
