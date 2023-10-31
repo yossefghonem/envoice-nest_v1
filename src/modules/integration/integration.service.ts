@@ -6,9 +6,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InvoiceLoginDto } from './dtos/invoiceLogin.dto';
-import { Cache } from 'cache-manager';
 import * as path from 'path';
-import * as fs from 'fs';
 import { firstValueFrom, map } from 'rxjs';
 import { AxiosResponse } from 'axios';
 import { JwtUser } from 'src/guards/jwt.strategy';
