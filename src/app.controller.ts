@@ -3,8 +3,6 @@ import { Controller, Get, Inject, Req } from '@nestjs/common';
 import { AppService } from './app.service';
 import { JwtAuthGuard } from './guards/jwt.guard';
 import { Request } from 'express';
-import { CACHE_MANAGER } from '@nestjs/cache-manager';
-import { Cache } from 'cache-manager';
 
 // @UseGuards(JwtAuthGuard)
 @Controller()
