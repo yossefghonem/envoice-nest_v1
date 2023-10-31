@@ -37,7 +37,6 @@
     "crypto-js": "^4.1.1",
     "exceljs": "^4.3.0",
     "execa": "^8.0.1",
-    "express-session": "^1.17.3",
     "moment": "^2.29.4",
     "morgan": "^1.10.0",
     "passport": "^0.6.0",
