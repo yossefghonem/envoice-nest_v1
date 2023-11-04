@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { Logger } from '@nestjs/common';
 import { AppModule } from './app.module';
-// import * as morgan from 'morgan';
+import * as morgan from 'morgan';
 // import * as session from 'express-session';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
@@ -12,7 +12,7 @@ async function bootstrap() {
     origin: '*',
   });
 
-  // app.use(morgan('dev'));
+  app.use(morgan('dev'));
 
   const PORT = process.env.PORT || 3000;
   const config = new DocumentBuilder()
@@ -42,3 +42,4 @@ async function bootstrap() {
 }
 
 bootstrap();
+

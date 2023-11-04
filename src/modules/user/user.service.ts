@@ -106,6 +106,8 @@ export class UserService {
         'role.id',
       ])
       .getMany();
+  console.log('users', users.length);
+      
     return users;
   }
 
