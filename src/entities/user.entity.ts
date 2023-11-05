@@ -24,18 +24,18 @@ export class User extends OBaseEntity {
 
   @Column({
     nullable: false,
-    transformer: {
-      to: (value) => {
-        if (value === null) return;
-        console.log({ tt: value });
-        return OverrideUtils.encryptPassword(value);
-      },
-      from: (value) => {
-        console.log({ ff: value });
-        if (value === null) return;
-        return OverrideUtils.dycreptPassword(value);
-      },
-    },
+    // transformer: {
+    //   to: (value) => {
+    //     if (value === null) return;
+    //     console.log({ tt: value });
+    //     return OverrideUtils.encryptPassword(value);
+    //   },
+    //   from: (value) => {
+    //     console.log({ ff: value });
+    //     if (value === null) return;
+    //     return OverrideUtils.dycreptPassword(value);
+    //   },
+    // },
   })
   @Exclude({ toPlainOnly: true })
   @ApiProperty()
