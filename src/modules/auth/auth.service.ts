@@ -67,6 +67,8 @@ export class AuthService {
       }
       return this.sign(userStored);
     } catch (error) {
+      console.log('login error ', error);
+      
       throw new UnauthorizedException(error.message, error.code);
     }
   }

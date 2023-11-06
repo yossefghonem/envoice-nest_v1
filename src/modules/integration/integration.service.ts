@@ -61,7 +61,7 @@ export class IntegrationService {
           ),
       );
     } catch (error) {
-      console.error('Error during invoice login:', error.response.data);
+      console.error('Error during invoice login:', error);
       throw new BadRequestException('error  api login');
     }
   }
