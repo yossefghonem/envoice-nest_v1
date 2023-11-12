@@ -68,6 +68,7 @@ export class UserService {
     const existsUser = await this.repo.findOne({
       where: [{ email: body.email }],
     });
+console.log({ existsUser });
 
     if (!existsUser) {
       throw new UnauthorizedException('User Not Found');
