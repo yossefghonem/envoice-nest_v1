@@ -73,7 +73,7 @@ console.log({ existsUser });
     if (!existsUser) {
       throw new UnauthorizedException('User Not Found');
     }
-    if (await this.comparePassword(body.password, existsUser.password))
+    if (!(await this.comparePassword(body.password, existsUser.password)))
       throw new UnauthorizedException('check your credintials');
     //remove password from responce
     delete existsUser.password;
