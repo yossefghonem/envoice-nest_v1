@@ -5,7 +5,6 @@ import { OBaseEntity } from './OBaseEntity';
 import { Branch } from './branch.entity';
 import { Activities } from './activity.entity';
 import { User } from './user.entity';
-import { License } from './license.entity';
 import { Invoice } from './invoice.entity';
 
 @Entity()
@@ -37,6 +36,9 @@ export class Company extends OBaseEntity {
   @Column({ default: 0 })
   pin?: number;
 
+  @Column({ default: new Date() })
+  endDate?: Date;
+
   @ApiPropertyOptional({ type: () => User })
   @OneToMany(() => User, (r) => r.company)
   users?: User[];
@@ -52,7 +54,7 @@ export class Company extends OBaseEntity {
   @ManyToOne(() => Activities, (r) => r.id, { eager: true })
   activity?: Activities;
 
-  @ApiPropertyOptional({ type: () => License })
-  @OneToOne(() => License, (r) => r.company)
-  license?: License;
+  // @ApiPropertyOptional({ type: () => License })
+  // @OneToOne(() => License, (r) => r.company)
+  // license?: License;
 }

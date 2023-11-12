@@ -1,10 +1,13 @@
-import { ApiProperty, PartialType } from "@nestjs/swagger";
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 
 export class CreateCompanyDto {
   @ApiProperty({
     type: String,
   })
   name: string;
+
+  @ApiProperty({})
+  endDate: string;
 
   @ApiProperty({})
   taxNumber: string;
@@ -31,4 +34,4 @@ export class CreateCompanyDto {
   clientSecret2?: string;
 }
 
-export class UpdateCompanyDto extends PartialType(CreateCompanyDto) { }
+export class UpdateCompanyDto extends PartialType(CreateCompanyDto) {}
