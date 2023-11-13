@@ -165,7 +165,7 @@ export class InvoiceService {
       },
       receiver: {
         address: {
-          branchID: envoiceDb.client.branchId,
+          branchID: "",// envoiceDb.client.branchId,
           country: envoiceDb.client.address.country.code,
           governate: envoiceDb.client.address.governerate,
           regionCity: envoiceDb.client.address.regionCity,
