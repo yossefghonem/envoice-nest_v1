@@ -17,24 +17,7 @@ export async function getBase64FromImage(link: string): Promise<string> {
 }
 
 export class OverrideUtils {
-  /**
-   * Filter array by string
-   *
-   * @param mainArr
-   * @param searchText
-   * @returns {any}
-   */
-  // public static filterArrayByString(mainArr: any[], searchText: string): any {
-  //   if (searchText === '') {
-  //     return mainArr;
-  //   }
-
-  //   searchText = searchText.toLowerCase();
-
-  //   return mainArr.filter((itemObj: any) => {
-  //     return this.searchInObj(itemObj, searchText);
-  //   });
-  // }
+ 
 
   static encryptPassword(password: string) {
     console.log(password);

@@ -3,8 +3,6 @@ import { Controller, Get, Inject, Req } from '@nestjs/common';
 import { AppService } from './app.service';
 import { JwtAuthGuard } from './guards/jwt.guard';
 import { Request } from 'express';
-import { CACHE_MANAGER } from '@nestjs/cache-manager';
-import { Cache } from 'cache-manager';
 
 // @UseGuards(JwtAuthGuard)
 @Controller()
@@ -19,11 +17,6 @@ export class AppController {
 
   @Get()
   async getHello(@Req() req: Request) {
-    // return this.sessionSer.getToken();
-    // return req.session
-    // req.session.cookie.domain="ddddddd"
-    // req.session.cookie.secure=true
-    // req.session.cookie.maxAge=36000
-    // return await this.cacheManager.get('key');
+   return 'Hello world';
   }
 }

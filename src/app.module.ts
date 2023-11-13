@@ -13,7 +13,6 @@ import { StaticModule } from './modules/static/static.module';
 import { CompanyModule } from './modules/company/company.module';
 import { GroupModule } from './modules/group/group.module';
 import { ItemModule } from './modules/item/item.module';
-import { LicenseModule } from './modules/license/license.module';
 import { InvoiceModule } from './modules/invoice/invoice.module';
 import { IntegrationModule } from './modules/integration/integration.module';
 import { AddressModule } from './modules/address/address.module';
@@ -27,7 +26,6 @@ const AllModules = [
   StaticModule,
   GroupModule,
   ItemModule,
-  LicenseModule,
   UserModule,
   ClientModule,
 ];
@@ -52,7 +50,7 @@ const AllModules = [
       //   trustServerCertificate: true,
       // },
     }),
-    //FileModule,
+  //FileModule,
     InvoiceModule,
     IntegrationModule,
     AddressModule,

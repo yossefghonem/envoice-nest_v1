@@ -6,7 +6,6 @@ import { UserService } from '../modules/user/user.service';
 
 import { UnauthorizedException } from '@nestjs/common/exceptions';
 import { UserRole } from '../enums/userRole.enum';
-import { LicenseService } from '../modules/license/license.service';
 
 export interface JwtUser {
   id: string;
@@ -22,12 +21,12 @@ export interface JwtUser {
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(private readonly licenseService: LicenseService) {
+  constructor() {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: true,
       secretOrKey: process.env.TOKEN_SECRET,
-      algorithm: "HS256",
+      algorithm: 'HS256',
     });
   }
 

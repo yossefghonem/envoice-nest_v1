@@ -7,11 +7,6 @@ import { PassportModule } from '@nestjs/passport';
 import { UserModule } from '../user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { JwtStrategy } from '../../guards/jwt.strategy';
-import { LicenseModule } from '../license/license.module';
-import { IntegrationService } from '../integration/integration.service';
-import { CompanyService } from '../company/company.service';
-import { HttpModule, HttpService } from '@nestjs/axios';
-import { InvoiceService } from '../invoice/invoice.service';
 import { CompanyModule } from '../company/company.module';
 
 @Module({
@@ -24,7 +19,6 @@ import { CompanyModule } from '../company/company.module';
     }),
     // import modules
     UserModule,
-    LicenseModule,
     IntegrationModule,
     CompanyModule
   ],

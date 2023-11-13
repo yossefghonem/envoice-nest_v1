@@ -1,11 +1,6 @@
-import {
-  Injectable,
-  NotFoundException,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { JwtUser } from '../../guards/jwt.strategy';
-import { CreateUserDto, LoginDto } from '../../dtos/user.dto';
+import { LoginDto } from '../../dtos/user.dto';
 import { UserService } from '../user/user.service';
 import { User } from '../../entities/user.entity';
 import { UserRole } from 'src/enums/userRole.enum';
@@ -51,6 +46,14 @@ export class AuthService {
       console.log(userStored);
       console.log('====================================');
       if (userStored.role.name === UserRole.USER) {
+        if (userStored.online) {
+          throw new UnauthorizedException(
+            'user alredy logined on another device',
+          );
+        }
+        if (userStored.company.endDate < new Date()) {
+          throw new UnauthorizedException('انهت نمدة ');
+        }
         // login to envoice and store token in company
         const loginBody: InvoiceLoginDto = {
           client_id: userStored.company.clientId,
@@ -65,8 +68,11 @@ export class AuthService {
         });
         userStored = await this.userService.findUser(body);
       }
+      await this.userService.update(userStored.id, { online: true });
       return this.sign(userStored);
     } catch (error) {
+      console.log('login error ', error);
+
       throw new UnauthorizedException(error.message, error.code);
     }
   }

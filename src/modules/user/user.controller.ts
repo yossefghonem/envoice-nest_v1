@@ -2,22 +2,21 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req } fro
 import { UserService } from './user.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateUserDto, UpdateUserDto } from '../../dtos/user.dto';
-import { JwtAuthGuard } from '../../guards/jwt.guard';
 
 @Controller('users')
-@ApiTags("User")
+@ApiTags('User')
 export class UserController {
-  constructor(private readonly userService: UserService) { }
+  constructor(private readonly userService: UserService) {}
 
   @Post()
   create(@Body() user: CreateUserDto) {
     return this.userService.create(user);
   }
 
-  //@UseGuards(JwtAuthGuard)
-  @Get("all")
+  // @UseGuards(JwtAuthGuard)
+  @Get('all')
   findAll(@Req() req: any) {
-    console.log("get all users", req.user);
+    console.log('get all users');
     return this.userService.findAll();
   }
 

@@ -6,12 +6,9 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InvoiceLoginDto } from './dtos/invoiceLogin.dto';
-import { Cache } from 'cache-manager';
 import * as path from 'path';
-import * as fs from 'fs';
 import { firstValueFrom, map } from 'rxjs';
 import { AxiosResponse } from 'axios';
-import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { JwtUser } from 'src/guards/jwt.strategy';
 import { InvoiceService } from '../invoice/invoice.service';
 // import { execaSync } from 'execa';
@@ -64,7 +61,7 @@ export class IntegrationService {
           ),
       );
     } catch (error) {
-      console.error('Error during invoice login:', error.response.data);
+      console.error('Error during invoice login:', error);
       throw new BadRequestException('error  api login');
     }
   }
