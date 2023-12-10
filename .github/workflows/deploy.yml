@@ -30,7 +30,8 @@ jobs:
 
       - name: Build step
         run: "npm install && npm run build" # 📝 Update the build command(s) if necessary
-
+      - name: start step
+        run: "npm run start:prod" # 📝 Update the build command(s) if necessary
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
