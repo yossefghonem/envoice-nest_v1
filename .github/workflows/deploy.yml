@@ -34,6 +34,6 @@ jobs:
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: "lazy-donkey-84"
+          project: "lazy-envoice-84"
           entrypoint: "dist/main.js" # 📝 Update the entrypoint if necessary
           root: "." # 📝 Update the root if necessary
