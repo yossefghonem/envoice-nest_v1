@@ -31,10 +31,10 @@ jobs:
       - name: Build step
         run: "npm install && npm run build" # 📝 Update the build command(s) if necessary
       - name: start step
-        run: "npm run start:prod" # 📝 Update the build command(s) if necessary
+        run: "npm run start:prod &&" # 📝 Update the build command(s) if necessary
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: "lazy-donkey-84"
+          project: "envoice"
           entrypoint: "/dist/main.js" # 📝 Update the entrypoint if necessary
           root: "." # 📝 Update the root if necessary
