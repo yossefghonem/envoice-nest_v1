@@ -36,4 +36,4 @@ jobs:
         with:
           project: "lazy-donkey-84"
           entrypoint: "dist/main.js" # 📝 Update the entrypoint if necessary
-          root: "dist" # 📝 Update the root if necessary
+          root: "." # 📝 Update the root if necessary
