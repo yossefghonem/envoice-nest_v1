@@ -114,7 +114,7 @@ export class IntegrationService {
           )
           .pipe(
             map((response) => {
-              console.log('sent results ???', response);
+              console.log('sent results0000000000 ???', response);
               // if (response?.status === 200) {
               // save login data to session
               return response;
@@ -123,6 +123,15 @@ export class IntegrationService {
           ),
       );
       console.log('final for submit', docSub.data);
+      if(docSub.data.acceptedDocuments.length){
+         const updateDb=await this.invoiceService.update({internalId:docSub.data.acceptedDocuments[0].internalId}, {
+          status: InvoiceStatus.ACCEPTED,
+          uuid:docSub.data.acceptedDocuments[0].uuid,
+          submissionId:docSub.data.acceptedDocuments[0].longId,
+        });
+        console.log({updateDb});
+      }
+      
       return docSub.data;
       // return sub;
       // return res.status(201).json(sub.data)

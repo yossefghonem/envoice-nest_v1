@@ -73,7 +73,7 @@ export class InvoiceService {
         } as InvoiceLine;
       }),
     };
-    console.log(newInvoice);
+    // console.log(newInvoice);
 
     return await this.repo.save(newInvoice);
   }
@@ -104,11 +104,15 @@ export class InvoiceService {
         'i.totalSalesAmount',
         'i.id',
         'i.uuid',
+        'i.submissionId',
         'i.status',
         'country.id',
         'address.id',
         'i.internalId',
+        'i.createdAt'
       ])
+      .orderBy('i.createdAt',"DESC")
+      .limit(1000)
       .getMany();
   }
 
@@ -221,10 +225,10 @@ export class InvoiceService {
             .map((entry) => entry.amount)[0] || 0;
 
         return {
-          description: line.item.name,
-          itemType: ItemTypes[line.item.type],
-          itemCode: line.item.code,
-          unitType: line.item.unit,
+          description: line.item?.name,
+          itemType: ItemTypes[line.item?.type],
+          itemCode: line.item?.code,
+          unitType: line.item?.unit,
           quantity: +line.quantity,
           internalCode: line.internalCode,
           salesTotal: +line.salesTotal,
@@ -279,8 +283,10 @@ export class InvoiceService {
     // call integration
   }
 
-  async update(id: number, updateInvoiceDto: UpdateInvoiceDto) {
-    // return this.repo.update(id, updateInvoiceDto)
+  async update(internalId: any, updateInvoiceDto: any) {
+    console.log(internalId,updateInvoiceDto);
+    
+    return this.repo.update(internalId, updateInvoiceDto)
   }
 
   async remove(id: number) {
