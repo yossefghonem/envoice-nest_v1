@@ -1,4 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+  Req,
+  Query,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateUserDto, UpdateUserDto } from '../../dtos/user.dto';
@@ -15,9 +26,15 @@ export class UserController {
 
   // @UseGuards(JwtAuthGuard)
   @Get('all')
-  findAll(@Req() req: any) {
+  findAll(
+    @Req() req: any,
+    @Query('page') page: number,
+    @Query('pageSize') pageSize: number,
+  ) {
     console.log('get all users');
-    return this.userService.findAll();
+    console.log(page, pageSize);
+
+    return this.userService.findAll(page ?? 1, pageSize ?? 20);
   }
 
   @Get(':id')

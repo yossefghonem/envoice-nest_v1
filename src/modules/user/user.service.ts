@@ -8,6 +8,7 @@ import { CompanyService } from '../company/company.service';
 import { Role } from '../../entities/role.entity';
 import { UserRole } from 'src/enums/userRole.enum';
 import * as bcrypt from 'bcrypt';
+import { paginate } from 'nestjs-typeorm-paginate';
 
 @Injectable()
 export class UserService {
@@ -68,7 +69,7 @@ export class UserService {
     const existsUser = await this.repo.findOne({
       where: [{ email: body.email }],
     });
-console.log({ existsUser });
+    console.log({ existsUser });
 
     if (!existsUser) {
       throw new UnauthorizedException('User Not Found');
@@ -98,7 +99,9 @@ console.log({ existsUser });
     return this.repo.findOneBy({ id: userDb.id });
   }
 
-  async findAll() {
+  async findAll(page: number, pageSize: number) {
+    console.log('get all users', page, pageSize);
+
     const users = await this.repo
       .createQueryBuilder('user')
       .leftJoin('user.company', 'company')
@@ -119,11 +122,12 @@ console.log({ existsUser });
         'branch.name_ar',
         'branch.id',
         'role.id',
-      ])
-      .getMany();
-    console.log('users', users.length);
+      ]);
+    return paginate(users, { page: page, limit: pageSize });
+    // .getMany();
+    // console.log('users', users.length);
 
-    return users;
+    // return users;
   }
 
   async findOne(id: number) {
@@ -148,5 +152,8 @@ console.log({ existsUser });
 
   remove(id: number) {
     return this.repo.delete(id);
+  }
+  async toggleStatus(id: number, status: boolean) {
+    return this.repo.update(id, { online: !status });
   }
 }
