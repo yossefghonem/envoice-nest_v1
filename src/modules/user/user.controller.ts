@@ -31,9 +31,6 @@ export class UserController {
     @Query('page') page: number,
     @Query('pageSize') pageSize: number,
   ) {
-    console.log('get all users');
-    console.log(page, pageSize);
-
     return this.userService.findAll(page ?? 1, pageSize ?? 20);
   }
 

@@ -42,9 +42,7 @@ export class AuthService {
     let userStored: User;
     try {
       userStored = await this.userService.findUser(body);
-      console.log('====================================');
-      console.log(userStored);
-      console.log('====================================');
+      
       if (userStored.role.name === UserRole.USER) {
         if (userStored.online) {
           throw new UnauthorizedException(
@@ -52,7 +50,7 @@ export class AuthService {
           );
         }
         if (userStored.company.endDate < new Date()) {
-          throw new UnauthorizedException('انهت نمدة ');
+          throw new UnauthorizedException('انهت المدة ');
         }
         // login to envoice and store token in company
         const loginBody: InvoiceLoginDto = {
@@ -71,8 +69,6 @@ export class AuthService {
       await this.userService.update(userStored.id, { online: true });
       return this.sign(userStored);
     } catch (error) {
-      console.log('login error ', error);
-
       throw new UnauthorizedException(error.message, error.code);
     }
   }

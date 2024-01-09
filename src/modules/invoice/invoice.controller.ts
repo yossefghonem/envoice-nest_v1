@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   Req,
 } from '@nestjs/common';
 import { InvoiceService } from './invoice.service';
@@ -27,8 +28,11 @@ export class InvoiceController {
 
   @Role([UserRole.USER])
   @Get()
-  findAll(@Req() req: any) {
-    return this.invoiceService.findAll(req.user);
+  findAll(@Req() req: any,
+   @Query('page') page: number,
+    @Query('pageSize') pageSize: number, 
+  ) {
+    return this.invoiceService.findAll(req.user, page ?? 1, pageSize ?? 20);
   }
 
   @Role([UserRole.USER])

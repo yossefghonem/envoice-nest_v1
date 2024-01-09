@@ -12,6 +12,7 @@ import { InvoiceLine } from '../../entities/invoice-line.entity';
 import { TaxbleItem } from 'src/entities/taxbleItems.entity';
 import { ItemTypes } from '../../enums/itemTypes.enum';
 import { JwtUser } from 'src/guards/jwt.strategy';
+import { paginate } from 'nestjs-typeorm-paginate';
 
 @Injectable()
 export class InvoiceService {
@@ -29,11 +30,7 @@ export class InvoiceService {
   itemsDiscount
   */
   async create(invoiceDto: CreateInvoiceDto, user: JwtUser) {
-    console.log('====================================');
-    console.log(invoiceDto);
-    console.log('====================================');
-
-    const newInvoice: Invoice = {
+     const newInvoice: Invoice = {
       documentType: invoiceDto.documentType,
       version: invoiceDto.version,
       company: { id: +user.companyId },
@@ -78,10 +75,10 @@ export class InvoiceService {
     return await this.repo.save(newInvoice);
   }
 
-  async findAll(user: JwtUser) {
+  async findAll(user: JwtUser, page: number, pageSize: number) {
     // const resss = await this.repo.find();
-    // return resss
-    return this.repo
+    
+    const envoice= this.repo
       .createQueryBuilder('i')
       .leftJoin('i.user', 'user')
       .leftJoin('i.client', 'client')
@@ -112,18 +109,15 @@ export class InvoiceService {
         'i.createdAt'
       ])
       .orderBy('i.createdAt',"DESC")
-      .limit(1000)
-      .getMany();
+     return paginate( envoice, { page, limit: pageSize });
   }
 
   async findOne(id: number): Promise<EnvoiceResponseDto> {
     const envoiceDb = await this.repo.findOneBy({ id: id });
 
-    // console.log("222222",envoiceDb.invoice_line[0].taxbleItem);
     const totalDiscountAmount = envoiceDb.invoice_line
       .map((line) => +line.discount_amount)
       .reduce((acc, line) => acc + line, 0);
-    console.log('tttt', totalDiscountAmount);
 
     const totalSalesAmount: number = +envoiceDb.invoice_line
       .map((line) => +line.salesTotal)

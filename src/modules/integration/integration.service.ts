@@ -27,13 +27,7 @@ export class IntegrationService {
   ) {}
 
   async invoiceLogin(data: InvoiceLoginDto) {
-    console.log('====================================');
-    console.log('start invoice login');
-    console.log('====================================');
     try {
-      console.log('====================================');
-      console.log(data);
-      console.log('====================================');
       const loginBody = {
         client_id: data.client_id,
         client_secret: data.client_secret,
@@ -52,16 +46,12 @@ export class IntegrationService {
           .pipe(
             map((response) => {
               if (response.status === 200) {
-                // save login data to session key:value
-                // this.storeToken(user.id, response.data.token);
-                console.log(response?.data);
                 return response.data?.access_token;
               }
             }),
           ),
       );
     } catch (error) {
-      console.error('Error during invoice login:', error);
       throw new BadRequestException('error  api login');
     }
   }
@@ -73,22 +63,13 @@ export class IntegrationService {
 
   // generate signiture
   async sendInvoice(id: number, user: JwtUser) {
-    // get invoice by id
     const document = await this.invoiceService.findOne(id);
-    // console.log(document);
-    // return document;
-    // const token = await this.getToken(user.id);
-    // if token expired or empty re-try login
-    // if(!token) await this.invoiceLogin({user})
-    // using exica generate signiture
     await this.generateSigniture(
       document,
       user.pin,
       user.certificate,
       user.dllLibPath,
     );
-
-    // call integration service
 
     try {
       console.log('start sending request ................');
@@ -114,35 +95,26 @@ export class IntegrationService {
           )
           .pipe(
             map((response) => {
-              console.log('sent results0000000000 ???', response);
-              // if (response?.status === 200) {
-              // save login data to session
+              // console.log('sent results0000000000 ???', response);
               return response;
-              // }
             }),
           ),
       );
-      console.log('final for submit', docSub.data);
-      if(docSub.data.acceptedDocuments.length){
-         const updateDb=await this.invoiceService.update({internalId:docSub.data.acceptedDocuments[0].internalId}, {
-          status: InvoiceStatus.ACCEPTED,
-          uuid:docSub.data.acceptedDocuments[0].uuid,
-          submissionId:docSub.data.acceptedDocuments[0].longId,
-        });
-        console.log({updateDb});
+      if (docSub.data.acceptedDocuments.length) {
+        const updateDb = await this.invoiceService.update(
+          { internalId: docSub.data.acceptedDocuments[0].internalId },
+          {
+            status: InvoiceStatus.ACCEPTED,
+            uuid: docSub.data.acceptedDocuments[0].uuid,
+            submissionId: docSub.data.acceptedDocuments[0].longId,
+          },
+        );
       }
-      
       return docSub.data;
-      // return sub;
-      // return res.status(201).json(sub.data)
-      // update Invoice status
-      // check submission status ...
-      return await this.invoiceService.update(id, {
-        status: InvoiceStatus.ACCEPTED,
-      });
     } catch (error) {
-      console.log('cant sent invoice', error.response);
+      // console.log('cant sent invoice', error.response);
       // return res.status(400).json(error.response.data)
+      throw new BadRequestException('cant sent invoice', error.response?.data);
     }
   }
 
@@ -153,12 +125,12 @@ export class IntegrationService {
     lib = 'SignatureP11.dll',
   ) {
     try {
-      console.log({
-        pin,
-        certificate,
-        lib,
-        doc,
-      });
+      // console.log({
+      //   pin,
+      //   certificate,
+      //   lib,
+      //   doc,
+      // });
       const out = execFileSync(
         path.join(
           process.cwd(),
@@ -176,8 +148,9 @@ export class IntegrationService {
       const responce = await out.toString('utf-8');
       return responce;
     } catch (error) {
-      console.log('error in generate', error.message.toString());
-      throw new NotFoundException('cant generate signature', error);
+      // console.log('error in generate', error.message.toString());
+      // throw new NotFoundException('cant generate signature', error);
+      throw new BadRequestException('cant generate signature', error.message);
     }
   }
 
