@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   Req,
+  Query,
 } from '@nestjs/common';
 import { ItemService } from './item.service';
 import { CreateItemDto, UpdateItemDto } from '../../dtos/items.dto';
@@ -27,8 +28,12 @@ export class ItemController {
 
   @Role([UserRole.USER])
   @Get('all')
-  findAll(@Req() req: any) {
-    return this.itemService.findAll(req.user);
+  findAll(@Req() req: any,
+  @Query('page') page: number = 1,
+  @Query('pageSize') limit: number = 1000,
+  @Query('query') query: any,
+  ) {
+    return this.itemService.findAll(req.user, page, limit,query);
   }
 
   @Get(':id')

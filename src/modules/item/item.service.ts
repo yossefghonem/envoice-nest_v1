@@ -5,6 +5,7 @@ import { Item } from '../../entities/item.entity';
 import { Repository } from 'typeorm';
 import { ItemTypes } from '../../enums/itemTypes.enum';
 import { JwtUser } from 'src/guards/jwt.strategy';
+import { paginate } from 'nestjs-typeorm-paginate';
 
 @Injectable()
 export class ItemService {
@@ -25,13 +26,24 @@ export class ItemService {
     });
   }
 
-  findAll(user: JwtUser) {
+  findAll(user: JwtUser, page: number = 1, limit: number = 1000, query: any) {
     // return this.repo.find({});
-    return this.repo
+    const items = this.repo
       .createQueryBuilder('item')
-      .leftJoinAndSelect('item.company', 'company')
-      .where('company.id = :id', { id: user.companyId })
-      .getMany();
+      .leftJoin('item.company', 'cop')
+      .leftJoinAndSelect('item.group', 'group')
+      .where('cop.id = :id', { id: user.companyId })
+      .select([
+        'item.id',
+        'item.name',
+        'item.code',
+        'item.price',
+        'item.taxCode',
+        'item.unit',
+        'group',
+      ]).orderBy('item.id', 'DESC');
+    // .getMany();
+    return paginate(items, { limit, page });
   }
 
   findOne(id: number) {
