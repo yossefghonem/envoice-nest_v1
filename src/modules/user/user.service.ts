@@ -122,7 +122,8 @@ export class UserService {
         'branch.name_ar',
         'branch.id',
         'role.id',
-      ]);
+      ])
+      .orderBy('user.online', 'DESC');
     return paginate(users, { page: page, limit: pageSize });
     // .getMany();
     // console.log('users', users.length);

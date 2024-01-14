@@ -86,6 +86,7 @@ export class InvoiceService {
       .leftJoin('user.branch', 'branch')
       .leftJoin('branch.address', 'address')
       .leftJoin('address.country', 'country')
+      .leftJoin('i.invoice_line', 'line')
       .where('comp.id = :id', { id: +user.companyId })
       .select([
         'i.createdAt',
@@ -106,6 +107,7 @@ export class InvoiceService {
         'country.id',
         'address.id',
         'i.internalId',
+        'line',
         'i.createdAt'
       ])
       .orderBy('i.createdAt',"DESC")
