@@ -102,7 +102,7 @@ export class IntegrationService {
       );
       if (docSub.data.acceptedDocuments.length) {
         const updateDb = await this.invoiceService.update(
-          { internalId: docSub.data.acceptedDocuments[0].internalId },
+          { id: id },
           {
             status: InvoiceStatus.ACCEPTED,
             uuid: docSub.data.acceptedDocuments[0].uuid,
