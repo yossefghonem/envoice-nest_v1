@@ -27,6 +27,6 @@ export class AddressService {
   }
 
   remove(id: number) {
-    return this.repo.delete(id);
+    return this.repo.softDelete(id);
   }
 }
