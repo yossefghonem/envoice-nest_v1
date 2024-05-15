@@ -6,6 +6,8 @@ import * as morgan from 'morgan';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
+  console.log('process.env.db_host', process.env.DB_HOST);
+
   const app = await NestFactory.create(AppModule);
   // app.enableCors();
   app.enableCors({
@@ -35,9 +37,8 @@ async function bootstrap() {
   // app.use(passport.session());
 
   await app.listen(PORT, () => {
-    Logger.log(`envoice server started at ${PORT}`, 'server');
-    // Logger.log(`Mongo DB connected on ${process.env.db_host}`, 'DataBase')
-    Logger.log(`http://localhost:${PORT}/api`, 'swagger');
+    Logger.verbose(`envoice server started at ${PORT}`, 'server');
+    Logger.verbose(`http://localhost:${PORT}/api`, 'swagger');
   });
 }
 
