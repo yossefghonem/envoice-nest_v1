@@ -9,10 +9,10 @@ async function bootstrap() {
   console.log('process.env.db_host', process.env.DB_HOST);
 
   const app = await NestFactory.create(AppModule);
-  // app.enableCors();
-  app.enableCors({
-    origin: '*',
-  });
+  app.enableCors();
+  // app.enableCors({
+  //   origin: '*',
+  // });
 
   app.use(morgan('dev'));
 
